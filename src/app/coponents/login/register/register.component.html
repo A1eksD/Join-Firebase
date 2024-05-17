@@ -1,0 +1,12 @@
+<section>
+    <div>
+        <input type="text" [(ngModel)]="login.name">
+        <input type="email" [(ngModel)]="login.email">
+        <input type="password" [(ngModel)]="login.password1">
+        <input type="password" [(ngModel)]="login.password2">
+        <div>
+            <button routerLink="/login" >Zurück</button>
+            <button (click)="login.register()">Regestrieren</button>
+        </div>
+    </div>
+</section>

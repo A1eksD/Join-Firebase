@@ -1,0 +1,12 @@
+<section routerLink="/login">
+<div>
+    <div>
+        <span routerLink="/register" class="becomeMemberSpan">Mitglied werden</span>
+    </div>
+    <!-- <form (ngSubmit)="saveNewUserData(contactForm)" #contactForm="ngForm" onsubmit="return false"> -->
+        <input type="email" [(ngModel)]="loginService.email">
+        <input type="password" [(ngModel)]="loginService.passwordLogin">
+        <button (click)="loginService.login()">login</button>
+    <!-- </form> -->
+</div>
+</section>
