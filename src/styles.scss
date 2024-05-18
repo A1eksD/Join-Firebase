@@ -1,9 +1,23 @@
 *{
     margin: 0;
+    font-family: 'Inter';
 }
 
 body{
     margin: 0;
+    font-family: 'Inter';
+    color: #4B4E51;
+}
+
+$blueButton: #0D6EFD;
+
+
+.dBlock {
+  display: block;
+}
+
+.dNone {
+  display: none;
 }
 
 @mixin displayFlex($d: flex, $j: center, $a: center, $g: 0) {

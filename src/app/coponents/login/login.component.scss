@@ -1,6 +1,72 @@
-.becomeMemberSpan{
-    cursor: pointer;
-    &:hover{
-        color: cadetblue;
+@import "../../../styles.scss";
+
+section{
+    width: 100vw;
+    height: 100vh;
+    @include displayFlex();
+    .positionAddMember{
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 40px;
+        span{
+            font-size: medium;
+            margin-right: 16px;
+        }
+        button{
+            cursor: pointer;
+            background-color: $blueButton;
+            padding: 16px;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            font-size: medium;
+        }
+    }
+}
+
+.positionWhiteBox{
+    @include displayFlex($g: 40px);
+    flex-direction: column;
+    min-width: 40vw;
+    height: 52vh;
+    border: 1px solid;
+    border-radius: 15px;
+    h1{
+        font-size: 48px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 120%;
+        margin-bottom: 12px;
+        color: black
+        
+    }
+    .inputDiv{
+        @include displayFlex();
+        flex-direction: column;
+        min-width: 40vw;
+        input{
+            width: 90%;
+            height: 32px;
+            border: none;
+            border-bottom: 2px solid rgba(209, 209, 209, 1);
+            border-radius: 0;
+            outline: none;
+            font-size: large;
+            margin-bottom: 32px;
+        }
+    }
+    .buttonDiv{
+        @include displayFlex($g: 40px);
+        min-width: 40vw;
+        button{
+            cursor: pointer;
+            background-color: $blueButton;
+            padding: 16px;
+            color: white;
+            border-radius: 10px;
+            border: none;
+            font-size: medium;
+        }
     }
 }

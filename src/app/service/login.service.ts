@@ -207,7 +207,6 @@ export class LoginService {
 
     if (userId) {
       const userDocRef = doc(this.firestore, `users/${userId}`);
-
       updateDoc(userDocRef, { status: false })
         .then(() => {
           signOut(auth)

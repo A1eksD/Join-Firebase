@@ -1,13 +1,23 @@
 <section routerLink="/login">
-<div>
-    <div>
-        <span routerLink="/register" class="becomeMemberSpan">Mitglied werden</span>
-    </div>
+  <div class="positionAddMember">
+    <span class="becomeMemberSpan">kein Mitglied?</span>
+    <button routerLink="/register">Registrieren</button>
+  </div>
+  <div class="positionWhiteBox">
     <!-- <form (ngSubmit)="saveNewUserData(contactForm)" #contactForm="ngForm" onsubmit="return false"> -->
-        <input type="email" [(ngModel)]="loginService.email">
-        <input type="password" [(ngModel)]="loginService.passwordLogin">
+    <div>
+        <h1 class="title">Log in</h1>
+        <img src="" alt="">
+    </div>
+
+    <div class="inputDiv">
+        <input type="email" [(ngModel)]="loginService.email" />
+        <input type="password" [(ngModel)]="loginService.passwordLogin" />
+    </div>
+    <div class="buttonDiv">
         <button (click)="loginService.login()">login</button>
         <button (click)="loginService.guestLogin()">Guest login</button>
+    </div>
     <!-- </form> -->
-</div>
+  </div>
 </section>
