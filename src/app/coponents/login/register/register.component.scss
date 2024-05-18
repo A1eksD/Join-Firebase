@@ -1,0 +1,137 @@
+@import "../../../../styles.scss";
+
+.logo{
+    position: absolute;
+    top: 72px;
+    left: 72px;
+    width: 100px;
+    height: 121px;
+    object-fit: contain;
+}
+
+section{
+    width: 100vw;
+    height: 100vh;
+    background-color: #4589FF;
+    @include displayFlex();
+    .positionHeadline{
+        @include displayFlex();
+        flex-direction: column;
+        position: relative;
+        .arrowLeft{
+            position: absolute;
+            right: 160%;
+            width: 45px;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: 0.3s ease-in-out;
+            &:hover{
+                background-color: #81afff91;
+            }
+        }
+        h1{
+            font-size: 48px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 120%;
+            margin-bottom: 12px;
+            color: black
+            
+        }
+    }
+    .whiteBox{
+        @include displayFlex($g: 32px);
+        flex-direction: column;
+        min-width: calc(40vw - 64px);
+        height: auto;
+        // border: none;
+        border-radius: 25px;
+        padding: 32px;
+        background-color: white;
+        .buttonDiv{
+            @include displayFlex($g: 40px);
+            min-width: 40vw;
+            button{
+                cursor: pointer;
+                min-width: 120px;
+                background-color: $blueButton;
+                padding: 16px;
+                color: white;
+                border-radius: 10px;
+                border: none;
+                font-size: large;
+                transition: 0.3s ease-in-out;
+                &:hover{
+                    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+                }
+            }
+        }
+    }
+}
+
+.inputDiv{
+    @include displayFlex();
+    flex-direction: column;
+    min-width: 40vw;
+    .email{
+        @include displayFlex();
+        width: 100%;
+        input{
+            width: calc(60% - 32px);
+            height: 32px;
+            border: none;
+            border-bottom: 2px solid rgba(209, 209, 209, 1);
+            border-radius: 0;
+            outline: none;
+            font-size: large;
+            padding-right: 32px;
+            margin-bottom: 32px;
+        }
+        img{
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            margin-bottom: 32px;
+            margin-left: -28px;
+        }
+    }
+    .password{
+        @include displayFlex();
+        width: 100%;
+        input{
+            width: calc(60% - 32px);
+            height: 32px;
+            border: none;
+            border-bottom: 2px solid rgba(209, 209, 209, 1);
+            border-radius: 0;
+            box-shadow: none !important;
+            outline: none;
+            font-size: large;
+            padding-right: 32px;
+            margin-bottom: 32px;
+        }
+        img{
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            margin-bottom: 32px;
+            margin-left: -28px;
+        }
+    }
+}
+
+.positionRememberUser{
+    @include displayFlex($j:flex-start, $g: 16px);
+    width: 60%;
+    margin-top: -40px;
+    img{
+        width: 18px;
+        height: 18px;
+        object-fit: cover;
+        cursor: pointer;
+    }
+}
+
+a{
+    color: #4589FF;
+}

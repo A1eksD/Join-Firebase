@@ -1,4 +1,11 @@
 <section>
-    <p>logo</p>
-    <p (click)="loginService.logout()" class="logout">logout</p>
+    <img src="assets/img/join-white.svg" alt="" class="logo">
+    <div class="positionInitial">
+        <p (click)="loginService.logout()" class="logout">logout</p>
+        <div class="initialBox">
+            @if (getUserLetters()) {
+                <h1 class="letters">{{ firstLetter }} {{secondLetter}}</h1>
+            }
+        </div>
+    </div>
 </section>

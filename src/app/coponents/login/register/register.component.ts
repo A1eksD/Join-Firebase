@@ -12,5 +12,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
-  constructor(public login:LoginService){}
+  acceptPolicy:boolean = false;
+
+  constructor(public loginService:LoginService){}
+
+  changeIcon(){
+    this.acceptPolicy = !this.acceptPolicy;
+  }
 }

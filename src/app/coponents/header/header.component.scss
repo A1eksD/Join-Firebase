@@ -4,10 +4,35 @@ section{
     width: auto;
     height: 96px;
     @include displayFlex($j: space-between);
-    .logout{
-        cursor: pointer;
-        &:hover{
-            background-color: aliceblue;
+    .logo{
+        margin-left: 24px;
+        height: 80px;
+        object-fit: contain;
+    }
+    .positionInitial{
+        @include displayFlex();
+        .logout{
+            cursor: pointer;
+            &:hover{
+                background-color: aliceblue;
+            }
+        }
+        .initialBox{
+            width: 46px;
+            height: 46px;
+            background-color: white;
+            border: 2px solid rgba(69, 137, 255, 1);
+            border-radius: 50px;
+            @include displayFlex();
+            margin-right: 16px;
+            .letters{
+                @include displayFlex();
+                font-size: large;
+                width: 38px;
+                height: 38px;
+                border: 2px solid #4589FF;
+                border-radius: 50%;
+            }
         }
     }
 }

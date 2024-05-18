@@ -1,12 +1,37 @@
 <section>
-    <div>
-        <input type="text" [(ngModel)]="login.name">
-        <input type="email" [(ngModel)]="login.email">
-        <input type="password" [(ngModel)]="login.password1">
-        <input type="password" [(ngModel)]="login.password2">
-        <div>
-            <button routerLink="/login" >Zurück</button>
-            <button (click)="login.register()">Regestrieren</button>
+    <img src="assets/img/join-white.svg" alt="" class="logo">
+    <div class="whiteBox">
+    <!-- <form #contactForm="ngForm" onsubmit="return false"> -->
+        <div class="positionHeadline">
+            <img src="assets/img/arrow-left-line.svg" alt="" class="arrowLeft" routerLink="/login">
+            <h1 class="title">Sign in</h1>
+            <img src="assets/img/blueLine.svg" alt="">
         </div>
+        <div class="inputDiv">
+            <div class="email">
+                <input type="text" [(ngModel)]="loginService.name">
+                <img src="assets/img/person.svg" alt="">
+            </div>
+            <div class="email">
+                <input type="email" [(ngModel)]="loginService.email" />
+                <img src="assets/img/mail.svg" alt="">
+            </div>
+            <div class="password">
+                <input type="password" [(ngModel)]="loginService.passwordLogin" />
+                <img src="assets/img/lock.svg" alt="">
+            </div>
+            <div class="password">
+                <input type="password" [(ngModel)]="loginService.passwordLogin" />
+                <img src="assets/img/lock.svg" alt="">
+            </div>
+        </div>
+        <div class="positionRememberUser">
+            <img src="assets/img/{{ acceptPolicy ? 'iconChecked.svg' : 'iconUnchecked.svg' }}" alt="" (click)="changeIcon()">
+            <p>I accept the <a href="#">Privacy Policy</a></p>
+        </div>
+        <div class="buttonDiv">
+            <button (click)="loginService.register()">Sign up</button>
+        </div>
+    <!-- </form> -->
     </div>
 </section>

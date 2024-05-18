@@ -21,7 +21,7 @@ export class AppComponent {
 
 
   checkIfUserIsLoggedin() {
-    if (this.longinService.getCurrentUserId() !== '') {
+    if (this.longinService.getCurrentUserId() === undefined) {
       this.route.navigateByUrl('/login');
     } else {
       this.route.navigateByUrl('/mainPage');
