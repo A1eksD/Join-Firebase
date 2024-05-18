@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { User } from '../interface/user';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut } from "firebase/auth";
 import { Firestore, QuerySnapshot, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -25,6 +25,7 @@ export class LoginService {
 
   constructor(private route: Router,) {}
 
+  //--------------- register new user -------------------------------------------------
   register() {
     this.getFirstAndLastName();
     const auth = getAuth();
@@ -126,7 +127,7 @@ export class LoginService {
       });
   }
 
-
+//--------------- login -------------------------------------------------
   login() {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, this.email, this.passwordLogin)
@@ -177,7 +178,7 @@ export class LoginService {
         break;
     }
   }
-
+//--------------- guestLogin -------------------------------------------------
   guestLogin(){
     const auth = getAuth();
     const email = 'guest@gues.de';
@@ -199,6 +200,43 @@ export class LoginService {
       });
   }
   
+//--------------- logout -------------------------------------------------
+  logout(){
+    const auth = getAuth();
+    const userId = this.getCurrentUserId();
+
+    if (userId) {
+      const userDocRef = doc(this.firestore, `users/${userId}`);
+
+      updateDoc(userDocRef, { status: false })
+        .then(() => {
+          signOut(auth)
+            .then(() => {
+              this.deleteUserIdInLocalStorage();
+              this.route.navigate(['/login']);
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else {
+      console.error('Keine UserID gefunden');
+    }
+  }
+
+  getCurrentUserId() {
+    let currentUser = localStorage.getItem('currentUser');
+    if (currentUser !== null) {
+      return JSON.parse(currentUser);
+    }
+  }
+
+  deleteUserIdInLocalStorage() {
+    localStorage.removeItem('currentUser');
+  }
 }
 
 

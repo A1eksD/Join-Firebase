@@ -1,0 +1,13 @@
+@import "../../../styles.scss";
+
+section{
+    width: auto;
+    height: 96px;
+    @include displayFlex($j: space-between);
+    .logout{
+        cursor: pointer;
+        &:hover{
+            background-color: aliceblue;
+        }
+    }
+}
