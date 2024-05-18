@@ -1,1 +1,34 @@
-<section>board</section>
+<section>
+  <div
+    class="dragArea"
+    id="open"
+    #openArea
+    (drop)="moveTo('open')"
+    (dragleave)="removeHighlight(open)"
+    (dragover)="allowDrop($event); highlight(open)"
+  >
+    @if(getOpenCategory()){
+        @for (item of openCategory; track $index;) {
+            <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
+              {{ item.category }}
+            </div>
+        } 
+    }
+  </div>
+  <div
+    class="dragArea"
+    id="closed"
+    #closedArea
+    (drop)="moveTo('closed')"
+    (dragleave)="removeHighlight(closed)"
+    (dragover)="allowDrop($event); highlight(closed)"
+  >
+    @if(getCloseCategory()){ 
+        @for (item of closedCategory; track $index;) {
+            <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
+              {{ item.category }}
+            </div>
+        }
+    }
+  </div>
+</section>

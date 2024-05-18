@@ -25,6 +25,7 @@ export class AppComponent {
       this.route.navigateByUrl('/login');
     } else {
       this.route.navigateByUrl('/mainPage');
+      // this.route.navigateByUrl('/board');
     }
   }
 }
