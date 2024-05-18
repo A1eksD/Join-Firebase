@@ -12,12 +12,7 @@ import { LoginService } from '../../service/login.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  email: string = '';
-  password: string = '';
 
   constructor(public loginService: LoginService){}
-  saveNewUserData(contactForm: any){
-
-  }
 
 }

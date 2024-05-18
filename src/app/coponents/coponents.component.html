@@ -1,6 +1,19 @@
 <section routerLink="/mainPage">
-    <app-summary routerLink="/summary"></app-summary>
-    <app-add-task routerLink="/addTask"></app-add-task>
-    <app-board routerLink="/board"></app-board>
-    <app-contacts routerLink="/contact"></app-contacts>
+    <div class="positionheader">
+        <app-header></app-header>
+    </div>
+    <div class="positionContent">
+        <div class="buttons">
+            <span (click)="selectComponent('summary')" routerLink="/summary" class="firstButton">summary</span>
+            <span (click)="selectComponent('addTask')" routerLink="/addTask">addTask</span>
+            <span (click)="selectComponent('board')" routerLink="/board">board</span>
+            <span (click)="selectComponent('contact')" routerLink="/contact">contact</span>
+        </div>
+        <div class="components">
+            <app-summary *ngIf="selectedComponent === 'summary'"></app-summary>
+            <app-add-task *ngIf="selectedComponent === 'addTask'"></app-add-task>
+            <app-board *ngIf="selectedComponent === 'board'"></app-board>
+            <app-contacts *ngIf="selectedComponent === 'contact'"></app-contacts>
+        </div>        
+    </div>
 </section>

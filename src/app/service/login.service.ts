@@ -23,7 +23,7 @@ export class LoginService {
   currentUser: string = '';
   errorMessage: string = '';
 
-  constructor(private router: Router,) {}
+  constructor(private route: Router,) {}
 
   register() {
     this.getFirstAndLastName();
@@ -86,7 +86,8 @@ export class LoginService {
     const docRef = await addDoc(this.getUserCollection(), userData);
     this.currentUser = docRef.id;
     this.getUserIdInLocalStorage();
-    this.router.navigate([`/mainPage`]);
+    this.route.navigateByUrl('/mainPage');
+    // this.router.navigate([`/mainPage`]);
   }
 
 
@@ -95,11 +96,17 @@ export class LoginService {
   }
 
 
-  async getUserIdInLocalStorage(){
-    localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    await this.updateUserOnlineStatus(this.currentUser);
-    window.location.reload();
+  async getUserIdInLocalStorage() {
+    const currentUserFromStorage = localStorage.getItem('currentUser');
+    if (!currentUserFromStorage) {
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+      await this.updateUserOnlineStatus(this.currentUser);
+      window.location.reload();
+    } else {
+      console.log('Benutzer bereits eingeloggt');
+    }
   }
+  
 
 
   async updateUserOnlineStatus(userId: string) {
@@ -137,15 +144,13 @@ export class LoginService {
       });
   }
 
-  /**
-   * Processes the query snapshot to fetch user document data and updates local and session state.
-   * @param snapshot QuerySnapshot object containing user documents.
-   */
   userDocument(snapshot: QuerySnapshot) {
     if (snapshot.docs.length > 0) {
       const userDoc = snapshot.docs[0];
       this.currentUser = userDoc.id;
       this.getUserIdInLocalStorage();
+      this.route.navigateByUrl('/mainPage');
+      // this.route.navigate([`/mainPage`]);
       setTimeout(() => {
         this.clearUserData();
       }, 1500);

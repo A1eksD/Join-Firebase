@@ -6,6 +6,7 @@ import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { Router } from '@angular/router';
 import { LoginService } from '../service/login.service';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'app-coponents',
@@ -16,32 +17,29 @@ import { LoginService } from '../service/login.service';
     AddTaskComponent,
     BoardComponent,
     ContactsComponent,
+    HeaderComponent
   ],
   templateUrl: './coponents.component.html',
   styleUrl: './coponents.component.scss',
 })
 export class CoponentsComponent {
+  selectedComponent: string = 'summary';
 
   constructor( private route: Router, private longinService:LoginService){}
 
   ngOnInit() {
     this.checkIfUserIsLoggedin();
-    // this.routeUserId();
   }
 
 
   checkIfUserIsLoggedin() {
-    let currentUser = this.longinService.currentUser;
-    if (currentUser !== '') {
-      this.route.navigateByUrl('/login');
+    if (!this.longinService.currentUser) {
+      this.route.navigateByUrl('/mainPage');
     }
   }
 
-  // routeUserId() {
-  //   if (this.router.params.subscribe()) {
-  //     this.router.params.subscribe((params) => {
-  //       this.currentChannel = params['id'];
-  //     });
-  //   }
-  // }
+  selectComponent(componentName: string) {
+    this.selectedComponent = componentName;
+  }
+
 }

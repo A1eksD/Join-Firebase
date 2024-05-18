@@ -1,0 +1,33 @@
+@import "../../styles.scss";
+
+section {
+    width: 100vw;
+    height: 100vh;
+
+    .positionheader {
+        height: 96px;
+        background-color: aqua;
+        width: 100vw;
+    }
+
+    .positionContent {
+        display: flex;
+        .buttons {
+            height: calc(100vh - 96px);
+            width: 222px;
+            background-color: blueviolet;
+            @include displayFlex($j: flex-start, $g: 32px);
+            flex-direction: column;
+            span {
+                cursor: pointer;
+                &:hover {
+                    scale: 1.1;
+                    background-color: crimson;
+                }
+            }
+            .firstButton{
+                margin-top: 32px;
+            }
+        }
+    }
+}
