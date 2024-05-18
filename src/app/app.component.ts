@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { ContactsComponent } from './coponents/contacts/contacts.component';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,19 @@ import { ContactsComponent } from './coponents/contacts/contacts.component';
 })
 export class AppComponent {
   title = 'join';
+
+  constructor( private route: Router, private longinService:LoginService){
+  }
+  ngOnInit() {
+    this.checkIfUserIsLoggedin();
+  }
+
+
+  checkIfUserIsLoggedin() {
+    if (this.longinService.getCurrentUserId() !== '') {
+      this.route.navigateByUrl('/login');
+    } else {
+      this.route.navigateByUrl('/mainPage');
+    }
+  }
 }

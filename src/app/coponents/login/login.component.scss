@@ -149,66 +149,66 @@ section{
 }
 
 
-// .logoHeader{
-//     .logoStartAnimation{
-//         position: absolute;
-//         top: 0;
-//         left: 0;
-//         width: 100vw;
-//         height: 100vh;
-//         z-index: 9999;
-//         background: rgb(69, 137, 255);
-//         animation: bodyBackgroundAnimation 1.5s ease-in forwards;
-//     }
-//     .logo{
-//         position: absolute;
-//         background-color: aqua;
-//         top: 50%;
-//         left: 50%;
-//         transform: translate(-50%, -50%);
-//         width: 265px;
-//         height: 323px;
-//         animation: logoAnimation 0.5s ease-in forwards 1s;
-//         background: url('../../../assets/img/join-big.svg') no-repeat center top, url('../../../assets/img/join_logo.svg') no-repeat center top;
-//         background-size: contain;
-//         z-index: 9999;
-//     }
-// }
+.logoHeader{
+    .logoStartAnimation{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 9999;
+        background: rgb(69, 137, 255);
+        animation: bodyBackgroundAnimation 1.5s ease-in forwards;
+    }
+    .logo{
+        position: absolute;
+        background-color: aqua;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 265px;
+        height: 323px;
+        animation: logoAnimation 0.5s ease-in forwards 1s;
+        background: url('../../../assets/img/join-big.svg') no-repeat center top, url('../../../assets/img/join_logo.svg') no-repeat center top;
+        background-size: contain;
+        z-index: 9999;
+    }
+}
 
-// @keyframes bodyBackgroundAnimation {
-//     0% {
-//       background: rgb(69, 137, 255);
-//       z-index: 9999;
-//     }
-//     50% {
-//       background: rgb(69, 137, 255);
-//       z-index: 9999;
-//     }
-//     100% {
-//       background: #ffffff;
-//       z-index: 0;
-//     }
-//   }
+@keyframes bodyBackgroundAnimation {
+    0% {
+      background: rgb(69, 137, 255);
+      z-index: 9999;
+    }
+    50% {
+      background: rgb(69, 137, 255);
+      z-index: 9999;
+    }
+    100% {
+      background: #ffffff;
+      z-index: 0;
+    }
+  }
 
-// @keyframes logoAnimation {
-//     0% {
-//         top: 50%;
-//         left: 50%;
-//         transform: translate(-50%, -50%);
-//         width: 265px;
-//         height: 323px;
-//         background-position: 0 0, 0 0;
-//         background-image: url('../../../assets/img/join-big.svg');
-//     }
-//     100% {
-//         top: 132px;
-//         left: 120px;
-//         width: 100px;
-//         height: 121px;
-//         background-position: 0 0, 0 0;
-//         background-image: url('../../../assets/img/join_logo.svg');
-//     }
-// }
+@keyframes logoAnimation {
+    0% {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 265px;
+        height: 323px;
+        background-position: 0 0, 0 0;
+        background-image: url('../../../assets/img/join-big.svg');
+    }
+    100% {
+        top: 132px;
+        left: 120px;
+        width: 100px;
+        height: 121px;
+        background-position: 0 0, 0 0;
+        background-image: url('../../../assets/img/join_logo.svg');
+    }
+}
 
 .privacyPolicy{
     position: absolute;

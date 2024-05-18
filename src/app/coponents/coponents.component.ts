@@ -4,7 +4,6 @@ import { SummaryComponent } from './summary/summary.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { Router } from '@angular/router';
 import { LoginService } from '../service/login.service';
 import { HeaderComponent } from './header/header.component';
 
@@ -25,17 +24,7 @@ import { HeaderComponent } from './header/header.component';
 export class CoponentsComponent {
   selectedComponent: string = 'summary';
 
-  constructor( private route: Router, private longinService:LoginService){}
-
-  ngOnInit() {
-    this.checkIfUserIsLoggedin();
-  }
-
-
-  checkIfUserIsLoggedin() {
-    if (!this.longinService.currentUser) {
-      this.route.navigateByUrl('/mainPage');
-    }
+  constructor(private longinService:LoginService){
   }
 
   selectComponent(componentName: string) {

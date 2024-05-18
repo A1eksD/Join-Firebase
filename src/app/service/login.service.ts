@@ -88,7 +88,6 @@ export class LoginService {
     this.currentUser = docRef.id;
     this.getUserIdInLocalStorage(this.currentUser);
     this.route.navigateByUrl('/mainPage');
-    // this.router.navigate([`/mainPage`]);
   }
 
 
@@ -98,17 +97,11 @@ export class LoginService {
 
 
   async getUserIdInLocalStorage(userId: string) {
-    localStorage.setItem('currentUser', JSON.stringify(userId));
-    await this.updateUserOnlineStatus(userId);
-    window.location.reload();
-    // const currentUserFromStorage = localStorage.getItem('currentUser');
-    // if (!currentUserFromStorage) {
-    //   localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-    //   await this.updateUserOnlineStatus(this.currentUser);
-    //   window.location.reload();
-    // } else {
-    //   console.log('Benutzer bereits eingeloggt');
-    // }
+    const currentUserFromStorage = localStorage.getItem('currentUser');
+    if (!currentUserFromStorage) {
+      localStorage.setItem('currentUser', JSON.stringify(userId));
+      await this.updateUserOnlineStatus(userId);
+    }
   }
   
 
