@@ -13,6 +13,11 @@ import { LoginService } from '../../service/login.service';
 })
 export class LoginComponent {
 
+  rememberUser: boolean = false;
+
   constructor(public loginService: LoginService){}
 
+  changeIcon(){
+    this.rememberUser = !this.rememberUser;
+  }
 }

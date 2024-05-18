@@ -15,7 +15,6 @@ section {
         .buttons {
             height: calc(100vh - 96px);
             width: 222px;
-            background-color: blueviolet;
             @include displayFlex($j: flex-start, $g: 32px);
             flex-direction: column;
             span {

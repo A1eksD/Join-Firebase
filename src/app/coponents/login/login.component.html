@@ -1,18 +1,32 @@
 <section routerLink="/login">
+  <div class="logoHeader">
+    <div class="logoStartAnimation"></div>
+    <div class="logo"></div>
+  </div>
   <div class="positionAddMember">
-    <span class="becomeMemberSpan">kein Mitglied?</span>
-    <button routerLink="/register">Registrieren</button>
+    <span class="becomeMemberSpan">Not a Join user?</span>
+    <button routerLink="/register">Sing up</button>
   </div>
   <div class="positionWhiteBox">
     <!-- <form (ngSubmit)="saveNewUserData(contactForm)" #contactForm="ngForm" onsubmit="return false"> -->
-    <div>
+    <div class="positionHeadline">
         <h1 class="title">Log in</h1>
-        <img src="" alt="">
+        <img src="assets/img/blueLine.svg" alt="">
     </div>
 
     <div class="inputDiv">
+      <div class="email">
         <input type="email" [(ngModel)]="loginService.email" />
+        <img src="assets/img/mail.svg" alt="">
+      </div>
+      <div class="password">
         <input type="password" [(ngModel)]="loginService.passwordLogin" />
+        <img src="assets/img/lock.svg" alt="">
+      </div>
+    </div>
+    <div class="positionRememberUser">
+      <img src="assets/img/{{ rememberUser ? 'iconChecked.svg' : 'iconUnchecked.svg' }}" alt="" (click)="changeIcon()">
+      <p>Remeber me</p>
     </div>
     <div class="buttonDiv">
         <button (click)="loginService.login()">login</button>
@@ -21,3 +35,7 @@
     <!-- </form> -->
   </div>
 </section>
+<div class="privacyPolicy">
+  <span>Privacy Policy</span>
+  <span>Legal Notice</span>
+</div>
