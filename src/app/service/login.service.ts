@@ -85,7 +85,7 @@ export class LoginService {
   async createUserInFirestore(userData: User){
     const docRef = await addDoc(this.getUserCollection(), userData);
     this.currentUser = docRef.id;
-    this.getUserIdInLocalStorage();
+    this.getUserIdInLocalStorage(this.currentUser);
     this.route.navigateByUrl('/mainPage');
     // this.router.navigate([`/mainPage`]);
   }
@@ -96,15 +96,18 @@ export class LoginService {
   }
 
 
-  async getUserIdInLocalStorage() {
-    const currentUserFromStorage = localStorage.getItem('currentUser');
-    if (!currentUserFromStorage) {
-      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-      await this.updateUserOnlineStatus(this.currentUser);
-      window.location.reload();
-    } else {
-      console.log('Benutzer bereits eingeloggt');
-    }
+  async getUserIdInLocalStorage(userId: string) {
+    localStorage.setItem('currentUser', JSON.stringify(userId));
+    await this.updateUserOnlineStatus(userId);
+    window.location.reload();
+    // const currentUserFromStorage = localStorage.getItem('currentUser');
+    // if (!currentUserFromStorage) {
+    //   localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+    //   await this.updateUserOnlineStatus(this.currentUser);
+    //   window.location.reload();
+    // } else {
+    //   console.log('Benutzer bereits eingeloggt');
+    // }
   }
   
 
@@ -148,7 +151,7 @@ export class LoginService {
     if (snapshot.docs.length > 0) {
       const userDoc = snapshot.docs[0];
       this.currentUser = userDoc.id;
-      this.getUserIdInLocalStorage();
+      this.getUserIdInLocalStorage(this.currentUser);
       this.route.navigateByUrl('/mainPage');
       // this.route.navigate([`/mainPage`]);
       setTimeout(() => {
@@ -174,6 +177,28 @@ export class LoginService {
         break;
     }
   }
+
+  guestLogin(){
+    const auth = getAuth();
+    const email = 'guest@gues.de';
+    const password = 'guest@gues.de';
+    const userId = '3oUdmL26NdAWAcYgYxQu';
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
+        this.getUserIdInLocalStorage(userId);
+        setTimeout(() => {
+          this.clearUserData();
+        }, 1500);
+        this.route.navigateByUrl('/mainPage');
+      })
+      .catch((error) => {
+        console.error(error);
+        this.errorMessage =
+          'Fehler bei der Gastanmeldung. Bitte versuchen Sie es später erneut.';
+      });
+  }
+  
 }
 
 

@@ -10,12 +10,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'join-bdb9c',
-        appId: '1:668904791885:web:da2c6f78e7ef4087b4e104',
-        storageBucket: 'join-bdb9c.appspot.com',
-        apiKey: 'AIzaSyAVcnywzsv-gAC3d5QTbF9EkCcTVOL-ep4',
-        authDomain: 'join-bdb9c.firebaseapp.com',
-        messagingSenderId: '668904791885',
+        apiKey: "AIzaSyAVcnywzsv-gAC3d5QTbF9EkCcTVOL-ep4",
+        authDomain: "join-bdb9c.firebaseapp.com",
+        projectId: "join-bdb9c",
+        storageBucket: "join-bdb9c.appspot.com",
+        messagingSenderId: "668904791885",
+        appId: "1:668904791885:web:da2c6f78e7ef4087b4e104"
       })
     ),
     provideFirestore(() => getFirestore()),
