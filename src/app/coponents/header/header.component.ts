@@ -37,10 +37,8 @@ export class HeaderComponent {
 
   getUserInitials(user: User[]) {
     if (user.length > 0) {
-        const getName = user[0].firstName + '' + user[0].lastName;
-        const firstUser =  this.splitNameValue(getName);
-        this.firstLetter = firstUser[0]!.charAt(0).toUpperCase();
-        this.secondLetter = firstUser[1]?.charAt(0).toUpperCase();
+        this.firstLetter = user[0].firstName !.charAt(0).toUpperCase();
+        this.secondLetter = user[0].lastName?.charAt(0).toUpperCase();
     }
   }
 

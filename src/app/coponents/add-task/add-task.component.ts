@@ -103,8 +103,10 @@ export class AddTaskComponent {
     this.toggleService.showUserWindow = !this.toggleService.showUserWindow;
   }
 
-  changeTask(task: string) {
+  changeTask(task: string, event: Event) {
+    event.stopPropagation();
     this.category = task;
+    this.toggleService.showCategoryWindow = false;
   }
 
   clearValues() {
@@ -155,10 +157,6 @@ export class AddTaskComponent {
     }
   }
 
-  editSubtask(task: string){
-
-  }
-
   deleteSubtask(task: string){
     const taskMsg = this.subtaskArray.indexOf(task);
     if (taskMsg !== -1) {
@@ -166,4 +164,6 @@ export class AddTaskComponent {
       this.chackedUser.splice(taskMsg, 1); 
     }
   }
+
+
 }

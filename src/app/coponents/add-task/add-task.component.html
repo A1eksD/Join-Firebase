@@ -1,8 +1,7 @@
 <section>
     <div class="taskBox">
     <!-------------title----------------->
-        <input type="text" name="" id="" class="titleInput" placeholder="Enter a title" [(ngModel)]="title">
-        <p style="margin-top: -44px;">(required)</p>
+        <input type="text" name="" id="" class="titleInput" placeholder="Enter a title (required)" [(ngModel)]="title">
     <!-------------descrptipon----------------->
         <div class="decriptionBox">
             <div class="namePosition">
@@ -45,13 +44,17 @@
                 @if (chackedUser.length > 0) {
                     <div class="checkedUsers">
                         @for (user of chackedUser; track $index) {
-                            <div>{{user.firstName}}{{user.lastName}}</div>
+                            <div class="userRing">
+                                <span class="userTag">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                            </div>
                         }
                     </div>
                 }
                 @for(user of userService.allUsers; track $index){
                     <div class="loadedUsers">
-                        <span>{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                        <div class="ringFromUser">
+                            <span class="tagFromUser">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                        </div>
                         <div class="userNameAndChackbox">
                             <label for="{{user.id}}"> {{user.firstName}} {{user.lastName}}</label>
                             <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/>
@@ -85,8 +88,8 @@
                 <div class="taskWindow" #taskWindoW 
                     [ngClass]="{'slideInUpTask': toggleService.showCategoryWindow , 'slideOutDownTask': !toggleService.showCategoryWindow,}"
                 >
-                    <span (click)="changeTask('Technical Task')">Technical Task</span>
-                    <span (click)="changeTask('User Story')">User Story</span>
+                    <span (click)="changeTask('Technical Task', $event)">Technical Task</span>
+                    <span (click)="changeTask('User Story', $event)">User Story</span>
                 </div>
             </div>
         </div>

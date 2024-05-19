@@ -12,6 +12,7 @@ section{
     width: calc(50% - 32px);
     height: calc(100% - 32px);
     padding: 16px;
+    padding-right: 8px;
     background-color: white;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
     z-index: 9;
@@ -24,6 +25,7 @@ section{
     font-weight: 400;
     font-size: 32px;
     padding-bottom: 12px;
+    margin-bottom: 0px;
 }
 
 .decriptionBox{
@@ -93,10 +95,9 @@ section{
 .assignetToBox{
     width: 100%;
     .userWindow{
-        width: 100%;
-        @include displayFlex($j: flex-start, $a: flex-start, $g: 12px); 
+        width: calc(100% - 22px);
+        @include displayFlex($j: flex-start, $a: flex-start); 
         flex-direction: column;
-        width: 100%;
         padding-left: 10px;
         margin: 6px;
         overflow-y: scroll;
@@ -105,7 +106,25 @@ section{
             width: 100%;
             overflow-x: scroll;
             display: flex;
-            gap: 20px;
+            .userRing{
+                width: 40px;
+                height: 40px;
+                background-color: white;
+                border-radius: 50%;
+                box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+                @include displayFlex(); 
+                margin: 8px;
+                .userTag{
+                    width: 32px;
+                    height: 32px;
+                    background-color: springgreen;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    @include displayFlex(); 
+                    color: white;
+                    font-weight: 500;
+                }
+            }
         }
         .loadedUsers{
             width: calc(100% - 16px);
@@ -117,6 +136,25 @@ section{
             &:hover{
                 background-color: #64718821;
             }
+            .ringFromUser{
+                min-width: 40px;
+                min-height: 40px;
+                background-color: white;
+                border-radius: 50%;
+                box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+                @include displayFlex(); 
+                margin: 4px;
+                .tagFromUser{
+                    min-width: 32px;
+                    min-height: 32px;
+                    background-color: springgreen;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    @include displayFlex(); 
+                    color: white;
+                    font-weight: 500;
+                }
+            }
             .userNameAndChackbox{
                 width: 100%;
                 @include displayFlex($j: space-between); 
@@ -125,6 +163,7 @@ section{
                     width: 16px;
                     height: 16px;
                     margin-right: 5px;
+                    cursor: pointer;
                 }
             }
             
@@ -138,7 +177,7 @@ section{
         .taskWindow{
             @include displayFlex($a: flex-start, $g: 12px); 
             flex-direction: column;
-            width: 100%;
+            width: calc(100% - 16px);
             padding-left: 16px;
             margin-bottom: 6px;
             margin-top: 6px;
@@ -334,7 +373,7 @@ input{
 }
   
 .slideOutDownUser {
-    max-height: 160px;
+    max-height: 180px;
     opacity: 1;
     animation: slideOutDownUser 0.2s forwards;
 }
@@ -346,7 +385,7 @@ input{
         transform: translateY(-20px);
     }
     to {
-        max-height: 160px;
+        max-height: 180px;
         opacity: 1;
         transform: translateY(0);
     }
@@ -354,7 +393,7 @@ input{
   
 @keyframes slideOutDownUser {
     from {
-        max-height: 160px;
+        max-height: 180px;
         opacity: 1;
         transform: translateY(0);
     }
