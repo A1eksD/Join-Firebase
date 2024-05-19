@@ -33,10 +33,16 @@
         <div class="categoryBox">
             <div class="headLetters">
                 <h2>Category</h2>
-                <img src="assets/img/arrow_drop_down.svg" alt=""(click)="openCategory()">
             </div>
-            <div>
-                <div>aaaaaaaa</div>
+            <div class="taskBoxSection">
+                <div class="assignedSelect"(click)="openCategory($event)">
+                    <span>{{ category }}</span>
+                    <img src="assets/img/arrow_drop_down.svg" alt="">
+                </div>
+                <div class="taskWindow" [ngClass]="{'slideInUp': toggleService.showCategoryWindow, 'slideOutDown': !toggleService.showCategoryWindow,}">
+                    <span (click)="changeTask('Technical Task')">Technical Task</span>
+                    <span (click)="changeTask('User Story')">User Story</span>
+                </div>
             </div>
         </div>
         <div class="subtaskBox">

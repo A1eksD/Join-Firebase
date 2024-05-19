@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TasksService } from '../../service/tasks.service';
 import { LoginService } from '../../service/login.service';
+import { ToggleBooleansService } from '../../service/toggle-booleans.service';
+
 
 @Component({
   selector: 'app-add-task',
@@ -18,10 +20,11 @@ export class AddTaskComponent {
   date: number = 0;
   priority: string = '';
   assignetTo: any[] = [];
-  category: string = '';
+  category: string = 'Technical Task';
   subtasks: string[] = [];
+  showCategoryWindow: boolean = false;
   
-  constructor(public taskService:TasksService, private loginService: LoginService){}
+  constructor(public taskService:TasksService, private loginService: LoginService, public toggleService: ToggleBooleansService){}
 
   prioLow(priority: string){
     this.priority = priority;
@@ -64,11 +67,17 @@ export class AddTaskComponent {
     }
   }
   
-  openCategory(){}
+  openCategory(event: Event){
+    event.stopPropagation();
+    this.toggleService.showCategoryWindow = !this.toggleService.showCategoryWindow;
+  }
 
   openAssignedTo(){}
 
-  
+  changeTask(task: string){
+    this.category = task;
+  }
+
   clearValues(){
     this.title = '';
     this.description = '';

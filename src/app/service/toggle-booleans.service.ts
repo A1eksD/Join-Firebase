@@ -8,4 +8,5 @@ export class ToggleBooleansService {
   constructor() { }
 
   openBoard:boolean = false;
+  showCategoryWindow:boolean = false;
 }

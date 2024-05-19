@@ -89,6 +89,34 @@ section{
     }
     .categoryBox{
         width: 100%;
+        .taskBoxSection{
+            .assignedSelect{
+                @include displayFlex($j: space-between); 
+                padding-left: 16px;
+                border: 0;
+                margin-top: 16px;
+                font-size: 19px;
+                appearance: none;
+                border-bottom: 1px solid rgba(209, 209, 209, 1);
+                line-height: 39px;
+                cursor: pointer;
+            }
+            .taskWindow{
+                @include displayFlex($a: flex-start, $g: 12px); 
+                flex-direction: column;
+                width: 100%;
+                padding-left: 16px;
+                margin-bottom: 6px;
+                margin-top: 6px;
+                span{
+                    cursor: pointer;
+                    transition: 0.2s ease-in-out;
+                    &:hover{
+                        color: #4589ff;
+                    }
+                }
+            }
+        }
     }
     .subtaskBox{
         width: 100%;
@@ -170,4 +198,45 @@ input{
     outline: none;
     font-size: large;
     margin-bottom: 32px;
+}
+
+
+.slideInUp {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    animation: slideInUp 0.2s forwards;
+}
+  
+.slideOutDown {
+    max-height: 56px;
+    opacity: 1;
+    overflow: hidden;
+    animation: slideOutDown 0.2s forwards;
+}
+  
+@keyframes slideInUp {
+    from {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        max-height: 56px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+  
+@keyframes slideOutDown {
+    from {
+        max-height: 56px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(20px);
+    }
 }

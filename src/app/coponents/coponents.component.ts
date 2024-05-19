@@ -51,4 +51,8 @@ export class CoponentsComponent {
   checkBooleansContacts(){
     this.toggleService.openBoard = false;
   }
+
+  toggleBooleans(){
+    this.toggleService.showCategoryWindow = false;
+  }
 }
