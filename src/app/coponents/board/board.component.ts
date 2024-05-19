@@ -70,11 +70,14 @@ export class BoardComponent {
   }
 
   highlight(element: ElementRef) {
+    // document.getElementById(category)!.classList.add('dragAreaHighlight');
+    // element.classList.add('dragAreaHighlight');
     this.renderer.addClass(element.nativeElement, 'dragAreaHighlight');
     console.log(`Highlighting ${element.nativeElement.id}`);
   }
   
   removeHighlight(element: ElementRef) {
+    // element.classList.remove('dragAreaHighlight');
     this.renderer.removeClass(element.nativeElement, 'dragAreaHighlight');
     console.log(`Removing highlight from ${element.nativeElement.id}`);
   }
