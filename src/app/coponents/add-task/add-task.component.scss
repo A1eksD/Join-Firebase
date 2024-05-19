@@ -18,192 +18,230 @@ section{
     @include displayFlex($j: space-evenly, $a: flex-start);
     flex-direction: column;
     overflow-y: scroll;
-    .titleInput{
-        font-weight: 400;
-        font-size: 32px;
-        padding-bottom: 12px;
+}
+
+.titleInput{
+    font-weight: 400;
+    font-size: 32px;
+    padding-bottom: 12px;
+}
+
+.decriptionBox{
+    width: 100%;
+    textarea{
+        height: 93px;
+        border: 1px solid;
+        border-color: rgba(209, 209, 209, 1);
+        border-radius: 0px 10px 10px 10px;
+        padding: 18px;
+        font-size: 19px;
+        color: black;
+        resize: none;
+        width: calc(100% - 36px);
+        outline: none;
+        font-size: 19px;
     }
-    .decriptionBox{
+}
+
+.dateBox{
+    width: 100%;
+    input{
         width: 100%;
-        textarea{
-            height: 93px;
-            border: 1px solid;
-            border-color: rgba(209, 209, 209, 1);
-            border-radius: 0px 10px 10px 10px;
-            padding: 18px;
+    }
+}
+
+.prioBox{
+    width: 100%;
+    .prioBoxHeader{
+        @include displayFlex($j: flex-start);
+    }
+    .prioBoxBtns{
+        margin-top: 12px;
+        margin-bottom: 12px;
+        @include displayFlex($j: space-around);
+        button{
+            @include displayFlex($g: 12px);
+            width: 136px;
+            height: 51px;
             font-size: 19px;
-            color: black;
-            resize: none;
-            width: calc(100% - 36px);
-            outline: none;
-            font-size: 19px;
-        }
-    }
-    .dateBox{
-        width: 100%;
-        input{
-            width: 100%;
-        }
-    }
-    .prioBox{
-        width: 100%;
-        .prioBoxHeader{
-            @include displayFlex($j: flex-start);
-        }
-        .prioBoxBtns{
-            margin-top: 12px;
-            margin-bottom: 12px;
-            @include displayFlex($j: space-around);
-            button{
-        	    @include displayFlex($g: 12px);
-        	    width: 136px;
-        	    height: 51px;
-        	    font-size: 19px;
-        	    font-weight: 400;
-        	    cursor: pointer;
-        	    background: white;
-        	    border: 0px;
-        	    border-radius: 10px;
-        	    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-                img{
-                    width: 20px;
-                    height: 20px;
-                    object-fit: contain;
-                }
-            }
-            .greenBtn:hover {
-                box-shadow: 0px 3px rgb(154, 233, 93), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-            }
-            
-            .orangeBtn:hover {
-                box-shadow: 0 3px rgb(255, 168, 0), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-            }
-            
-            .redBtn:hover {
-                box-shadow: 0 3px rgb(255, 66, 6), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-            }
-        }
-    }
-    .assignetToBox{
-        width: 100%;
-        .userWindow{
-            width: 100%;
-            @include displayFlex($j: flex-start, $a: flex-start, $g: 12px); 
-            flex-direction: column;
-            width: 100%;
-            padding-left: 10px;
-            margin: 6px;
-            overflow-y: scroll;
-        }
-    }
-    .categoryBox{
-        width: 100%;
-        .taskBoxSection{
-            .taskWindow{
-                @include displayFlex($a: flex-start, $g: 12px); 
-                flex-direction: column;
-                width: 100%;
-                padding-left: 16px;
-                margin-bottom: 6px;
-                margin-top: 6px;
-                span{
-                    cursor: pointer;
-                    transition: 0.2s ease-in-out;
-                    &:hover{
-                        color: #4589ff;
-                    }
-                }
-            }
-        }
-    }
-    .subtaskBox{
-        width: 100%;
-        .headLetters{
-            @include displayFlex($j: flex-start); 
-            p{
-                color: red;
-                margin-left: 16px;
-                margin-right: 16px;
-            }
-        }
-        .email{
-            display: flex;
-            input{
-                width: 100%;
-                margin-bottom: 0;
-                padding-right: 26px;
-            }
+            font-weight: 400;
+            cursor: pointer;
+            background: white;
+            border: 0px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
             img{
-                margin-left: -26px;
-                cursor: pointer;
-                &:hover{
-                    scale: 1.1;
-                }
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
             }
         }
-        .taskList{
-            width: calc(100% - 24px);
-            margin: 12px;
-            @include displayFlex($j: space-between);
+        .greenBtn:hover {
+            box-shadow: 0px 3px rgb(154, 233, 93), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        }
+        
+        .orangeBtn:hover {
+            box-shadow: 0 3px rgb(255, 168, 0), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        }
+        
+        .redBtn:hover {
+            box-shadow: 0 3px rgb(255, 66, 6), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        }
+    }
+}
+
+.assignetToBox{
+    width: 100%;
+    .userWindow{
+        width: 100%;
+        @include displayFlex($j: flex-start, $a: flex-start, $g: 12px); 
+        flex-direction: column;
+        width: 100%;
+        padding-left: 10px;
+        margin: 6px;
+        overflow-y: scroll;
+        .checkedUsers{
+            height: auto;
+            width: 100%;
+            overflow-x: scroll;
+            display: flex;
+            gap: 20px;
+        }
+        .loadedUsers{
+            width: calc(100% - 16px);
+            @include displayFlex($j: flex-start, $g: 12px); 
+            border-radius: 5px;
             padding: 2px;
-            padding-left: 4px;
-            padding-right: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
             &:hover{
                 background-color: #64718821;
-                border-radius: 5px;
-            } 
-            img{
+            }
+            .userNameAndChackbox{
+                width: 100%;
+                @include displayFlex($j: space-between); 
+                input{
+                    margin: 0;
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 5px;
+                }
+            }
+            
+        }
+    }
+}
+
+.categoryBox{
+    width: 100%;
+    .taskBoxSection{
+        .taskWindow{
+            @include displayFlex($a: flex-start, $g: 12px); 
+            flex-direction: column;
+            width: 100%;
+            padding-left: 16px;
+            margin-bottom: 6px;
+            margin-top: 6px;
+            span{
                 cursor: pointer;
+                transition: 0.2s ease-in-out;
                 &:hover{
-                    scale: 1.1;
+                    color: #4589ff;
                 }
             }
         }
     }
-    .positionBtn{
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        margin: 24px;
-        .ClearBtn {
+}
 
-            width: 120px;
-            height: 61px;
-            border-radius: 10px;
-            border: 1px solid #647188;
-            color: #647188;
-            background-color: white;
-            font-size: 22px;
-            margin-right: 8px;
-            cursor: pointer;
-        }
-          
-        .ClearBtn:hover {
-            border: 2px solid #4589ff;
-            color: #4589ff;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        }
-          
-        .ClearBtn:hover .clearBtnImg{
-            filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
-        }
-
-        .createTaskBtn {
-            width: 174px;
-            height: 61px;
-            border-radius: 10px;
-            border: 1px solid #4589ff;
-            background-color: #4589ff;
-            color: white;
-            font-size: 22px;
-            cursor: pointer;
-        }
-          
-        .createTaskBtn:hover {
-            background-color: #176cff;
-            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.subtaskBox{
+    width: 100%;
+    .headLetters{
+        @include displayFlex($j: flex-start); 
+        p{
+            color: red;
+            margin-left: 16px;
+            margin-right: 16px;
         }
     }
+    .email{
+        display: flex;
+        input{
+            width: 100%;
+            margin-bottom: 0;
+            padding-right: 26px;
+        }
+        img{
+            margin-left: -26px;
+            cursor: pointer;
+            &:hover{
+                scale: 1.1;
+            }
+        }
+    }
+    .taskList{
+        width: calc(100% - 24px);
+        margin: 12px;
+        @include displayFlex($j: space-between);
+        padding: 2px;
+        padding-left: 4px;
+        padding-right: 4px;
+        &:hover{
+            background-color: #64718821;
+            border-radius: 5px;
+        } 
+        img{
+            cursor: pointer;
+            &:hover{
+                scale: 1.1;
+            }
+        }
+    }
+}
+
+
+.positionBtn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 24px;
+    .ClearBtn {
+        width: 120px;
+        height: 61px;
+        border-radius: 10px;
+        border: 1px solid #647188;
+        color: #647188;
+        background-color: white;
+        font-size: 22px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .ClearBtn:hover {
+        border: 2px solid #4589ff;
+        color: #4589ff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .ClearBtn:hover .clearBtnImg{
+        filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
+    }
+    .createTaskBtn {
+        width: 174px;
+        height: 61px;
+        border-radius: 10px;
+        border: 1px solid #4589ff;
+        background-color: #4589ff;
+        color: white;
+        font-size: 22px;
+        cursor: pointer;
+        
+    }
+    .createTaskBtn:hover {
+        background-color: #176cff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
+
+.namePosition{
+    @include displayFlex($j: flex-start, $g: 4px); 
 }
 
 .assignedSelect{
@@ -222,7 +260,7 @@ section{
     @include displayFlex($j: space-between); 
     width: 100%;
     .headLine{
-        @include displayFlex($j: flex-start); 
+        @include displayFlex($j: flex-start, $g: 4px); 
     }
 }
 
@@ -235,6 +273,16 @@ input{
     outline: none;
     font-size: large;
     margin-bottom: 32px;
+}
+
+.disabledBtn{
+    width: 174px;
+    height: 61px;
+    border-radius: 10px;
+    border: none;
+    background-color: #a3a5a7;
+    color: white;
+    font-size: 22px;
 }
 
 //----------------------------- animation tasks---------------------------------------------

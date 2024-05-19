@@ -2,14 +2,21 @@
     <div class="taskBox">
     <!-------------title----------------->
         <input type="text" name="" id="" class="titleInput" placeholder="Enter a title" [(ngModel)]="title">
+        <p style="margin-top: -44px;">(required)</p>
     <!-------------descrptipon----------------->
         <div class="decriptionBox">
-            <h2>Decription</h2>
+            <div class="namePosition">
+                <h2>Decription</h2>
+                <p>(required)</p>
+            </div>
             <textarea name="" id="" [(ngModel)]="description"></textarea>
         </div>
     <!-------------date----------------->
         <div class="dateBox">
-            <h2>Due date</h2>
+            <div class="namePosition">
+                <h2>Due date</h2>
+                <p>(required)</p>
+            </div>
             <input type="date" id="date" [(ngModel)]="date" (click)="checkDateAddTask()">
         </div>
     <!-------------prio Btn----------------->
@@ -35,11 +42,20 @@
                 <img src="assets/img/arrow_drop_down.svg" alt="">
             </div>
             <div class="userWindow" [ngClass]="{'slideInUpUser': toggleService.showUserWindow , 'slideOutDownUser': !toggleService.showUserWindow,}">
+                @if (chackedUser.length > 0) {
+                    <div class="checkedUsers">
+                        @for (user of chackedUser; track $index) {
+                            <div>{{user.firstName}}{{user.lastName}}</div>
+                        }
+                    </div>
+                }
                 @for(user of userService.allUsers; track $index){
-                    <div (click)="addUser(user, $event)">
-                        <span>{{getUserFirstLetter(user)}} {{getUserSecondLetter(user)}}</span>
-                        <span>{{user.firstName}} {{user.lastName}}</span>
-                        <img src="assets/img/{{ addedUser ? 'iconChecked.svg' : 'iconUnchecked.svg' }}" alt="" >
+                    <div class="loadedUsers">
+                        <span>{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                        <div class="userNameAndChackbox">
+                            <label for="{{user.id}}"> {{user.firstName}} {{user.lastName}}</label>
+                            <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/>
+                        </div>
                     </div>
                 }
                 <!-- <div>
@@ -98,7 +114,7 @@
     <!-------------create btn----------------->
         <div class="positionBtn">
             <button class="ClearBtn" (click)="clearValues()">Clear <img src="assets/img/vector.svg" alt=""></button>
-            <button class="createTaskBtn" (click)="checkValues()">Create task <img src="assets/img/check.svg"></button>
+            <button (click)="checkValues()" disabled="{{checkAllValues()}}" [ngClass]="checkAllValues() ? 'createTaskBtn' : 'disabledBtn'">Create task <img src="assets/img/check.svg"></button>
         </div>
     </div>
 </section>

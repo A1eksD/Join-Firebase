@@ -21,6 +21,7 @@ export class AddTaskComponent {
   date: number = 0;
   priority: string = '';
   assignetTo: any[] = [];
+  chackedUser: any[] = [];
   category: string = 'Technical Task';
   subtask: string = '';
   subtaskArray: string[] = [];
@@ -48,20 +49,35 @@ export class AddTaskComponent {
   }
 
   checkValues() {
-    const unicTimestamp = new Date().getTime();
-    const task = {
-      title: this.title,
-      description: this.description,
-      date: this.date,
-      priority: this.priority || 'low',
-      assignetTo: this.assignetTo || [],
-      category: this.category || '',
-      subtasks: this.subtaskArray || [],
-      publishedTimestamp: unicTimestamp,
-      createtBy: this.loginService.currentUser,
-    };
-    this.taskService.addTask([task]);
-    this.clearValues();
+    if (this.checkAllValues()) {
+      const unicTimestamp = new Date().getTime();
+      const task = {
+        title: this.title,
+        description: this.description,
+        date: this.date,
+        priority: this.priority || 'low',
+        assignetTo: this.assignetTo || [],
+        category: this.category || 'Technical Task',
+        subtasks: this.subtaskArray || [],
+        publishedTimestamp: unicTimestamp,
+        createtBy: this.loginService.currentUser,
+      };
+      this.taskService.addTask([task]);
+      this.clearValues(); 
+    }
+  }
+
+  checkAllValues(){
+    if (this.title == '') {
+      return false;
+    }
+    if (this.description == '') {
+      return false
+    }
+    if (this.date == 0) {
+      return false
+    }
+    return true;
   }
 
   checkDateAddTask() {
@@ -97,6 +113,7 @@ export class AddTaskComponent {
     this.date = 0;
     this.priority = '';
     this.assignetTo = [];
+    this.chackedUser = [];
     this.category = '';
     this.subtask = '';
     this.subtaskArray = [];
@@ -110,10 +127,15 @@ export class AddTaskComponent {
     return user?.lastName?.charAt(0).toUpperCase() || '';
   }
 
-  addUser(user: User, event: Event){
+  addUser(user: User, event: Event) {
     event.stopPropagation();
-    this.addedUser = !this.addedUser;
+    if (!this.chackedUser.some(u => u.id === user.id)) {
+      this.chackedUser.push(user);
+    } else {
+      this.chackedUser = this.chackedUser.filter(u => u.id !== user.id);
+    }
   }
+  
 
   checkSubtaskLength(){
     if (this.subtask.length <= 30) {
@@ -141,6 +163,7 @@ export class AddTaskComponent {
     const taskMsg = this.subtaskArray.indexOf(task);
     if (taskMsg !== -1) {
       this.subtaskArray.splice(taskMsg, 1);
+      this.chackedUser.splice(taskMsg, 1); 
     }
   }
 }
