@@ -1,14 +1,15 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   ElementRef,
-  Renderer2,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
+import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -35,8 +36,11 @@ export class BoardComponent {
   currentDraggedElement: number = 0;
   openCategory: any[] = [];
   closedCategory: any[] = [];
+  currentCategory: string = 'open';
 
-  constructor(private renderer: Renderer2) {}
+
+  constructor(public toogleService: ToggleBooleansService) {}
+
 
   getOpenCategory() {
     this.openCategory = this.todos.filter((t) => t.category === 'open');
@@ -69,16 +73,12 @@ export class BoardComponent {
     }
   }
 
-  highlight(element: ElementRef) {
-    // document.getElementById(category)!.classList.add('dragAreaHighlight');
-    // element.classList.add('dragAreaHighlight');
-    this.renderer.addClass(element.nativeElement, 'dragAreaHighlight');
-    console.log(`Highlighting ${element.nativeElement.id}`);
+  highlight(category: string) {
+    this.currentCategory = category;
+    
   }
   
-  removeHighlight(element: ElementRef) {
-    // element.classList.remove('dragAreaHighlight');
-    this.renderer.removeClass(element.nativeElement, 'dragAreaHighlight');
-    console.log(`Removing highlight from ${element.nativeElement.id}`);
+  removeHighlight(category: string) {
+    this.currentCategory = category;
   }
 }

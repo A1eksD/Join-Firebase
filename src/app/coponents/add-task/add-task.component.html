@@ -1,1 +1,56 @@
-<section>add task</section>
+<section>
+    <div class="taskBox">
+        <input type="text" name="" id="" class="titleInput" placeholder="Enter a title" [(ngModel)]="title">
+        <div class="decriptionBox">
+            <h2>Decription</h2>
+            <textarea name="" id="" [(ngModel)]="description"></textarea>
+        </div>
+        <div class="dateBox">
+            <h2>Due date</h2>
+            <input type="date" [(ngModel)]="date">
+        </div>
+        <div class="prioBox">
+            <div class="prioBoxHeader">
+                <h2>Priority</h2><span>(optional)</span>
+            </div>
+            <div class="prioBoxBtns">
+                <button class="greenBtn">Low<img src="assets/img/prio_baja.svg" alt=""></button>
+                <button class="orangeBtn">Medium<img src="assets/img/prio_media.svg" alt=""></button>
+                <button class="redBtn">Heigh<img src="assets/img/prio_alta.svg" alt=""></button>
+            </div>
+        </div>
+        <div class="assignetToBox">
+            <div class="headLetters">
+                <div class="headLine">
+                    <h2>Assignet to</h2><span>(optional)</span>
+                </div>
+                <img src="assets/img/arrow_drop_down.svg" alt="">
+            </div>
+            <div>
+                <div>sssssss</div>
+            </div>
+        </div>
+        <div class="categoryBox">
+            <div class="headLetters">
+                <h2>Category</h2>
+                <img src="assets/img/arrow_drop_down.svg" alt="">
+            </div>
+            <div>
+                <div>aaaaaaaa</div>
+            </div>
+        </div>
+        <div class="subtaskBox">
+            <div class="headLetters">
+                <h2>Subtask</h2><span>(optional)</span>
+            </div>
+            <div class="email">
+                <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtasks"/>
+                <img src="assets/img/subtask_icons.svg" alt="">
+            </div>
+        </div>
+        <div class="positionBtn">
+            <button class="ClearBtn">Clear <img src="assets/img/vector.svg" alt=""></button>
+            <button class="createTaskBtn">Create task <img src="assets/img/check.svg"></button>
+        </div>
+    </div>
+</section>

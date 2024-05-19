@@ -17,6 +17,8 @@ section {
             width: 222px;
             @include displayFlex($j: flex-start, $g: 32px);
             flex-direction: column;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
+            z-index: 10;
             span {
                 cursor: pointer;
                 &:hover {

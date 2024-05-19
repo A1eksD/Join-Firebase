@@ -6,6 +6,7 @@ import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { LoginService } from '../service/login.service';
 import { HeaderComponent } from './header/header.component';
+import { ToggleBooleansService } from '../service/toggle-booleans.service';
 
 @Component({
   selector: 'app-coponents',
@@ -24,11 +25,30 @@ import { HeaderComponent } from './header/header.component';
 export class CoponentsComponent {
   selectedComponent: string = 'summary';
 
-  constructor(private longinService:LoginService){
+  constructor(private toggleService: ToggleBooleansService){
   }
 
   selectComponent(componentName: string) {
     this.selectedComponent = componentName;
   }
 
+  checkBooleansSummary(){
+    this.toggleService.openBoard = false;
+    console.log(this.toggleService.openBoard);
+    
+  }
+
+  checkBooleansAddTask(){
+    this.toggleService.openBoard = false;
+    console.log(this.toggleService.openBoard);
+  }
+
+  checkBooleansBoard(){
+    this.toggleService.openBoard = true;
+    console.log(this.toggleService.openBoard);
+  }
+
+  checkBooleansContacts(){
+    this.toggleService.openBoard = false;
+  }
 }

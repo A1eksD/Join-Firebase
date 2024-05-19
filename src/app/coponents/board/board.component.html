@@ -1,11 +1,13 @@
 <section>
-  <div
+  @if (toogleService.openBoard) {
+    <div
     class="dragArea"
     id="open"
     #openArea
     (drop)="moveTo('open')"
-    (dragleave)="removeHighlight(open)"
-    (dragover)="allowDrop($event); highlight(open)"
+    (dragleave)="removeHighlight('open')"
+    (dragover)="allowDrop($event); highlight('open')"
+    [ngClass]="{ 'dragAreaHighlight': currentCategory === 'open', '': currentCategory !== 'open' }"
   >
     @if(getOpenCategory()){
         @for (item of openCategory; track $index;) {
@@ -20,8 +22,9 @@
     id="closed"
     #closedArea
     (drop)="moveTo('closed')"
-    (dragleave)="removeHighlight(closed)"
-    (dragover)="allowDrop($event); highlight(closed)"
+    (dragleave)="removeHighlight('closed')"
+    (dragover)="allowDrop($event); highlight('closed')"
+    [ngClass]="{ 'dragAreaHighlight': currentCategory === 'closed', '': currentCategory !== 'closed' }"
   >
     @if(getCloseCategory()){ 
         @for (item of closedCategory; track $index;) {
@@ -31,4 +34,5 @@
         }
     }
   </div>
+  }
 </section>

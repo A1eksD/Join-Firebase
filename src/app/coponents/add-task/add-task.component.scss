@@ -1,8 +1,173 @@
+@import "../../../styles.scss";
+
 section{
     width: calc(100vw - 222px);
     height: calc(100vh - 96px);
     position: absolute;
     bottom: 0;
     right: 0;
-    background-color: cornflowerblue;
+}
+
+.taskBox{
+    width: calc(50% - 32px);
+    height: calc(100% - 32px);
+    padding: 16px;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
+    z-index: 9;
+    @include displayFlex($j: space-evenly, $a: flex-start);
+    flex-direction: column;
+    .titleInput{
+        font-weight: 400;
+        font-size: 32px;
+        padding-bottom: 12px;
+    }
+    .decriptionBox{
+        width: 100%;
+        textarea{
+            height: 93px;
+            border: 1px solid;
+            border-color: rgba(209, 209, 209, 1);
+            border-radius: 0px 10px 10px 10px;
+            padding: 18px;
+            font-size: 19px;
+            color: black;
+            resize: none;
+            width: calc(100% - 36px);
+            outline: none;
+            font-size: 19px;
+        }
+    }
+    .dateBox{
+        width: 100%;
+        input{
+            width: 100%;
+        }
+    }
+    .prioBox{
+        width: 100%;
+        .prioBoxHeader{
+            @include displayFlex($j: flex-start);
+        }
+        .prioBoxBtns{
+            margin-top: 12px;
+            margin-bottom: 12px;
+            @include displayFlex($j: space-around);
+            button{
+        	    @include displayFlex($g: 12px);
+        	    width: 136px;
+        	    height: 51px;
+        	    font-size: 19px;
+        	    font-weight: 400;
+        	    cursor: pointer;
+        	    background: white;
+        	    border: 0px;
+        	    border-radius: 10px;
+        	    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+                img{
+                    width: 20px;
+                    height: 20px;
+                    object-fit: contain;
+                }
+            }
+            .greenBtn:hover {
+                box-shadow: 0px 3px rgb(154, 233, 93), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+            }
+            
+            .orangeBtn:hover {
+                box-shadow: 0 3px rgb(255, 168, 0), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+            }
+            
+            .redBtn:hover {
+                box-shadow: 0 3px rgb(255, 66, 6), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+            }
+        }
+    }
+    .assignetToBox{
+        width: 100%;
+        
+    }
+    .categoryBox{
+        width: 100%;
+    }
+    .subtaskBox{
+        width: 100%;
+        .headLetters{
+            @include displayFlex($j: flex-start); 
+        }
+        .email{
+            display: flex;
+            input{
+                width: 100%;
+                margin-bottom: 0;
+            }
+            img{
+                margin-left: -26px;
+            }
+        }
+    }
+    .positionBtn{
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin: 24px;
+        .ClearBtn {
+
+            width: 120px;
+            height: 61px;
+            border-radius: 10px;
+            border: 1px solid #647188;
+            color: #647188;
+            background-color: white;
+            font-size: 22px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+          
+        .ClearBtn:hover {
+            border: 2px solid #4589ff;
+            color: #4589ff;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+          
+        .ClearBtn:hover .clearBtnImg{
+            filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
+        }
+
+        .createTaskBtn {
+            width: 174px;
+            height: 61px;
+            border-radius: 10px;
+            border: 1px solid #4589ff;
+            background-color: #4589ff;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+        }
+          
+        .createTaskBtn:hover {
+            background-color: #176cff;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+    }
+}
+
+
+.headLetters{
+    @include displayFlex($j: space-between); 
+    width: 100%;
+    .headLine{
+        @include displayFlex($j: flex-start); 
+    }
+}
+
+input{
+    width: 100%;
+    height: 32px;
+    border: none;
+    border-bottom: 2px solid rgba(209, 209, 209, 1);
+    border-radius: 0;
+    outline: none;
+    font-size: large;
+    margin-bottom: 32px;
 }

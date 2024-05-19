@@ -4,10 +4,10 @@
     </div>
     <div class="positionContent">
         <div class="buttons">
-            <span (click)="selectComponent('summary')" routerLink="/summary" class="firstButton">summary</span>
-            <span (click)="selectComponent('addTask')" routerLink="/addTask">addTask</span>
-            <span (click)="selectComponent('board')" routerLink="/board">board</span>
-            <span (click)="selectComponent('contact')" routerLink="/contact">contact</span>
+            <span (click)="selectComponent('summary'); checkBooleansSummary()" routerLink="/summary" class="firstButton">summary</span>
+            <span (click)="selectComponent('addTask'); checkBooleansAddTask()" routerLink="/addTask">addTask</span>
+            <span (click)="selectComponent('board'); checkBooleansBoard()" routerLink="/board">board</span>
+            <span (click)="selectComponent('contact'); checkBooleansContacts()" routerLink="/contact">contact</span>
         </div>
         <div class="components">
             <app-summary *ngIf="selectedComponent === 'summary'"></app-summary>
