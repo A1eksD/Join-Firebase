@@ -33,4 +33,8 @@ export class UsersService {
       return JSON.parse(currentUser);
     }
   }
+
+  ngOnDestroy() {
+    this.unsubUser();
+  }
 }

@@ -7,16 +7,16 @@
         </div>
         <div class="dateBox">
             <h2>Due date</h2>
-            <input type="date" [(ngModel)]="date">
+            <input type="date" id="date" [(ngModel)]="date" (click)="checkDateAddTask()">
         </div>
         <div class="prioBox">
             <div class="prioBoxHeader">
                 <h2>Priority</h2><span>(optional)</span>
             </div>
             <div class="prioBoxBtns">
-                <button class="greenBtn">Low<img src="assets/img/prio_baja.svg" alt=""></button>
-                <button class="orangeBtn">Medium<img src="assets/img/prio_media.svg" alt=""></button>
-                <button class="redBtn">Heigh<img src="assets/img/prio_alta.svg" alt=""></button>
+                <button class="greenBtn" (click)="prioLow('low')">Low<img src="assets/img/prio_baja.svg" alt=""></button>
+                <button class="orangeBtn" (click)="prioMedium('medium')">Medium<img src="assets/img/prio_media.svg" alt=""></button>
+                <button class="redBtn" (click)="prioHigh('heigh')">Heigh<img src="assets/img/prio_alta.svg" alt=""></button>
             </div>
         </div>
         <div class="assignetToBox">
@@ -24,7 +24,7 @@
                 <div class="headLine">
                     <h2>Assignet to</h2><span>(optional)</span>
                 </div>
-                <img src="assets/img/arrow_drop_down.svg" alt="">
+                <img src="assets/img/arrow_drop_down.svg" alt="" (click)="openAssignedTo()">
             </div>
             <div>
                 <div>sssssss</div>
@@ -33,7 +33,7 @@
         <div class="categoryBox">
             <div class="headLetters">
                 <h2>Category</h2>
-                <img src="assets/img/arrow_drop_down.svg" alt="">
+                <img src="assets/img/arrow_drop_down.svg" alt=""(click)="openCategory()">
             </div>
             <div>
                 <div>aaaaaaaa</div>
@@ -49,8 +49,8 @@
             </div>
         </div>
         <div class="positionBtn">
-            <button class="ClearBtn">Clear <img src="assets/img/vector.svg" alt=""></button>
-            <button class="createTaskBtn">Create task <img src="assets/img/check.svg"></button>
+            <button class="ClearBtn" (click)="clearValues()">Clear <img src="assets/img/vector.svg" alt=""></button>
+            <button class="createTaskBtn" (click)="checkValues()">Create task <img src="assets/img/check.svg"></button>
         </div>
     </div>
 </section>
