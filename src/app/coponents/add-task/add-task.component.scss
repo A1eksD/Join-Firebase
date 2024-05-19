@@ -17,6 +17,7 @@ section{
     z-index: 9;
     @include displayFlex($j: space-evenly, $a: flex-start);
     flex-direction: column;
+    overflow-y: scroll;
     .titleInput{
         font-weight: 400;
         font-size: 32px;
@@ -85,22 +86,19 @@ section{
     }
     .assignetToBox{
         width: 100%;
-        
+        .userWindow{
+            width: 100%;
+            @include displayFlex($j: flex-start, $a: flex-start, $g: 12px); 
+            flex-direction: column;
+            width: 100%;
+            padding-left: 10px;
+            margin: 6px;
+            overflow-y: scroll;
+        }
     }
     .categoryBox{
         width: 100%;
         .taskBoxSection{
-            .assignedSelect{
-                @include displayFlex($j: space-between); 
-                padding-left: 16px;
-                border: 0;
-                margin-top: 16px;
-                font-size: 19px;
-                appearance: none;
-                border-bottom: 1px solid rgba(209, 209, 209, 1);
-                line-height: 39px;
-                cursor: pointer;
-            }
             .taskWindow{
                 @include displayFlex($a: flex-start, $g: 12px); 
                 flex-direction: column;
@@ -122,15 +120,43 @@ section{
         width: 100%;
         .headLetters{
             @include displayFlex($j: flex-start); 
+            p{
+                color: red;
+                margin-left: 16px;
+                margin-right: 16px;
+            }
         }
         .email{
             display: flex;
             input{
                 width: 100%;
                 margin-bottom: 0;
+                padding-right: 26px;
             }
             img{
                 margin-left: -26px;
+                cursor: pointer;
+                &:hover{
+                    scale: 1.1;
+                }
+            }
+        }
+        .taskList{
+            width: calc(100% - 24px);
+            margin: 12px;
+            @include displayFlex($j: space-between);
+            padding: 2px;
+            padding-left: 4px;
+            padding-right: 4px;
+            &:hover{
+                background-color: #64718821;
+                border-radius: 5px;
+            } 
+            img{
+                cursor: pointer;
+                &:hover{
+                    scale: 1.1;
+                }
             }
         }
     }
@@ -180,6 +206,17 @@ section{
     }
 }
 
+.assignedSelect{
+    @include displayFlex($j: space-between); 
+    padding-left: 16px;
+    border: 0;
+    margin-top: 16px;
+    font-size: 19px;
+    appearance: none;
+    border-bottom: 1px solid rgba(209, 209, 209, 1);
+    line-height: 39px;
+    cursor: pointer;
+}
 
 .headLetters{
     @include displayFlex($j: space-between); 
@@ -190,7 +227,7 @@ section{
 }
 
 input{
-    width: 100%;
+    width: calc(100% - 4px);
     height: 32px;
     border: none;
     border-bottom: 2px solid rgba(209, 209, 209, 1);
@@ -200,15 +237,15 @@ input{
     margin-bottom: 32px;
 }
 
-
-.slideInUp {
+//----------------------------- animation tasks---------------------------------------------
+.slideInUpTask {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
     animation: slideInUp 0.2s forwards;
 }
   
-.slideOutDown {
+.slideOutDownTask {
     max-height: 56px;
     opacity: 1;
     overflow: hidden;
@@ -240,3 +277,43 @@ input{
         transform: translateY(20px);
     }
 }
+
+//--------------------------------animation user-------------------------------------
+.slideInUpUser {
+    max-height: 0;
+    opacity: 0;
+    animation: slideInUpUser 0.2s forwards;
+}
+  
+.slideOutDownUser {
+    max-height: 160px;
+    opacity: 1;
+    animation: slideOutDownUser 0.2s forwards;
+}
+  
+@keyframes slideInUpUser {
+    from {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        max-height: 160px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+  
+@keyframes slideOutDownUser {
+    from {
+        max-height: 160px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}
+

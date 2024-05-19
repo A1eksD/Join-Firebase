@@ -9,6 +9,7 @@ export class UsersService {
   firestore: Firestore = inject(Firestore);
   allUsers: User[] = [];
   getUserIDs: string[] = [];
+
   unsubUser;
 
   constructor() { 

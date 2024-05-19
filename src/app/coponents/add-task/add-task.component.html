@@ -1,14 +1,18 @@
 <section>
     <div class="taskBox">
+    <!-------------title----------------->
         <input type="text" name="" id="" class="titleInput" placeholder="Enter a title" [(ngModel)]="title">
+    <!-------------descrptipon----------------->
         <div class="decriptionBox">
             <h2>Decription</h2>
             <textarea name="" id="" [(ngModel)]="description"></textarea>
         </div>
+    <!-------------date----------------->
         <div class="dateBox">
             <h2>Due date</h2>
             <input type="date" id="date" [(ngModel)]="date" (click)="checkDateAddTask()">
         </div>
+    <!-------------prio Btn----------------->
         <div class="prioBox">
             <div class="prioBoxHeader">
                 <h2>Priority</h2><span>(optional)</span>
@@ -19,17 +23,40 @@
                 <button class="redBtn" (click)="prioHigh('heigh')">Heigh<img src="assets/img/prio_alta.svg" alt=""></button>
             </div>
         </div>
+    <!-------------users----------------->
         <div class="assignetToBox">
             <div class="headLetters">
                 <div class="headLine">
                     <h2>Assignet to</h2><span>(optional)</span>
                 </div>
-                <img src="assets/img/arrow_drop_down.svg" alt="" (click)="openAssignedTo()">
             </div>
-            <div>
-                <div>sssssss</div>
+            <div class="assignedSelect" (click)="openAssignedTo($event)">
+                <span>Select contacts to assign</span>
+                <img src="assets/img/arrow_drop_down.svg" alt="">
+            </div>
+            <div class="userWindow" [ngClass]="{'slideInUpUser': toggleService.showUserWindow , 'slideOutDownUser': !toggleService.showUserWindow,}">
+                @for(user of userService.allUsers; track $index){
+                    <div (click)="addUser(user, $event)">
+                        <span>{{getUserFirstLetter(user)}} {{getUserSecondLetter(user)}}</span>
+                        <span>{{user.firstName}} {{user.lastName}}</span>
+                        <img src="assets/img/{{ addedUser ? 'iconChecked.svg' : 'iconUnchecked.svg' }}" alt="" >
+                    </div>
+                }
+                <!-- <div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                    <div>sssssss</div>
+                </div> -->
             </div>
         </div>
+    <!-------------chategory----------------->
         <div class="categoryBox">
             <div class="headLetters">
                 <h2>Category</h2>
@@ -39,21 +66,36 @@
                     <span>{{ category }}</span>
                     <img src="assets/img/arrow_drop_down.svg" alt="">
                 </div>
-                <div class="taskWindow" [ngClass]="{'slideInUp': toggleService.showCategoryWindow, 'slideOutDown': !toggleService.showCategoryWindow,}">
+                <div class="taskWindow" #taskWindoW 
+                    [ngClass]="{'slideInUpTask': toggleService.showCategoryWindow , 'slideOutDownTask': !toggleService.showCategoryWindow,}"
+                >
                     <span (click)="changeTask('Technical Task')">Technical Task</span>
                     <span (click)="changeTask('User Story')">User Story</span>
                 </div>
             </div>
         </div>
+    <!-------------subtask----------------->
         <div class="subtaskBox">
             <div class="headLetters">
                 <h2>Subtask</h2><span>(optional)</span>
+                @if(!checkSubtaskLength()){
+                    <p>Your subtask is to long. Use description field.</p>
+                }
             </div>
             <div class="email">
-                <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtasks"/>
-                <img src="assets/img/subtask_icons.svg" alt="">
+                <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask"/>
+                <img src="assets/img/subtask_icons.svg" alt="" (click)="addSubtask()">
             </div>
+            @if(checkSubtaskLength()){
+                @for(task of subtaskArray; track $index){
+                    <div class="taskList">
+                        <span>{{task}}</span>
+                        <img src="assets/img/delete.svg" alt="" (click)="deleteSubtask(task)">
+                    </div>
+                }
+            }
         </div>
+    <!-------------create btn----------------->
         <div class="positionBtn">
             <button class="ClearBtn" (click)="clearValues()">Clear <img src="assets/img/vector.svg" alt=""></button>
             <button class="createTaskBtn" (click)="checkValues()">Create task <img src="assets/img/check.svg"></button>

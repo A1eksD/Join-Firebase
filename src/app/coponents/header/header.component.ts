@@ -16,7 +16,6 @@ export class HeaderComponent {
   currentUser: User[] = [];
   firstLetter: string = '';
   secondLetter: string = '';
-  thirdLetter: string = '';
 
   constructor(public loginService: LoginService, public userService: UsersService) {
   }
