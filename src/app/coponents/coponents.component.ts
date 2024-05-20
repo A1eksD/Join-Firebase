@@ -55,5 +55,6 @@ export class CoponentsComponent {
   toggleBooleans(){
     this.toggleService.showCategoryWindow = false;
     this.toggleService.showUserWindow = false;
+    this.toggleService.slideInRightWindow = false;
   }
 }

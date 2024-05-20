@@ -10,4 +10,5 @@ export class ToggleBooleansService {
   openBoard:boolean = false;
   showCategoryWindow:boolean = false;
   showUserWindow:boolean = false;
+  slideInRightWindow:boolean = false;
 }

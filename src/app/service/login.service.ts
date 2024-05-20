@@ -42,6 +42,7 @@ export class LoginService {
           uid: user.uid,
           firstName: this.firstName,
           lastName: this.lastName || '',
+          savedUsers: [],
           email: this.email,
           status: true
         }

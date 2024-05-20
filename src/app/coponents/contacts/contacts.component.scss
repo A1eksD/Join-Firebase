@@ -55,8 +55,8 @@ section{
     bottom: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 1;
     background-color: rgba(128, 128, 128, 0.5);
+    overflow: hidden;
     .userRightWindow{
         position: absolute;
         top: -96px;
@@ -64,7 +64,8 @@ section{
         bottom: 0;
         width: 40%;
         height: 100vh;
-        z-index: 2;
+        z-index: 10;
+        animation: slideinRightWindow 0.5s ease-in-out;
         .bleueTop{
             position: absolute;
             top: 96px;
@@ -114,7 +115,7 @@ section{
             height: 60%;
             background-color: white;
             border-bottom-left-radius: 25px;
-            z-index: 3;
+            z-index: 10;
             @include displayFlex();
             flex-direction: column;
             .imgBackground{
@@ -159,7 +160,7 @@ section{
                 }
             }
             .btnBox{
-                @include displayFlex();
+                @include displayFlex($g: 24px);
                 .closeBtn{
                     padding: 12px;
                     border-radius: 5px;
@@ -167,6 +168,9 @@ section{
                     color: #647188;
                     border: 1px solid #647188;
                     font-size: 16px;
+                    z-index: 11;
+                    width: auto;
+                    height: 18px;
                     cursor: pointer;
                     &:hover {
                         outline: 0.5px solid #4589ff;
@@ -186,10 +190,13 @@ section{
                 .saveBtn{
                     padding: 12px;
                     background-color: #4589FF;
-                    border: 0;
+                    border: 1px #4589FF;
                     border-radius: 5px;
                     color: white;
                     font-size: 16px;
+                    z-index: 11;
+                    width: auto;
+                    height: 20px;
                     cursor: pointer;
                     transition: 0.3s ease-in-out;
                     &:hover{
@@ -204,6 +211,8 @@ section{
                     }
                 }
                 .disabledBtn{
+                    width: auto;
+                    height: 20px;
                     border: none;
                     padding: 12px;
                     color: white;
@@ -219,6 +228,28 @@ section{
             }
         }
     }
+}
+
+span{
+    @include displayFlex(); 
+}
+
+@keyframes slideinRightWindow {
+    from{
+        transform: translateX(100%);
+        top: -96px;
+
+    }
+    to{
+        transform: translateX(0);
+        top: -96px;
+
+    }
+}
+
+.slideInRight{
+    transform: translateX(100%);
+    top: -96px;
 }
 
 .inputNumber::-webkit-outer-spin-button,
