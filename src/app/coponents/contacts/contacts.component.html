@@ -1,1 +1,61 @@
-<section>contacts</section>
+<section>
+    <div class="allContacsBox">
+    <!-------------------add user header------------------>
+        <div class="inputBox">
+            <input type="text" placeholder="Search for existing user">
+            <div></div>
+        </div>
+        <button>Add new member  <img src="assets/img/person_add.svg" alt=""></button>
+    <!-------------------render user rightWindow------------------>
+        <div class="grayBackground">
+            <div class="userRightWindow">
+                <div class="bleueTop">
+                    <img src="assets/img/closeInWhite.svg" alt="" class="closeAddContactBox" (click)="returnBack()">
+                    <div class="positionLetters">
+                        <img src="assets/img/capa1.svg" alt="">
+                        <h1>Add Contact</h1>
+                        <p>Tasks are better with a team!</p>
+                    </div>
+                </div>
+                <div class="whiteBox">
+                    <img src="assets/img/frame79.svg" alt="" class="imgBackground">
+                    <div class="inputBox">
+                        <div class="inputBoxWithImg">
+                            <input type="text" [(ngModel)]="name"  placeholder="Enter name (min. 3 char.)">
+                            <img src="assets/img/person.svg" alt="">
+                            <p>(requiert)</p>
+                        </div>
+                        <div class="inputBoxWithImg">
+                            <input type="email" [(ngModel)]="email"  placeholder="Enter email" pattern="[^@]+@[^\.]+\..+">
+                            <img src="assets/img/mail.svg" alt="">
+                            <p>(requiert)</p>
+                        </div>
+                        <div class="inputBoxWithImg">
+                            <input type="number" [(ngModel)]="phoneNr" class="inputNumber"  placeholder="Enter number">
+                            <img src="assets/img/call.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="btnBox">
+                        <button class="closeBtn">Close<img src="assets/img/vector.svg" alt=""></button>
+                        <button class="saveBtn" (click)="saveUserData()"
+                            disabled="{{checkCurrentData()}}" [ngClass]="checkCurrentData() ? 'saveBtn' : 'disabledBtn'"
+                        >Create contact<img src="assets/img/check.svg" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-------------------render users------------------>
+        @for (user of allUsers; track $index) {
+            <div class="loadedUsers">
+                <div class="ringFromUser">
+                    <span class="tagFromUser">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                </div>
+                <div class="userNameAndChackbox">
+                    <label for="{{user.id}}"> {{user.firstName}} {{user.lastName}}</label>
+                    <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/>
+                </div>
+            </div>
+        }
+    <!-------------------render user leftWindow------------------>
+    </div>
+</section>

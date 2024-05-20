@@ -266,16 +266,27 @@ section{
         width: 174px;
         height: 61px;
         border-radius: 10px;
-        border: 1px solid #4589ff;
-        background-color: #4589ff;
         color: white;
         font-size: 22px;
         cursor: pointer;
+        background-color: #4589ff;
+        border: 1px solid #4589ff;
+        animation: 0.3s acriveBtn;
         
     }
     .createTaskBtn:hover {
         background-color: #176cff;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
+
+@keyframes acriveBtn {
+    from {
+        background-color: #a3a5a7;
+    }
+    to {
+        background-color: #4589ff;
+        border: 1px solid #4589ff;
     }
 }
 
@@ -319,10 +330,11 @@ input{
     height: 61px;
     border-radius: 10px;
     border: none;
-    background-color: #a3a5a7;
     color: white;
     font-size: 22px;
+    background-color: #a3a5a7;
 }
+
 
 //----------------------------- animation tasks---------------------------------------------
 .slideInUpTask {

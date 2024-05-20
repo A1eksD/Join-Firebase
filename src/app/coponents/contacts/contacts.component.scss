@@ -1,8 +1,234 @@
+@import "../../../styles.scss";
+
 section{
     width: calc(100vw - 222px);
     height: calc(100vh - 96px);
     position: absolute;
     bottom: 0;
     right: 0;
-    background-color: dodgerblue;
+}
+
+.allContacsBox{
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
+    @include displayFlex($j: flex-start);
+    flex-direction: column;
+    .inputBox{
+        width: 60%;
+        @include displayFlex($j: flex-start);
+        flex-direction: column;
+        input{
+            width: calc(100% - 16px);
+            height: 26px;
+            border: 1px solid;
+            outline: none;
+            margin-top: 16px;
+            border-radius: 10px;
+            padding: 8px;
+            font-size: larger;
+        }
+    }
+    button{
+        width: 60%;
+        height: 56px;
+        background-color: #4589FF;
+        border: 1px;
+        border-radius: 10px;
+        cursor: pointer;
+        @include displayFlex();
+        font-size: 24px;
+        font-weight: 400;
+        color: white;
+        margin: 16px;
+        img{
+            margin-left: 8px;
+        }
+    }
+}
+
+.grayBackground{
+    position: absolute;
+    top: -96px;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    background-color: rgba(128, 128, 128, 0.5);
+    .userRightWindow{
+        position: absolute;
+        top: -96px;
+        right: 0;
+        bottom: 0;
+        width: 40%;
+        height: 100vh;
+        z-index: 2;
+        .bleueTop{
+            position: absolute;
+            top: 96px;
+            width: 100%;
+            height: 40%;
+            background-color: #176CFF;
+            border-top-left-radius: 25px;
+            z-index: 3;
+            .closeAddContactBox{
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+                &:hover{
+                    scale: 1.1;
+                }
+            }
+            .positionLetters{
+                height: 100%;
+                @include displayFlex($g: 12px);
+                flex-direction: column;
+                color: white;
+                text-align: center;
+                img{
+                    width: 64px;
+                    height: 72px;
+                    object-fit: contain;
+                    padding-top: 12px;
+                }
+                h1{
+                    font-size: 44px;
+                    margin: 0;
+                    margin-top: 16px;
+                }
+                p{
+                    font-size: 24px;
+                    font-weight: 300;
+                    margin-top: 8px;
+                }
+            }
+        }
+        .whiteBox{
+            position: absolute;
+            bottom: -96px;
+            width: 100%;
+            height: 60%;
+            background-color: white;
+            border-bottom-left-radius: 25px;
+            z-index: 3;
+            @include displayFlex();
+            flex-direction: column;
+            .imgBackground{
+                width: 120px;
+                height: 120px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                object-fit: cover;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-self: center;
+                margin-bottom: 8px;
+            }
+            .inputBox{
+                width: 60%;
+                height: auto;
+                .inputBoxWithImg{
+                    @include displayFlex();
+                    width: 100%;
+                    position: relative;
+                    margin-bottom: 12px;
+                    input{
+                        border: 0px;
+                        border-bottom: 1px solid rgba(209, 209, 209, 1);
+                        padding: 13px 32px 0px 16px;
+                        gap: 10px;
+                        display: flex;
+                        font-weight: 400;
+                        font-size: 16px;
+                        outline: none;
+                        border-radius: 0;
+                    }
+                    img{
+                        margin-left: -28px;
+                    }
+                    p{
+                        position: absolute;
+                        bottom: -18px;
+                        left: 14px;
+                        color: #176CFF;
+                    }
+                }
+            }
+            .btnBox{
+                @include displayFlex();
+                .closeBtn{
+                    padding: 12px;
+                    border-radius: 5px;
+                    background-color: white;
+                    color: #647188;
+                    border: 1px solid #647188;
+                    font-size: 16px;
+                    cursor: pointer;
+                    &:hover {
+                        outline: 0.5px solid #4589ff;
+                        color: #4589ff;
+                        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                    }
+                    &:hover img{
+                        filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
+                    }
+                    img{
+                        width: 14px;
+                        height: 14px;
+                        object-fit: contain;
+                        margin-left: 8px;
+                    }
+                }
+                .saveBtn{
+                    padding: 12px;
+                    background-color: #4589FF;
+                    border: 0;
+                    border-radius: 5px;
+                    color: white;
+                    font-size: 16px;
+                    cursor: pointer;
+                    transition: 0.3s ease-in-out;
+                    &:hover{
+                        background-color: #176cff;
+                        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                    }
+                    img{
+                        width: 14px;
+                        height: 14px;
+                        object-fit: contain;
+                        margin-left: 8px;
+                    }
+                }
+                .disabledBtn{
+                    border: none;
+                    padding: 12px;
+                    color: white;
+                    font-size: 16px;
+                    background-color: #a3a5a7;
+                    cursor: context-menu;
+                    transition: 0.3s ease-in-out;
+                    &:hover{
+                        background-color: #a3a5a7;
+                        box-shadow: none
+                    }
+                }
+            }
+        }
+    }
+}
+
+.inputNumber::-webkit-outer-spin-button,
+.inputNumber::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inputNumber[type=number] {
+    -moz-appearance: textfield; 
+    -webkit-appearance: none;   
+    appearance: none;  
 }
