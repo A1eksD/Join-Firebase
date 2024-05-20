@@ -10,15 +10,11 @@ section{
     .dragArea{
         width: 300px;
         height: 600px;
-        background-color: white;
         margin: 32px;
+        border: 1px solid;
+        background-color: white;
     }
 }
-
-.dragAreaHighlight{
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
 
 .box{
     width: 32px;

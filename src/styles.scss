@@ -21,6 +21,10 @@ $blueButton: #0D6EFD;
   display: none;
 }
 
+.dragAreaHighlight{
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
 @mixin displayFlex($d: flex, $j: center, $a: center, $g: 0) {
     display: $d;
     justify-content: $j;

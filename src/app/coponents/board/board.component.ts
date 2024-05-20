@@ -5,17 +5,19 @@ import {
   ViewChild
 } from '@angular/core';
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
+import { OnDragHighlightDirective } from '../../directives/on-drag-highlight.directive';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, OnDragHighlightDirective],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
 export class BoardComponent {
   @ViewChild('openArea') open!: ElementRef;
   @ViewChild('closedArea') closed!: ElementRef;
+
   todos = [
     {
       id: 0,
@@ -39,7 +41,7 @@ export class BoardComponent {
   currentCategory: string = 'open';
 
 
-  constructor(public toogleService: ToggleBooleansService) {}
+  constructor(public toggleService: ToggleBooleansService) {}
 
 
   getOpenCategory() {
