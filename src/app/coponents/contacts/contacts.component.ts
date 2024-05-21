@@ -105,10 +105,30 @@ export class ContactsComponent {
     event.stopPropagation();
   }
 
-  showContactDetails(user: User){
-    this.userDetails = '';
-    this.userDetails = user;
+  showContactDetails(user: User) {
+    if (this.userDetails !== user) {
+      this.userDetails = '';
+      setTimeout(() => {
+        this.userDetails = user;
+      },300);
+    } else if (this.userDetails === '') {
+      this.userDetails = user;
+    } else if(this.userDetails == user){
+      this.userDetails = '';
+    }
   }
+
+  checkContactValue(){
+    if (this.userDetails !== '') {
+      return true;
+    } else if (this.userDetails == '') {
+      return setTimeout(() => {
+         false;
+        },300);
+    }
+    return true;
+  }
+  
 
   editContact(userDetails: User){
 

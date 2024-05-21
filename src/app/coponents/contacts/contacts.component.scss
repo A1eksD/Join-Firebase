@@ -312,7 +312,7 @@ span{
 
 .positionUserContactBox{
     position: absolute;
-    right: 0;
+    right: -110%;
     top: 80px;
     width: 50%;
     height: calc(100vh - 186px);
@@ -379,7 +379,8 @@ span{
 }
 
 .slideInContactInfo{
-    animation: slideInContactInfo 0.3s ease-in-out;
+    animation: slideInContactInfo 0.3s linear;
+    right: 0;
 }
 
 @keyframes slideInContactInfo {
@@ -387,11 +388,36 @@ span{
       right: -110%;
       height: calc(100vh - 186px);
       top: 80px;
+      opacity: 0;
     }
     to {
       right: 0;
       height: calc(100vh - 186px);
       top: 80px;
+      opacity: 1;
+    }
+  }
+
+.slideOutContactInfo{
+    animation: slideOutContactInfo 0.3s linear;
+    right: -110%;
+}
+
+@keyframes slideOutContactInfo {
+    0% {
+      right: 0;
+      height: calc(100vh - 186px);
+      top: 80px;
+      opacity: 1;
+    }
+    70%{
+        opacity: 0;
+    }
+    100% {
+      right: -110%;
+      height: calc(100vh - 186px);
+      top: 80px;
+      opacity: 0;
     }
   }
   
