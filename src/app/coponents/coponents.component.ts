@@ -4,7 +4,6 @@ import { SummaryComponent } from './summary/summary.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
-import { LoginService } from '../service/login.service';
 import { HeaderComponent } from './header/header.component';
 import { ToggleBooleansService } from '../service/toggle-booleans.service';
 

@@ -56,10 +56,17 @@ export class UsersService {
     try {
       const docRef = doc(this.firestore, `users/${getAddedUsers[0].id}`);
       await updateDoc(docRef, { savedUsers: allMembers });
-      const docReff = await addDoc(collection(this.firestore, "commonUsers"), { savedUsers: user });
-      console.log("Document written with ID: ", docReff.id);
+      this.addContactDocToCommonUsers(user);
     } catch (error) {
-      console.error('Added user failed');
+      console.error('Added contact failed');
+    }
+  }
+
+  async addContactDocToCommonUsers(user: User[]){
+    try {
+      await addDoc(collection(this.firestore, "commonUsers"), { savedUsers: user });
+    } catch (error) {
+      console.error('Added contact failed');
     }
   }
 

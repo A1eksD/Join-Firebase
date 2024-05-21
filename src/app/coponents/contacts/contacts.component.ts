@@ -21,21 +21,22 @@ export class ContactsComponent {
   firstName:string = '';
   lastName:string = '';
   closeUserWindow:boolean = false;
+  userDetails: any = '';
 
-  constructor(public toggleService: ToggleBooleansService, private userService: UsersService){
-    setInterval(() => {
-      console.log(this.closeUserWindow);
-      
-    }, 500)
+
+  constructor(public toggleService: ToggleBooleansService, public userService: UsersService){}
+
+  getUserFirstLetter(user: User){
+    return user?.firstName?.charAt(0).toUpperCase() || '';
   }
 
-  getUserFirstLetter(user: User){}
-
-  getUserSecondLetter(user: User){}
-
-  addUser(user: User, event: Event) {
-    event.stopPropagation();
+  getUserSecondLetter(user: User){
+    return user?.lastName?.charAt(0).toUpperCase() || '';
   }
+
+  // addUser(user: User, event: Event) {
+  //   event.stopPropagation();
+  // }
 
   saveUserData() {
     if (this.checkCurrentData()) {
@@ -102,5 +103,18 @@ export class ContactsComponent {
 
   stopPropagation(event: Event){
     event.stopPropagation();
+  }
+
+  showContactDetails(user: User){
+    this.userDetails = '';
+    this.userDetails = user;
+  }
+
+  editContact(userDetails: User){
+
+  }
+
+  deleteContact(userDetails: User){
+
   }
 }

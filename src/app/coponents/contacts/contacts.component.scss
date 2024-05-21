@@ -9,7 +9,7 @@ section{
 }
 
 .allContacsBox{
-    width: 50%;
+    width: 40%;
     height: 100%;
     background-color: white;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
@@ -230,6 +230,58 @@ section{
     }
 }
 
+.renderAllContacts{
+    width: 100%;
+    
+    @include displayFlex($j: flex-start); 
+    flex-direction: column;
+    .loadedUsers{
+        width: calc(100% - 16px);
+        @include displayFlex($j: flex-start, $g: 12px); 
+        border-radius: 5px;
+        padding: 2px;
+        padding-left: 8px;
+        padding-right: 8px;
+        cursor: pointer;
+        &:hover{
+            background-color: #64718821;
+        }
+        .ringFromUser{
+            min-width: 40px;
+            min-height: 40px;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+            @include displayFlex(); 
+            margin: 4px;
+            .tagFromUser{
+                min-width: 32px;
+                min-height: 32px;
+                object-fit: cover;
+                border-radius: 50%;
+                @include displayFlex(); 
+                color: white;
+                font-weight: 500;
+            }
+        }
+        .userNameAndChackbox{
+            width: 100%;
+            @include displayFlex($j: space-between); 
+            label{
+                cursor: pointer;
+            }
+            // input{
+            //     margin: 0;
+            //     width: 16px;
+            //     height: 16px;
+            //     margin-right: 5px;
+            //     cursor: pointer;
+            // }
+        }
+        
+    }
+}
+
 span{
     @include displayFlex(); 
 }
@@ -262,4 +314,92 @@ span{
     -moz-appearance: textfield; 
     -webkit-appearance: none;   
     appearance: none;  
+}
+
+.positionUserContactBox{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    height: calc(100vh - 160px);
+    @include displayFlex($j: flex-start, $a: flex-start, $g: 40px); 
+    flex-direction: column;
+    transform: translateX(0); 
+    transition: transform 0.3s ease-in-out;
+    .userContactHeader{
+        @include displayFlex($j: flex-start, $g: 56px); 
+        .positionBackground{
+            width: 132px;
+            height: 132px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            .backgroundColor{
+                width: 122px;
+                height: 122px;
+                @include displayFlex();
+                border-radius: 50%;
+                p{
+                    font-size: 59px; 
+                    color: white;
+                }
+            }
+        }
+        .positionName{
+            @include displayFlex($j: flex-start, $a:flex-start, $g: 16px); 
+            flex-direction: column;
+            h1{
+                flex-direction: column;
+                font-size: 40px;
+                font-weight: bold;
+                margin: 0;
+            }
+            .positionEditDelete{
+                @include displayFlex($j: flex-start, $g: 20px); 
+                .editBox{
+                    @include displayFlex($g: 8px); 
+                    transition: 0.2s ease-in-out;
+                    cursor: pointer;
+                    &:hover{
+                        color: #176cff;
+                        transform: scale(1.1);
+                        font-weight: bolder;
+                    }
+                }
+            }
+        }
+    }
+    .positionContactInfo{
+        @include displayFlex($a:flex-start, $g: 16px); 
+        flex-direction: column;
+        a{
+            text-decoration: none;
+            color: #2776ff;
+        }
+        p{
+            color: #176CFF;
+        }
+    }
+}
+
+.slideInContactInfo{
+    animation: slideInContactInfo 0.3s ease-in-out;
+    height: calc(100vh - 160px);
+    width: 50%;
+}
+
+@keyframes slideInContactInfo {
+    from{
+        transform: translateX(110%) ;
+        width: 50%;
+        height: calc(100vh - 160px);
+    }
+    to{
+        transform: translateX(0) ;
+        width: 50%;
+        height: calc(100vh - 160px);
+    }
 }
