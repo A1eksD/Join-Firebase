@@ -6,8 +6,9 @@ section{
     position: absolute;
     bottom: 0;
     right: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
+
 
 .allContacsBox{
     width: 40%;
@@ -56,14 +57,14 @@ section{
     bottom: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 10;
     background-color: rgba(128, 128, 128, 0.5);
-    overflow: hidden;
     .userRightWindow{
         position: absolute;
-        top: -96px;
+        top: 0;
         right: 0;
         bottom: 0;
-        width: 40%;
+        width: 32%;
         height: 100vh;
         z-index: 10;
         animation: slideinRightWindow 0.5s ease-in-out;
@@ -71,7 +72,7 @@ section{
             position: absolute;
             top: 96px;
             width: 100%;
-            height: 40%;
+            height: 36%;
             background-color: #176CFF;
             border-top-left-radius: 25px;
             z-index: 3;
@@ -111,9 +112,9 @@ section{
         }
         .whiteBox{
             position: absolute;
-            bottom: -96px;
+            bottom: 0;
             width: 100%;
-            height: 60%;
+            height: 54%;
             background-color: white;
             border-bottom-left-radius: 25px;
             z-index: 10;
@@ -282,19 +283,19 @@ span{
 
 @keyframes slideinRightWindow {
     from{
-        transform: translateX(100%);
-        top: -96px;
+        transform: translateX(110%);
+        // top: -96px;
 
     }
     to{
         transform: translateX(0);
-        top: -96px;
+        // top: -96px;
 
     }
 }
 
 .slideInRight{
-    transform: translateX(100%);
+    transform: translateX(120%);
     top: -96px;
 }
 
@@ -312,12 +313,13 @@ span{
 
 .positionUserContactBox{
     position: absolute;
-    right: -110%;
+    right: 0;
     top: 80px;
     width: 50%;
     height: calc(100vh - 186px);
     @include displayFlex($j: flex-start, $a: flex-start, $g: 40px); 
     flex-direction: column;
+    // transform: translateX(100%);
     .userContactHeader{
         @include displayFlex($j: flex-start, $g: 56px); 
         .positionBackground{
@@ -380,44 +382,222 @@ span{
 
 .slideInContactInfo{
     animation: slideInContactInfo 0.3s linear;
-    right: 0;
+    transform: translateX(0);
 }
 
 @keyframes slideInContactInfo {
     from {
-      right: -110%;
-      height: calc(100vh - 186px);
-      top: 80px;
+      transform: translateX(110%);
       opacity: 0;
     }
     to {
-      right: 0;
-      height: calc(100vh - 186px);
-      top: 80px;
+      transform: translateX(0);
       opacity: 1;
     }
   }
 
 .slideOutContactInfo{
     animation: slideOutContactInfo 0.3s linear;
-    right: -110%;
+    transform: translateX(110%);
 }
 
 @keyframes slideOutContactInfo {
-    0% {
-      right: 0;
-      height: calc(100vh - 186px);
-      top: 80px;
+    from {
+      transform: translateX(0);
       opacity: 1;
     }
-    70%{
-        opacity: 0;
-    }
-    100% {
-      right: -110%;
-      height: calc(100vh - 186px);
-      top: 80px;
+    to {
+      transform: translateX(110%);
       opacity: 0;
     }
   }
-  
+
+.grayBackgroundLeft{
+    position: absolute;
+    top: -96px;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(128, 128, 128, 0.5);
+    .userLeftWindow{
+        position: absolute;
+        top: -96px;
+        left: 0;
+        bottom: 0;
+        width: 40%;
+        height: 100vh;
+        z-index: 12;
+        animation: slideinLeftWindow 0.5s ease-in-out;
+        .bleueTopLeft{
+            position: absolute;
+            top: 96px;
+            width: 100%;
+            height: 40%;
+            background-color: #176CFF;
+            border-top-right-radius: 25px;
+            z-index: 12;
+            .closeAddContactBox{
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+                &:hover{
+                    scale: 1.1;
+                }
+            }
+            .positionLetters{
+                height: 100%;
+                @include displayFlex($g: 12px);
+                flex-direction: column;
+                color: white;
+                text-align: center;
+                img{
+                    width: 64px;
+                    height: 72px;
+                    object-fit: contain;
+                    padding-top: 12px;
+                }
+                h1{
+                    font-size: 44px;
+                    margin: 0;
+                    margin-top: 16px;
+                }
+            }
+        }
+        .whiteBox{
+            position: absolute;
+            bottom: -96px;
+            width: 100%;
+            height: 60%;
+            background-color: white;
+            border-bottom-right-radius: 25px;
+            z-index: 12;
+            @include displayFlex();
+            flex-direction: column;
+            .imgBackground{
+                width: 120px;
+                height: 120px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                object-fit: cover;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-self: center;
+                margin-bottom: 8px;
+            }
+            .inputBox{
+                width: 60%;
+                height: auto;
+                .inputBoxWithImg{
+                    @include displayFlex();
+                    width: 100%;
+                    position: relative;
+                    margin-bottom: 12px;
+                    input{
+                        border: 0px;
+                        border-bottom: 1px solid rgba(209, 209, 209, 1);
+                        padding: 13px 32px 0px 16px;
+                        gap: 10px;
+                        display: flex;
+                        font-weight: 400;
+                        font-size: 16px;
+                        outline: none;
+                        border-radius: 0;
+                    }
+                    img{
+                        margin-left: -28px;
+                    }
+                    p{
+                        position: absolute;
+                        bottom: -18px;
+                        left: 14px;
+                        color: #176CFF;
+                    }
+                }
+            }
+            .btnBox{
+                @include displayFlex($g: 24px);
+                .closeBtn{
+                    padding: 12px;
+                    border-radius: 5px;
+                    background-color: white;
+                    color: #647188;
+                    border: 1px solid #647188;
+                    font-size: 16px;
+                    z-index: 11;
+                    width: auto;
+                    height: 18px;
+                    cursor: pointer;
+                    &:hover {
+                        outline: 0.5px solid #4589ff;
+                        color: #4589ff;
+                        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                    }
+                    &:hover img{
+                        filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
+                    }
+                    img{
+                        width: 14px;
+                        height: 14px;
+                        object-fit: contain;
+                        margin-left: 8px;
+                    }
+                }
+                .saveBtn{
+                    padding: 12px;
+                    background-color: #4589FF;
+                    border: 1px #4589FF;
+                    border-radius: 5px;
+                    color: white;
+                    font-size: 16px;
+                    z-index: 11;
+                    width: auto;
+                    height: 20px;
+                    cursor: pointer;
+                    transition: 0.3s ease-in-out;
+                    &:hover{
+                        background-color: #176cff;
+                        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                    }
+                    img{
+                        width: 14px;
+                        height: 14px;
+                        object-fit: contain;
+                        margin-left: 8px;
+                    }
+                }
+                .disabledBtn{
+                    width: auto;
+                    height: 20px;
+                    border: none;
+                    padding: 12px;
+                    color: white;
+                    font-size: 16px;
+                    background-color: #a3a5a7;
+                    cursor: context-menu;
+                    transition: 0.3s ease-in-out;
+                    &:hover{
+                        background-color: #a3a5a7;
+                        box-shadow: none
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes slideinLeftWindow {
+    from{
+        transform: translateX(-100%);
+       top: -96px;
+
+    }
+    to{
+        transform: translateX(0);
+        top: -96px;
+
+    }
+}

@@ -58,41 +58,74 @@
                 </div>
             }
         </div>
-    <!-------------------render user leftWindow------------------>
     </div>
     <!-------------------render user details------------------>
         <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', slideOutContactInfo: userDetails ==''}">
-            <!-- @if(checkContactValue()){ -->
-                <div class="userContactHeader">
-                    <div class="positionBackground">
-                        <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
-                            <p>{{getUserFirstLetter(userDetails)}}{{getUserSecondLetter(userDetails)}}</p>
-                        </div>
+            <div class="userContactHeader">
+                <div class="positionBackground">
+                    <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
+                        <p>{{getUserFirstLetter(userDetails)}}{{getUserSecondLetter(userDetails)}}</p>
                     </div>
-                    <div class="positionName">
-                        <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
-                        <div class="positionEditDelete">
-                            <div class="editBox" (click)="editContact(userDetails)">
-                                <img src="assets/img/edit.svg" alt="">
-                                <span>Edit</span>
-                            </div>
-                            <div class="editBox" (click)="deleteContact(userDetails)">
-                                <img src="assets/img/delete.svg" alt="">
-                                <span>Delete</span>
-                            </div>
+                </div>
+                <div class="positionName">
+                    <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
+                    <div class="positionEditDelete">
+                        <div class="editBox" (click)="editContact(userDetails)">
+                            <img src="assets/img/edit.svg" alt="">
+                            <span>Edit</span>
+                        </div>
+                        <div class="editBox" (click)="deleteContact(userDetails)">
+                            <img src="assets/img/delete.svg" alt="">
+                            <span>Delete</span>
                         </div>
                     </div>
                 </div>
-                <div class="positionContactInfo">
-                    <h2>Contact Information</h2>
-                    <h3>Email</h3>
-                    <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
-                    <h3>Phone</h3>
-                    @if (userDetails.phoneNumber !== '') {
-                        <p>no number available</p>
-                    }
-                    <p>{{userDetails.phoneNumber}}</p>
-                </div>
-            <!-- } -->
+            </div>
+            <div class="positionContactInfo">
+                <h2>Contact Information</h2>
+                <h3>Email</h3>
+                <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
+                <h3>Phone</h3>
+                @if (userDetails.phoneNumber !== '') {
+                    <p>no number available</p>
+                }
+                <p>{{userDetails.phoneNumber}}</p>
+            </div>
         </div>
+     <!-- -----------------render user leftWindow----------------
+    <div class="grayBackgroundLeft">
+        <div class="userLeftWindow">
+            <div class="bleueTopLeft" (click)="stopPropagation($event)">
+                <img src="assets/img/closeInWhite.svg" alt="" class="closeAddContactBox" (click)="returnBack()">
+                <div class="positionLetters">
+                    <img src="assets/img/capa1.svg" alt="">
+                    <h1>Edit Contact</h1>
+                </div>
+            </div>
+            <div class="whiteBox" (click)="stopPropagation($event)">
+                <img src="assets/img/frame79.svg" alt="" class="imgBackground">
+                <div class="inputBox">
+                    <div class="inputBoxWithImg">
+                        <input type="text" [(ngModel)]="name"  placeholder="Enter name (min. 3 char.)" >
+                        <img src="assets/img/person.svg" alt="">
+                        <p>(requiert)</p>
+                    </div>
+                    <div class="inputBoxWithImg">
+                        <input type="email" [(ngModel)]="email"  placeholder="Enter email" pattern="[^@]+@[^\.]+\..+" >
+                        <img src="assets/img/mail.svg" alt="">
+                        <p>(requiert)</p>
+                    </div>
+                    <div class="inputBoxWithImg">
+                        <input type="number" [(ngModel)]="phoneNr" class="inputNumber"  placeholder="Enter number" >
+                        <img src="assets/img/call.svg" alt="">
+                    </div>
+                </div>
+                <div class="btnBox">
+                    <span class="closeBtn" (click)="returnBack()">Close<img src="assets/img/vector.svg" alt=""></span>
+                    <span class="saveBtn" (click)="saveUserData()" [ngClass]="checkCurrentData() ? 'saveBtn' : 'disabledBtn'"
+                    >Save<img src="assets/img/check.svg" alt=""></span>
+                </div>
+            </div>
+        </div>
+    </div> -->
 </section>

@@ -117,17 +117,6 @@ export class ContactsComponent {
       this.userDetails = '';
     }
   }
-
-  checkContactValue(){
-    if (this.userDetails !== '') {
-      return true;
-    } else if (this.userDetails == '') {
-      return setTimeout(() => {
-         false;
-        },300);
-    }
-    return true;
-  }
   
 
   editContact(userDetails: User){
