@@ -6,6 +6,7 @@ section{
     position: absolute;
     bottom: 0;
     right: 0;
+    overflow: hidden;
 }
 
 .allContacsBox{
@@ -270,13 +271,6 @@ section{
             label{
                 cursor: pointer;
             }
-            // input{
-            //     margin: 0;
-            //     width: 16px;
-            //     height: 16px;
-            //     margin-right: 5px;
-            //     cursor: pointer;
-            // }
         }
         
     }
@@ -318,19 +312,17 @@ span{
 
 .positionUserContactBox{
     position: absolute;
-    bottom: 0;
     right: 0;
+    top: 80px;
     width: 50%;
-    height: calc(100vh - 160px);
+    height: calc(100vh - 186px);
     @include displayFlex($j: flex-start, $a: flex-start, $g: 40px); 
     flex-direction: column;
-    transform: translateX(0); 
-    transition: transform 0.3s ease-in-out;
     .userContactHeader{
         @include displayFlex($j: flex-start, $g: 56px); 
         .positionBackground{
-            width: 132px;
-            height: 132px;
+            min-width: 132px;
+            min-height: 132px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -343,6 +335,7 @@ span{
                 @include displayFlex();
                 border-radius: 50%;
                 p{
+                    text-align: left;
                     font-size: 59px; 
                     color: white;
                 }
@@ -387,19 +380,18 @@ span{
 
 .slideInContactInfo{
     animation: slideInContactInfo 0.3s ease-in-out;
-    height: calc(100vh - 160px);
-    width: 50%;
 }
 
 @keyframes slideInContactInfo {
-    from{
-        transform: translateX(110%) ;
-        width: 50%;
-        height: calc(100vh - 160px);
+    from {
+      right: -110%;
+      height: calc(100vh - 186px);
+      top: 80px;
     }
-    to{
-        transform: translateX(0) ;
-        width: 50%;
-        height: calc(100vh - 160px);
+    to {
+      right: 0;
+      height: calc(100vh - 186px);
+      top: 80px;
     }
-}
+  }
+  
