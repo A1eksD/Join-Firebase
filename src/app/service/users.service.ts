@@ -32,7 +32,7 @@ export class UsersService {
   }
 
   subCommonUsersList(){
-    return onSnapshot(collection(this.firestore, 'users'), (list) => {
+    return onSnapshot(collection(this.firestore, 'commonUsers'), (list) => {
       this.commonUsers = [];
       list.forEach((element) => {
         const userWithId = { id: element.id, ...element.data() } as User;
@@ -73,19 +73,31 @@ export class UsersService {
   async updateEditContact(user: User[]){
     const currentUser = localStorage.getItem('currentUser');
     const filteredUser = this.allUsers.filter(u => u.id === this.getCleanID(currentUser!));
-    const contacts = filteredUser[0].savedUsers.filter((u: User) => u.id === user[0].id);
+    const getCurrentSavedUsers = this.getCurrentSavedUsers(filteredUser[0].savedUsers, user[0]);
     try {
-      const docRef = doc(this.firestore, `users/${filteredUser[0].id}/savedUsers/${contacts[0].id}`);
-      await updateDoc(docRef, {user});
+      const docRef = doc(this.firestore, `users/${filteredUser[0].id}`);
+      await updateDoc(docRef, {savedUsers : getCurrentSavedUsers});
       this.updateContactDocToCommonUsers(user);
     } catch (error) {
       console.error('Added contact failed');
     }
   }
 
+  getCurrentSavedUsers(savedUser: User[], contact: User): User[] {
+    const contactIndex = savedUser.findIndex(c => c.uid === contact.uid);
+    if (contactIndex !== -1) {
+      savedUser.splice(contactIndex, 1);
+    }
+    savedUser.push(contact);
+    return savedUser;
+  }
+  
+
   async updateContactDocToCommonUsers(user: User[]){
+    const filteredUser = this.commonUsers.filter(u => u.savedUsers![0].uid === user[0].uid);
     try {
-      await addDoc(collection(this.firestore, `commonUsers/${user[0].id}`), { savedUsers: user });
+      const docRef = doc(this.firestore, `commonUsers/${filteredUser[0].id}`);
+      await updateDoc(docRef, {savedUsers : user});
     } catch (error) {
       console.error('Added contact failed');
     }

@@ -50,7 +50,7 @@ export class ContactsComponent {
         phoneNumber: this.phoneNr || '',
         status: false,
         color: this.generateRandomColor(),
-        id: Math.floor(Math.random() * 400).toString(),
+        uid: (Math.random() * 341235).toString(),
       };
       this.userService.addNewContact([user]);
       this.returnBack();
@@ -87,6 +87,7 @@ export class ContactsComponent {
     this.phoneNr = undefined;
     this.closeUserWindow = false;
     this.closeUserEditWindow = false;
+    this.userDetails = '';
   }
 
   openAddContactWindow(event: Event){
@@ -165,9 +166,10 @@ export class ContactsComponent {
       phoneNumber: this.editPhoneNr || '',
       status: false,
       color: this.getUserToEdit.color,
-      id: this.getUserToEdit.id
+      uid: this.getUserToEdit.uid
     };
     this.userService.updateEditContact([user]);
+    this.returnBack();
   }
 
   showUserContacts(){
