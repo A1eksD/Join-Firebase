@@ -156,7 +156,8 @@ section{
                     p{
                         position: absolute;
                         bottom: -18px;
-                        left: 14px;
+                        left: 0;
+                        padding-left: 16px;
                         color: #176CFF;
                     }
                 }
@@ -319,7 +320,6 @@ span{
     height: calc(100vh - 186px);
     @include displayFlex($j: flex-start, $a: flex-start, $g: 40px); 
     flex-direction: column;
-    // transform: translateX(100%);
     .userContactHeader{
         @include displayFlex($j: flex-start, $g: 56px); 
         .positionBackground{
@@ -415,14 +415,14 @@ span{
 .grayBackgroundLeft{
     position: absolute;
     top: -96px;
-    right: 0;
+    left: 0;
     bottom: 0;
     width: 100vw;
     height: 100vh;
     background-color: rgba(128, 128, 128, 0.5);
     .userLeftWindow{
         position: absolute;
-        top: -96px;
+        top: 0;
         left: 0;
         bottom: 0;
         width: 40%;
@@ -433,10 +433,11 @@ span{
             position: absolute;
             top: 96px;
             width: 100%;
-            height: 40%;
+            height: 36%;
             background-color: #176CFF;
             border-top-right-radius: 25px;
             z-index: 12;
+            box-shadow: rgb(155 157 159) 1px 0px 3px 0px inset{};
             .closeAddContactBox{
                 position: absolute;
                 top: 16px;
@@ -468,33 +469,44 @@ span{
         }
         .whiteBox{
             position: absolute;
-            bottom: -96px;
+            bottom: 0;
             width: 100%;
-            height: 60%;
+            height: 54%;
             background-color: white;
             border-bottom-right-radius: 25px;
             z-index: 12;
-            @include displayFlex();
+            @include displayFlex($g: 16px);
             flex-direction: column;
+            box-shadow: rgb(155 157 159) 1px 0px 3px 0px inset;
             .imgBackground{
-                width: 120px;
-                height: 120px;
+                width: 134px;
+                height: 134px;
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
                 object-fit: cover;
                 border-radius: 50%;
-                display: flex;
-                justify-content: center;
-                align-self: center;
+                @include displayFlex();
                 margin-bottom: 8px;
+                background-color: white;
+                .imgBackgroundEdit{
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    @include displayFlex();
+                    span{
+                        color: white;
+                        font-size: 59px;
+                        @include displayFlex();
+                    }
+                }
             }
             .inputBox{
-                width: 60%;
+                width: auto;
                 height: auto;
-                .inputBoxWithImg{
+                .inputBoxWithImgLeft{
                     @include displayFlex();
                     width: 100%;
                     position: relative;
-                    margin-bottom: 12px;
+                    margin-bottom: 28px;
                     input{
                         border: 0px;
                         border-bottom: 1px solid rgba(209, 209, 209, 1);
@@ -512,12 +524,13 @@ span{
                     p{
                         position: absolute;
                         bottom: -18px;
-                        left: 14px;
+                        left: 0;
+                        margin-left: 16px;
                         color: #176CFF;
                     }
                 }
             }
-            .btnBox{
+            .btnBoxLeft{
                 @include displayFlex($g: 24px);
                 .closeBtn{
                     padding: 12px;
@@ -545,7 +558,7 @@ span{
                         margin-left: 8px;
                     }
                 }
-                .saveBtn{
+                .saveBtnLeft{
                     padding: 12px;
                     background-color: #4589FF;
                     border: 1px #4589FF;
@@ -568,7 +581,7 @@ span{
                         margin-left: 8px;
                     }
                 }
-                .disabledBtn{
+                .disabledBtnLeft{
                     width: auto;
                     height: 20px;
                     border: none;
@@ -592,12 +605,8 @@ span{
 @keyframes slideinLeftWindow {
     from{
         transform: translateX(-100%);
-       top: -96px;
-
     }
     to{
         transform: translateX(0);
-        top: -96px;
-
     }
 }

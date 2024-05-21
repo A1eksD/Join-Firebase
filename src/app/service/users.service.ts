@@ -8,7 +8,7 @@ import { User } from '../interface/user';
 export class UsersService {
   firestore: Firestore = inject(Firestore);
   allUsers: any[] = [];
-  getUserIDs: string[] = [];
+  getUserIDs: any[] = [];
   commonUsers: User[] = [];
 
   unsubUser;
@@ -65,6 +65,27 @@ export class UsersService {
   async addContactDocToCommonUsers(user: User[]){
     try {
       await addDoc(collection(this.firestore, "commonUsers"), { savedUsers: user });
+    } catch (error) {
+      console.error('Added contact failed');
+    }
+  }
+
+  async updateEditContact(user: User[]){
+    const currentUser = localStorage.getItem('currentUser');
+    const filteredUser = this.allUsers.filter(u => u.id === this.getCleanID(currentUser!));
+    const contacts = filteredUser[0].savedUsers.filter((u: User) => u.id === user[0].id);
+    try {
+      const docRef = doc(this.firestore, `users/${filteredUser[0].id}/savedUsers/${contacts[0].id}`);
+      await updateDoc(docRef, {user});
+      this.updateContactDocToCommonUsers(user);
+    } catch (error) {
+      console.error('Added contact failed');
+    }
+  }
+
+  async updateContactDocToCommonUsers(user: User[]){
+    try {
+      await addDoc(collection(this.firestore, `commonUsers/${user[0].id}`), { savedUsers: user });
     } catch (error) {
       console.error('Added contact failed');
     }

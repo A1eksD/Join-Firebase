@@ -21,17 +21,17 @@
                     <img src="assets/img/frame79.svg" alt="" class="imgBackground">
                     <div class="inputBox">
                         <div class="inputBoxWithImg">
-                            <input type="text" [(ngModel)]="name"  placeholder="Enter name (min. 3 char.)" >
+                            <input type="text" [(ngModel)]="name"  placeholder="Enter name (min. 3 char.)">
                             <img src="assets/img/person.svg" alt="">
                             <p>(requiert)</p>
                         </div>
                         <div class="inputBoxWithImg">
-                            <input type="email" [(ngModel)]="email"  placeholder="Enter email" pattern="[^@]+@[^\.]+\..+" >
+                            <input type="email" [(ngModel)]="email"  placeholder="Enter email" pattern="[^@]+@[^\.]+\..+">
                             <img src="assets/img/mail.svg" alt="">
                             <p>(requiert)</p>
                         </div>
                         <div class="inputBoxWithImg">
-                            <input type="number" [(ngModel)]="phoneNr" class="inputNumber"  placeholder="Enter number" >
+                            <input type="number" [(ngModel)]="phoneNr" class="inputNumber"  placeholder="Enter number">
                             <img src="assets/img/call.svg" alt="">
                         </div>
                     </div>
@@ -45,7 +45,7 @@
         </div>
     <!-------------------render users------------------>
         <div class="renderAllContacts">
-            @for (user of userService.commonUsers; track $index) {
+            @for (user of showUserContacts(); track $index) {
                 <div class="loadedUsers" (click)="showContactDetails(user)">
                     <div class="ringFromUser">
                         <span class="tagFromUser" *ngIf="user.color" [style.backgroundColor]="user.color">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
@@ -92,40 +92,44 @@
                 <p>{{userDetails.phoneNumber}}</p>
             </div>
         </div>
-     <!-- -----------------render user leftWindow----------------
-    <div class="grayBackgroundLeft">
-        <div class="userLeftWindow">
-            <div class="bleueTopLeft" (click)="stopPropagation($event)">
-                <img src="assets/img/closeInWhite.svg" alt="" class="closeAddContactBox" (click)="returnBack()">
-                <div class="positionLetters">
-                    <img src="assets/img/capa1.svg" alt="">
-                    <h1>Edit Contact</h1>
-                </div>
-            </div>
-            <div class="whiteBox" (click)="stopPropagation($event)">
-                <img src="assets/img/frame79.svg" alt="" class="imgBackground">
-                <div class="inputBox">
-                    <div class="inputBoxWithImg">
-                        <input type="text" [(ngModel)]="name"  placeholder="Enter name (min. 3 char.)" >
-                        <img src="assets/img/person.svg" alt="">
-                        <p>(requiert)</p>
-                    </div>
-                    <div class="inputBoxWithImg">
-                        <input type="email" [(ngModel)]="email"  placeholder="Enter email" pattern="[^@]+@[^\.]+\..+" >
-                        <img src="assets/img/mail.svg" alt="">
-                        <p>(requiert)</p>
-                    </div>
-                    <div class="inputBoxWithImg">
-                        <input type="number" [(ngModel)]="phoneNr" class="inputNumber"  placeholder="Enter number" >
-                        <img src="assets/img/call.svg" alt="">
+    <!-------------------render user leftWindow------------------>
+        <div class="grayBackgroundLeft"  [ngClass]="{dBlock: closeUserEditWindow , dNone: !closeUserEditWindow}" (click)="returnBack()">
+            <div class="userLeftWindow" [ngClass]="{slideinLeftWindow: closeUserEditWindow}">
+                <div class="bleueTopLeft" (click)="stopPropagation($event)">
+                    <img src="assets/img/closeInWhite.svg" alt="" class="closeAddContactBox" (click)="returnBack()">
+                    <div class="positionLetters">
+                        <img src="assets/img/capa1.svg" alt="">
+                        <h1>Edit Contact</h1>
                     </div>
                 </div>
-                <div class="btnBox">
-                    <span class="closeBtn" (click)="returnBack()">Close<img src="assets/img/vector.svg" alt=""></span>
-                    <span class="saveBtn" (click)="saveUserData()" [ngClass]="checkCurrentData() ? 'saveBtn' : 'disabledBtn'"
-                    >Save<img src="assets/img/check.svg" alt=""></span>
+                <div class="whiteBox" (click)="stopPropagation($event)">
+                    <div class="imgBackground">
+                        <div *ngIf="getUserToEdit.color" [style.backgroundColor]="getUserToEdit.color" class="imgBackgroundEdit">
+                            <span>{{getUserFirstLetter(getUserToEdit)}}{{getUserSecondLetter(userDetails)}}</span>
+                        </div>
+                    </div>
+                    <div class="inputBox">
+                        <div class="inputBoxWithImgLeft">
+                            <input type="text" [(ngModel)]="editName"  placeholder="Enter name (min. 3 char.)" >
+                            <img src="assets/img/person.svg" alt="">
+                            <p>(requiert)</p>
+                        </div>
+                        <div class="inputBoxWithImgLeft">
+                            <input type="email" [(ngModel)]="editEmail"  placeholder="Enter email" pattern="[^@]+@[^\.]+\..+" >
+                            <img src="assets/img/mail.svg" alt="">
+                            <p>(requiert)</p>
+                        </div>
+                        <div class="inputBoxWithImgLeft">
+                            <input type="number" [(ngModel)]="editPhoneNr" class="inputNumber"  placeholder="Enter number" >
+                            <img src="assets/img/call.svg" alt="">
+                        </div>
+                    </div>
+                    <div class="btnBoxLeft">
+                        <span class="closeBtn" (click)="returnBack()">Close<img src="assets/img/vector.svg" alt=""></span>
+                        <span class="saveBtnLeft" (click)="saveUserEditData()" [ngClass]="checkEditData() ? 'saveBtnLeft' : 'disabledBtnLeft'"
+                        >Save<img src="assets/img/check.svg" alt=""></span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div> -->
 </section>

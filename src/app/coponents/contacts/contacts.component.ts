@@ -18,10 +18,15 @@ export class ContactsComponent {
   name:string = '';
   email:string = '';
   phoneNr:any = undefined;
+  editName:string = '';
+  editEmail:string = '';
+  editPhoneNr:any = undefined;
   firstName:string = '';
   lastName:string = '';
   closeUserWindow:boolean = false;
+  closeUserEditWindow:boolean = false;
   userDetails: any = '';
+  getUserToEdit: any = '';
 
 
   constructor(public toggleService: ToggleBooleansService, public userService: UsersService){}
@@ -34,13 +39,9 @@ export class ContactsComponent {
     return user?.lastName?.charAt(0).toUpperCase() || '';
   }
 
-  // addUser(user: User, event: Event) {
-  //   event.stopPropagation();
-  // }
-
   saveUserData() {
     if (this.checkCurrentData()) {
-      this.splitName();
+      this.splitName(this.name);
       const user: User = {
         firstName: this.firstName,
         lastName: this.lastName || '',
@@ -49,14 +50,15 @@ export class ContactsComponent {
         phoneNumber: this.phoneNr || '',
         status: false,
         color: this.generateRandomColor(),
+        id: Math.floor(Math.random() * 400).toString(),
       };
       this.userService.addNewContact([user]);
       this.returnBack();
     }
   }
 
-  splitName(){
-    const fullname: string[] = this.name.split(' ');
+  splitName(fullName: string){
+    const fullname: string[] = fullName.split(' ');
     this.firstName = fullname[0];
     this.lastName = fullname[1];
   }
@@ -75,7 +77,6 @@ export class ContactsComponent {
     const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,}$/;
     return emailRegex.test(this.email);
   }
-  
 
   returnBack(){
     this.name = '';
@@ -85,6 +86,7 @@ export class ContactsComponent {
     this.email = '';
     this.phoneNr = undefined;
     this.closeUserWindow = false;
+    this.closeUserEditWindow = false;
   }
 
   openAddContactWindow(event: Event){
@@ -120,10 +122,57 @@ export class ContactsComponent {
   
 
   editContact(userDetails: User){
+    this.getUserToEdit = userDetails;
+    this.closeUserEditWindow = true;
+    this.editName = this.getFullName(userDetails);
+    this.editEmail = userDetails.email;
+    this.editPhoneNr = userDetails.phoneNumber;
+    this.checkEditData();
+  }
 
+  getFullName(userDetails: User){
+    const fullName = userDetails.firstName + ' ' + userDetails.lastName;
+    return fullName;
+  }
+
+
+  checkEditData(){
+    if (this.editName.length < 3) {
+      return false;
+    }
+    if (!this.checkEditEmail()) {
+      return false;
+    }
+    return true;
+  }
+
+  checkEditEmail(): boolean {
+    const emailRegex = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(this.editEmail);
   }
 
   deleteContact(userDetails: User){
 
+  }
+
+  saveUserEditData(){
+    this.splitName(this.editName);
+    const user: User = {
+      firstName: this.firstName,
+      lastName: this.lastName || '',
+      email: this.editEmail,
+      savedUsers: [],
+      phoneNumber: this.editPhoneNr || '',
+      status: false,
+      color: this.getUserToEdit.color,
+      id: this.getUserToEdit.id
+    };
+    this.userService.updateEditContact([user]);
+  }
+
+  showUserContacts(){
+    const currentUser = localStorage.getItem('currentUser');
+    const filterUser = this.userService.allUsers.filter(u => u.id === this.userService.getCleanID(currentUser!))
+    return filterUser[0].savedUsers;
   }
 }
