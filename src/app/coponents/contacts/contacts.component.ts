@@ -208,19 +208,23 @@ export class ContactsComponent {
   }
   
   getHeaderInputValue() {
-    const currentUser = localStorage.getItem('currentUser');
-    // Filter current user's contacts
-    const filteredUser = this.userService.allUsers.filter((u) => u.id === this.userService.getCleanID(currentUser!));
-    // Filter common users based on search input
-    const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.includes(this.headerInputValue)));
-    const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
-    //------------------- 
-    const filterUserToAddName = this.userService.commonUsers.filter((user: any) => (user.savedUsers[0].firstName.includes(this.headerInputValue)));
-    const sortedFilterUserToAddName = this.sortFilterUserToAddName(filterUserToAddName);
+    if (this.headerInputValue !== '') {
+      this.noUserFound = true;
+      const currentUser = localStorage.getItem('currentUser');
+      // Filter current user's contacts
+      const filteredUser = this.userService.allUsers.filter((u) => u.id === this.userService.getCleanID(currentUser!));
+      // Filter common users based on search input
+      const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.includes(this.headerInputValue)));
+      const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
+      //------------------- 
+      const filterUserToAddName = this.userService.commonUsers.filter((user: any) => (user.savedUsers[0].firstName.includes(this.headerInputValue)));
+      const sortedFilterUserToAddName = this.sortFilterUserToAddName(filterUserToAddName);
 
-    // if (!this.isEqual(sortedFilterUserExistingUserName, sortedFilterUserToAddName)) {
+      // if (!this.isEqual(sortedFilterUserExistingUserName, sortedFilterUserToAddName)) {
       this.checkDifferentUser(sortedFilterUserExistingUserName, sortedFilterUserToAddName);
-    // }
+    } else {
+      this.noUserFound = false;
+    }
   }
 
   sortFilterUserExistingUserName(contacts: User[]): User[]{
@@ -255,27 +259,30 @@ export class ContactsComponent {
 
   checkDifferentUser(filterUserExistingUserName: User[], filterUserToAddName: User[]) {
     this.searchBarUsersArray = [];
-    if (this.headerInputValue !== '') {
-      for (let i = 0; i < filterUserToAddName.length; i++) {
-        // if (!this.checkUserFirstName()) {
-        //   this.searchBarUsersArray = [];
-        // } else 
-        if(filterUserExistingUserName[i] !== filterUserToAddName[i].savedUsers![0]) {
-          this.searchBarUsersArray.push(filterUserToAddName[i].savedUsers![0]);
-          console.log(this.searchBarUsersArray);
-        }
-      } 
-    } else {
-      this.searchBarUsersArray = [];
+    for (let i = 0; i < filterUserToAddName.length; i++) {
+      const userContacts = filterUserExistingUserName[i];
+  
+      // Check if userContacts is undefined before accessing its properties
+      if (!userContacts) {
+        this.searchBarUsersArray.push(filterUserToAddName[i].savedUsers![0]);
+        continue; // Skip to the next iteration if userContacts is undefined
+      }
+  
+      if (userContacts.uid === '' || userContacts.uid !== filterUserToAddName[i].savedUsers![0].uid) {
+        this.searchBarUsersArray.push(filterUserToAddName[i].savedUsers![0]);
+        console.log('-------------', this.searchBarUsersArray);
+      }
     }
   }
+  
 
-  checkUserFirstName() {
+  checkUserFirstName(user: User[]) {
     const userFirstNameExists = this.searchBarUsersArray.some(user =>
       user.firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())
     );
   
     if (userFirstNameExists) {
+      this.searchBarUsersArray.push(user);
       this.noUserFound = true;
       return true;
     } else {

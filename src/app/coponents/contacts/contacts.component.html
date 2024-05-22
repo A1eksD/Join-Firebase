@@ -8,10 +8,10 @@
                     <div [ngClass]="{showSearchWindow: checkInputInSidebar(), hideSearchWindow: !checkInputInSidebar()}" class="renderedUsers">
                         @for (user of searchBarUsersArray; track $index) {
                             <div class="renderFilteredUsers">
-                                @if (searchBarUsersArray.length > 0) {
-                                    <p>{{user.firstName!}} {{user.lastName}}</p>
-                                } @else {
+                                @if (!noUserFound) {
                                     <p>No user found</p>
+                                } @else {
+                                    <p>{{user.firstName!}} {{user.lastName}}</p>
                                 }
                                 <img src="assets/img/checkImg.png" alt="" class="checkImg">
                             </div>
