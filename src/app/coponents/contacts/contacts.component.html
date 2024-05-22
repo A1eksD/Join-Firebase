@@ -1,11 +1,26 @@
 <section>
     <div class="allContacsBox">
     <!-------------------add user header------------------>
-        <div class="inputBox">
-            <input type="text" placeholder="Search for existing user">
-            <div></div>
+        <div class="stickyHeader">
+            <div class="inputBox">
+                <input type="text" placeholder="Search for existing user" (keyup)="getHeaderInputValue()" [(ngModel)]="headerInputValue">
+                @if (checkInputInSidebar()) {
+                    <div [ngClass]="{showSearchWindow: checkInputInSidebar(), hideSearchWindow: !checkInputInSidebar()}" class="renderedUsers">
+                        @for (user of searchBarUsersArray; track $index) {
+                            <div class="renderFilteredUsers">
+                                @if (searchBarUsersArray.length > 0) {
+                                    <p>{{user.firstName!}} {{user.lastName}}</p>
+                                } @else {
+                                    <p>No user found</p>
+                                }
+                                <img src="assets/img/checkImg.png" alt="" class="checkImg">
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            <button (click)="openAddContactWindow($event)">Add new member  <img src="assets/img/person_add.svg" alt=""></button>
         </div>
-        <button (click)="openAddContactWindow($event)">Add new member  <img src="assets/img/person_add.svg" alt=""></button>
     <!-------------------render user rightWindow------------------>
         <div class="grayBackground" (click)="returnBack()" [ngClass]="{dBlock: closeUserWindow , dNone: !closeUserWindow}">
             <div class="userRightWindow" [ngClass]="{showRightWindow: closeUserWindow}">
@@ -44,20 +59,27 @@
             </div>
         </div>
     <!-------------------render users------------------>
-        <div class="renderAllContacts">
-            @for (user of showUserContacts(); track $index) {
-                <div class="loadedUsers" (click)="showContactDetails(user)">
-                    <div class="ringFromUser">
-                        <span class="tagFromUser" *ngIf="user.color" [style.backgroundColor]="user.color">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+        @if (SortedContacts.length > 0) {
+            <div class="renderAllContacts">
+                @for (user of showUserContacts();; track $index) {
+                    @if (getFirstCharacter(user)) {
+                        <div class="firstCharacter">
+                            <span>{{firstChar}}</span>
+                        </div>
+                    }
+                    <div class="loadedUsers" (click)="showContactDetails(user)">
+                        <div class="ringFromUser">
+                            <span class="tagFromUser" *ngIf="user.color!" [style.backgroundColor]="user.color!">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                        </div>
+                        <div class="userNameAndChackbox">
+                            <label>{{user.firstName}} {{user.lastName}}</label>
+                            <!-- for="{{user.id}}"> -->
+                            <!-- <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/> -->
+                        </div>
                     </div>
-                    <div class="userNameAndChackbox">
-                        <label>{{user.firstName}} {{user.lastName}}</label>
-                        <!-- for="{{user.id}}"> -->
-                        <!-- <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/> -->
-                    </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+        }
     </div>
     <!-------------------render user details------------------>
         <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', slideOutContactInfo: userDetails ==''}">
@@ -86,7 +108,7 @@
                 <h3>Email</h3>
                 <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
                 <h3>Phone</h3>
-                @if (userDetails.phoneNumber !== '') {
+                @if (userDetails.phoneNumber == '') {
                     <p>no number available</p>
                 }
                 <p>{{userDetails.phoneNumber}}</p>
