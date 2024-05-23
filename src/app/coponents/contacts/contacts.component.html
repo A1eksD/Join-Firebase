@@ -5,18 +5,16 @@
             <div class="inputBox">
                 <input type="text" placeholder="Search for existing user" (keyup)="getHeaderInputValue()" [(ngModel)]="headerInputValue">
                 @if (checkInputInSidebar()) {
+                    @if (!noUserFound) {
                     <div [ngClass]="{showSearchWindow: checkInputInSidebar(), hideSearchWindow: !checkInputInSidebar()}" class="renderedUsers">
                         @for (user of searchBarUsersArray; track $index) {
-                            <div class="renderFilteredUsers">
-                                @if (!noUserFound) {
-                                    <p>No user found</p>
-                                } @else {
-                                    <p>{{user.firstName!}} {{user.lastName}}</p>
-                                }
+                            <div class="renderFilteredUsers" (click)="addUserToContacts(user)">
+                                <p>{{user.firstName!}} {{user.lastName}}</p>
                                 <img src="assets/img/checkImg.png" alt="" class="checkImg">
                             </div>
                         }
                     </div>
+                    }
                 }
             </div>
             <button (click)="openAddContactWindow($event)">Add new member  <img src="assets/img/person_add.svg" alt=""></button>
