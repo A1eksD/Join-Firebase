@@ -210,49 +210,17 @@ export class ContactsComponent {
     this.firstChar = firstLetter;
     return this.firstChar;
   }
-
-  // getHeaderInputValue() {
-  //   if (this.headerInputValue !== '') {
-  //     this.noUserFound = true;
-  //     const currentUser = localStorage.getItem('currentUser');
   
-  //     // Filter current user's contacts
-  //     const filteredUser = this.userService.allUsers.filter(
-  //       (u) => u.id === this.userService.getCleanID(currentUser!)
-  //     );
-  
-  //     // Filter common users based on search input, considering duplicates
-  //     const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) =>
-  //       user.firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())
-  //     );
-  //     const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
-  
-  //     const filterUserToAddName = this.userService.commonUsers.filter((user: any) =>
-  //       user.savedUsers[0].firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())
-  //     );
-  //     const sortedFilterUserToAddName = this.sortFilterUserToAddName(filterUserToAddName);
-  //     console.log(sortedFilterUserToAddName);
-      
-  //     // Combine search results while preserving duplicates
-  //     this.searchBarUsersArray = [...sortedFilterUserExistingUserName, ...sortedFilterUserToAddName];
-  
-  //     // Remove duplicates if necessary (optional)
-  //     // this.searchBarUsersArray = [...new Set(this.searchBarUsersArray)];
-  
-  //     // Check if any user was found
-  //     this.noUserFound = this.searchBarUsersArray.length === 0;
-  //   } else {
-  //     this.noUserFound = false;
-  //   }
-  // }
-  
+  getCleanIDFromLogedInUSer(){
+    const currentUser = localStorage.getItem('currentUser');
+    // Filter current user's contacts
+    return this.userService.allUsers.filter((u) => u.id === this.userService.getCleanID(currentUser!));
+  }
   
   getHeaderInputValue() {
     if (this.headerInputValue !== '') {
-      // this.noUserFound = true;
-      const currentUser = localStorage.getItem('currentUser');
       // Filter current user's contacts
-      const filteredUser = this.userService.allUsers.filter((u) => u.id === this.userService.getCleanID(currentUser!));
+      const filteredUser = this.getCleanIDFromLogedInUSer();
       // Filter common users based on search input
       const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.includes(this.headerInputValue)));
       const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
@@ -264,10 +232,7 @@ export class ContactsComponent {
       const sortedFilterUserToAddName = this.sortFilterUserToAddName(filterUserToAddName);
       this.checkDifferentUser(sortedFilterUserExistingUserName, sortedFilterUserToAddName);
       console.log(this.searchBarUsersArray.length === 0 || filterUserToAddName.length === 0);
-      // if (this.searchBarUsersArray.length === 0 || filterUserToAddName.length === 0) {
-      //   this.noUserFound = false;
-      // }
-      // this.noUserFound = this.searchBarUsersArray.length === 0 || filterUserToAddName.length === 0;
+
       if (filterUserToAddName.length === 0) {
         this.noUserFound = true;
       } else {
@@ -337,6 +302,12 @@ export class ContactsComponent {
     } else {
       return false;
     }
+  }
+
+  addUserToContacts(user: User){
+    const filteredContact = this.searchBarUsersArray.filter(c => c.uid === user.uid);
+    console.log('filteredContact', filteredContact);
+    this.userService.updateEditContact(filteredContact);
   }
   
 }
