@@ -1,18 +1,82 @@
+@import "../../../styles.scss";
+
+
 section{
     width: calc(100vw - 222px);
     height: calc(100vh - 96px);
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: gold;
-    display: flex;
+    @include displayFlex($a: flex-start, $g: 32px);
+    flex-direction: column;
+    .searchBox{
+        @include displayFlex($j: flex-start, $g: 32px);
+        margin-top: 40px;
+        .inputBox{
+            display: flex;
+            padding: 8px 16px 8px 16px;
+            border-radius: 10px;
+            gap: 10px;
+            border: 1px solid #a8a8a8;
+            margin-left: 40px;
+            input{
+                outline: none;
+                font-size: 16px;
+                border: none;
+            }
+            .searchImg{
+                &:hover{
+                    cursor: pointer;
+                    filter: brightness(0) saturate(100%) invert(41%) sepia(88%) saturate(443%) hue-rotate(180deg) brightness(106%) contrast(108%);
+                }
+            }
+        }
+        button{
+            background: #4589ff;
+            border: 0;
+            color: white;
+            font-size: 23px;
+            font-weight: 400;
+            height: 51px;
+            width: 148px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+            &:hover{
+                background-color: #176cff;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+            }
+            img{
+                margin-left: 8px;
+            }
+        }
+    }
+}
 
-    .dragArea{
-        width: 300px;
-        height: 600px;
-        margin: 32px;
-        border: 1px solid;
-        background-color: white;
+.droppBoxes{
+    @include displayFlex($j: space-between, $g:22px);
+    width: calc(100vw - 246px);
+    height: calc(100vh - 236px);
+    margin-left: 12px;
+    margin-right: 12px;
+    .dragRow{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: 16px;    
+        .headerOfBar{
+            @include displayFlex($j: space-between);
+            width: 100%;
+            h1{
+                font-size: x-large;
+            }
+        }
+        .dragArea{
+            height: calc(100% - 58px);
+            background-color: aquamarine;
+        }
     }
 }
 

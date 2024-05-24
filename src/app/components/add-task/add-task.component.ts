@@ -48,7 +48,9 @@ export class AddTaskComponent {
     this.priority = priority;
   }
 
-  checkValues() {
+  checkValues(event: Event) {
+    event.stopPropagation();
+    event.preventDefault();
     if (this.checkAllValues()) {
       const unicTimestamp = new Date().getTime();
       const task = {

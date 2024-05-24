@@ -10,7 +10,7 @@
                         @for (user of searchBarUsersArray; track $index) {
                             <div class="renderFilteredUsers" (click)="addUserToContacts(user)">
                                 <p>{{user.firstName!}} {{user.lastName}}</p>
-                                <img src="assets/img/checkImg.png" alt="" class="checkImg">
+                                <img src="assets/img/plus.svg" alt="" class="checkImg">
                             </div>
                         }
                     </div>

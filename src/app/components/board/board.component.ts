@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 import { OnDragHighlightDirective } from '../../directives/on-drag-highlight.directive';
+import { TasksService } from '../../service/tasks.service';
 
 @Component({
   selector: 'app-board',
@@ -22,17 +23,17 @@ export class BoardComponent {
     {
       id: 0,
       title: 'Putzen',
-      category: 'open',
+      category: 'todo',
     },
     {
       id: 1,
       title: 'Kochen',
-      category: 'open',
+      category: 'todo',
     },
     {
       id: 2,
       title: 'Einkaufen',
-      category: 'closed',
+      category: 'inProgress',
     },
   ];
   currentDraggedElement: number = 0;
@@ -41,19 +42,35 @@ export class BoardComponent {
   currentCategory: string = 'open';
 
 
-  constructor(public toggleService: ToggleBooleansService) {}
+  constructor(public toggleService: ToggleBooleansService, public taskService: TasksService) {}
 
 
-  getOpenCategory() {
-    this.openCategory = this.todos.filter((t) => t.category === 'open');
+  getToDOCategory() {
+    this.openCategory = this.todos.filter((t) => t.category === 'todo');
     if (this.openCategory.length > 0) {
       return true;
     }
     return false;
   }
 
-  getCloseCategory() {
-    this.closedCategory = this.todos.filter((t) => t.category === 'closed');
+  getInProgressCategory() {
+    this.closedCategory = this.todos.filter((t) => t.category === 'inProgress');
+    if (this.closedCategory.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  getAwaitFeedbackCategory() {
+    this.closedCategory = this.todos.filter((t) => t.category === 'awaitFeedback');
+    if (this.closedCategory.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  getDoneategory() {
+    this.closedCategory = this.todos.filter((t) => t.category === 'done');
     if (this.closedCategory.length > 0) {
       return true;
     }

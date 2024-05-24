@@ -1,40 +1,82 @@
 <section>
-  @if (toggleService.openBoard) {
-    <div
-    appOnDragHighlight
-    class="dragArea"
-    id="open"
-    #openArea
-    (drop)="moveTo('open')"
-    (dragleave)="removeHighlight('open')"
-    (dragover)="allowDrop($event); highlight('open')"
-   
-  >
-    @if(getOpenCategory()){
-        @for (item of openCategory; track $index;) {
-            <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
-              {{ item.category }}
-            </div>
-        } 
-    }
+  <div class="searchBox">
+    <div class="inputBox">
+      <input type="text">
+      <img src="assets/img/vector3.svg" alt="">
+      <img src="assets/img/search.svg" alt="" class="searchImg">
+    </div>
+    <button>New Task <img src="assets/img/plus.svg" alt=""></button>
   </div>
-  <div
-    appOnDragHighlight
-    class="dragArea"
-    id="closed"
-    #closedArea
-    (drop)="moveTo('closed')"
-    (dragleave)="removeHighlight('closed')"
-    (dragover)="allowDrop($event); highlight('closed')"
-    
-  >
-    @if(getCloseCategory()){ 
-        @for (item of closedCategory; track $index;) {
-            <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
-              {{ item.category }}
-            </div>
+  <!-- @if (toggleService.openBoard) { -->
+  <div class="droppBoxes">
+    <div class="dragRow">
+      <div class="headerOfBar">
+        <h1>To do</h1>
+        <img src="assets/img/plus_button.svg" alt="">
+      </div>
+      <div
+        appOnDragHighlight  id="todo" #todoArea class="dragArea"
+        (drop)="moveTo('todo')" (dragleave)="removeHighlight('todo')" (dragover)="allowDrop($event); highlight('todo')">
+        @if(getToDOCategory()){
+            @for (item of openCategory; track $index;) {
+                <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
+                  {{ item.category }}
+                </div>
+            } 
         }
-    }
+      </div>
+    </div>
+    <div class="dragRow">
+      <div class="headerOfBar">
+        <h1>In progress</h1>
+        <img src="assets/img/plus_button.svg" alt="">
+      </div>
+      <div
+      appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
+      (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
+      @if(getInProgressCategory()){ 
+          @for (item of closedCategory; track $index;) {
+              <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
+                {{ item.category }}
+              </div>
+          }
+      }
+      </div>
+    </div>
+    <div class="dragRow">
+      <div class="headerOfBar">
+        <h1>Await feedback</h1>
+        <img src="assets/img/plus_button.svg" alt="">
+      </div>
+      <div
+        appOnDragHighlight class="dragArea" id="awaitFeedback" #awaitFeedbackArea
+        (drop)="moveTo('awaitFeedback')" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
+        @if(getAwaitFeedbackCategory()){ 
+            @for (item of closedCategory; track $index;) {
+                <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
+                  {{ item.category }}
+                </div>
+            }
+        }
+      </div>
+    </div>
+    <div class="dragRow">
+      <div class="headerOfBar">
+        <h1>Done</h1>
+        <img src="assets/img/plus_button.svg" alt="">
+      </div>
+      <div
+        appOnDragHighlight class="dragArea" id="done" #doneArea
+        (drop)="moveTo('done')" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
+        @if(getDoneategory()){ 
+            @for (item of closedCategory; track $index;) {
+                <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
+                  {{ item.category }}
+                </div>
+            }
+        }
+      </div>
+    </div>
+    <!-- } -->
   </div>
-  }
 </section>

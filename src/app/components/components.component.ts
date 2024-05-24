@@ -33,18 +33,14 @@ export class ComponentsComponent {
 
   checkBooleansSummary(){
     this.toggleService.openBoard = false;
-    console.log(this.toggleService.openBoard);
-    
   }
 
   checkBooleansAddTask(){
     this.toggleService.openBoard = false;
-    console.log(this.toggleService.openBoard);
   }
 
   checkBooleansBoard(){
     this.toggleService.openBoard = true;
-    console.log(this.toggleService.openBoard);
   }
 
   checkBooleansContacts(){
