@@ -1,8 +1,8 @@
 <section>
     <div class="taskBox">
-    <!-------------title----------------->
+        <!-------------title----------------->
         <input type="text" name="" id="" class="titleInput" placeholder="Enter a title (required)" [(ngModel)]="title">
-    <!-------------descrptipon----------------->
+        <!-------------descrptipon----------------->
         <div class="decriptionBox">
             <div class="namePosition">
                 <h2>Decription</h2>
@@ -10,7 +10,7 @@
             </div>
             <textarea name="" id="" [(ngModel)]="description"></textarea>
         </div>
-    <!-------------date----------------->
+        <!-------------date----------------->
         <div class="dateBox">
             <div class="namePosition">
                 <h2>Due date</h2>
@@ -18,7 +18,7 @@
             </div>
             <input type="date" id="date" [(ngModel)]="date" (click)="checkDateAddTask()">
         </div>
-    <!-------------prio Btn----------------->
+        <!-------------prio Btn----------------->
         <div class="prioBox">
             <div class="prioBoxHeader">
                 <h2>Priority</h2><span>(optional)</span>
@@ -26,10 +26,10 @@
             <div class="prioBoxBtns">
                 <button class="greenBtn" (click)="prioLow('low')">Low<img src="assets/img/prio_baja.svg" alt=""></button>
                 <button class="orangeBtn" (click)="prioMedium('medium')">Medium<img src="assets/img/prio_media.svg" alt=""></button>
-                <button class="redBtn" (click)="prioHigh('heigh')">Heigh<img src="assets/img/prio_alta.svg" alt=""></button>
+                <button class="redBtn" (click)="prioHigh('high')">High<img src="assets/img/prio_alta.svg" alt=""></button>
             </div>
         </div>
-    <!-------------users----------------->
+        <!-------------users----------------->
         <div class="assignetToBox">
             <div class="headLetters">
                 <div class="headLine">
@@ -45,15 +45,17 @@
                     <div class="checkedUsers">
                         @for (user of chackedUser; track $index) {
                             <div class="userRing">
-                                <span class="userTag">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                                <span class="userTag" *ngIf="user.color!" [style.backgroundColor]="user.color!">
+                                    {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
                             </div>
                         }
                     </div>
                 }
-                @for(user of userService.allUsers; track $index){
+                @for(user of getContactsFromCurrenUser(); track $index){
                     <div class="loadedUsers">
                         <div class="ringFromUser">
-                            <span class="tagFromUser">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                            <span class="tagFromUser"  *ngIf="user.color!" [style.backgroundColor]="user.color!">
+                                {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
                         </div>
                         <div class="userNameAndChackbox">
                             <label for="{{user.id}}"> {{user.firstName}} {{user.lastName}}</label>
@@ -61,27 +63,15 @@
                         </div>
                     </div>
                 }
-                <!-- <div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                    <div>sssssss</div>
-                </div> -->
             </div>
         </div>
-    <!-------------chategory----------------->
+        <!-------------chategory----------------->
         <div class="categoryBox">
             <div class="headLetters">
                 <h2>Category</h2>
             </div>
             <div class="taskBoxSection">
-                <div class="assignedSelect"(click)="openCategory($event)">
+                <div class="assignedSelect" (click)="openCategory($event)">
                     <span>{{ category }}</span>
                     <img src="assets/img/arrow_drop_down.svg" alt="">
                 </div>
@@ -93,7 +83,7 @@
                 </div>
             </div>
         </div>
-    <!-------------subtask----------------->
+        <!-------------subtask----------------->
         <div class="subtaskBox">
             <div class="headLetters">
                 <h2>Subtask</h2><span>(optional)</span>
@@ -114,10 +104,15 @@
                 }
             }
         </div>
-    <!-------------create btn----------------->
+        <!-------------create btn----------------->
         <div class="positionBtn">
             <button class="ClearBtn" (click)="clearValues()">Clear <img src="assets/img/vector.svg" alt=""></button>
-            <button (click)="checkValues($event)" disabled="{{checkAllValues()}}" [ngClass]="checkAllValues() ? 'createTaskBtn' : 'disabledBtn'">Create task <img src="assets/img/check.svg"></button>
+            <button 
+                (click)="checkValues($event)" 
+                [disabled]="!checkAllValues()" 
+                [ngClass]="{'createTaskBtn': checkAllValues(), 'disabledBtn': !checkAllValues()}">
+                Create task <img src="assets/img/check.svg">
+            </button>
         </div>
     </div>
 </section>

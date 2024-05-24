@@ -75,14 +75,20 @@ section{
         }
         .dragArea{
             height: calc(100% - 58px);
-            background-color: aquamarine;
+            background-color: rgb(161, 221, 248);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: scroll;
         }
     }
 }
 
-.box{
-    width: 32px;
-    height: 32px;
-    background-color: cadetblue;
-    margin: 16px;
+.dragArea{
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+}
+
+.dragArea::-webkit-scrollbar { 
+    display: none; 
 }

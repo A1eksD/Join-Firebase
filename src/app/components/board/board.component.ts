@@ -7,11 +7,12 @@ import {
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 import { OnDragHighlightDirective } from '../../directives/on-drag-highlight.directive';
 import { TasksService } from '../../service/tasks.service';
+import { TaskComponent } from './task/task.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, OnDragHighlightDirective],
+  imports: [CommonModule, OnDragHighlightDirective, TaskComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })

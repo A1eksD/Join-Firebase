@@ -92,7 +92,6 @@ export class UsersService {
     }
     return savedUser;
   }
-  
 
   async updateContactDocToCommonUsers(user: User[]){
     const filteredUser = this.commonUsers.filter(u => u.savedUsers![0].uid === user[0].uid);

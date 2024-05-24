@@ -18,11 +18,9 @@
           appOnDragHighlight  id="todo" #todoArea class="dragArea"
           (drop)="moveTo('todo')" (dragleave)="removeHighlight('todo')" (dragover)="allowDrop($event); highlight('todo')">
           @if(getToDOCategory()){
-              @for (item of toDoCategory; track $index;) {
-                  <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
-                    {{ item.category }}
-                  </div>
-              } 
+            @for (item of toDoCategory; track $index;) {
+                <app-task (dragstart)="startDragging(item.id)" draggable="true" ></app-task>
+            } 
           }
         </div>
       </div>
@@ -35,11 +33,9 @@
         appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
         (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
         @if(getInProgressCategory()){ 
-            @for (item of inProgressCategory; track $index;) {
-                <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
-                  {{ item.category }}
-                </div>
-            }
+          @for (item of inProgressCategory; track $index;) {
+            <app-task (dragstart)="startDragging(item.id)" draggable="true" ></app-task>
+          }
         }
         </div>
       </div>
@@ -52,11 +48,9 @@
           appOnDragHighlight class="dragArea" id="awaitFeedback" #awaitFeedbackArea
           (drop)="moveTo('awaitFeedback')" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
           @if(getAwaitFeedbackCategory()){ 
-              @for (item of awaitFeedbackCategory; track $index;) {
-                  <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
-                    {{ item.category }}
-                  </div>
-              }
+            @for (item of awaitFeedbackCategory; track $index;) {
+              <app-task (dragstart)="startDragging(item.id)" draggable="true"></app-task>
+            }
           }
         </div>
       </div>
@@ -69,11 +63,9 @@
           appOnDragHighlight class="dragArea" id="done" #doneArea
           (drop)="moveTo('done')" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
           @if(getDoneategory()){ 
-              @for (item of doneCategory; track $index;) {
-                  <div class="box" draggable="true" (dragstart)="startDragging(item.id)">
-                    {{ item.category }}
-                  </div>
-              }
+            @for (item of doneCategory; track $index;) {
+              <app-task (dragstart)="startDragging(item.id)" draggable="true"></app-task>
+            }
           }
         </div>
       </div>

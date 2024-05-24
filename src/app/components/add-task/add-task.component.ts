@@ -1,8 +1,7 @@
-import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TasksService } from '../../service/tasks.service';
-import { LoginService } from '../../service/login.service';
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 import { UsersService } from '../../service/users.service';
 import { User } from '../../interface/user';
@@ -31,7 +30,6 @@ export class AddTaskComponent {
 
   constructor(
     public taskService: TasksService,
-    private loginService: LoginService,
     public toggleService: ToggleBooleansService,
     public userService: UsersService
   ) {}
@@ -50,7 +48,8 @@ export class AddTaskComponent {
 
   checkValues(event: Event) {
     event.stopPropagation();
-    event.preventDefault();
+    console.log(this.checkAllValues());
+    
     if (this.checkAllValues()) {
       const unicTimestamp = new Date().getTime();
       const task = {
@@ -58,15 +57,20 @@ export class AddTaskComponent {
         description: this.description,
         date: this.date,
         priority: this.priority || 'low',
-        assignetTo: this.assignetTo || [],
+        assignetTo: this.chackedUser || [],
         category: this.category || 'Technical Task',
         subtasks: this.subtaskArray || [],
         publishedTimestamp: unicTimestamp,
-        createtBy: this.loginService.currentUser,
+        createtBy: this.showUserContacts(),
       };
       this.taskService.addTask([task]);
       this.clearValues(); 
     }
+  }
+
+  showUserContacts(){
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser!.replace(/"/g, '');
   }
 
   checkAllValues(){
@@ -133,13 +137,28 @@ export class AddTaskComponent {
 
   addUser(user: User, event: Event) {
     event.stopPropagation();
-    if (!this.chackedUser.some(u => u.id === user.id)) {
+    if (!this.chackedUser.some(u => u.uid === user.uid)) {
       this.chackedUser.push(user);
     } else {
-      this.chackedUser = this.chackedUser.filter(u => u.id !== user.id);
+      this.chackedUser = this.chackedUser.filter(u => u.uid !== user.uid);
     }
   }
   
+  getContactsFromCurrenUser(){
+    const currentUser = localStorage.getItem('currentUser');
+    const cleanUserID = currentUser!.replace(/"/g, '');
+    const filteredUser = this.userService.allUsers.filter(u => u.id === cleanUserID);
+    const filteredContacts = this.sortFilterUserExistingUserName(filteredUser[0].savedUsers);
+    return filteredContacts;
+  }
+
+  sortFilterUserExistingUserName(contacts: User[]): User[]{
+    return contacts.sort((a, b) => {
+      const nameA = a.firstName.toUpperCase();
+      const nameB = b.firstName.toUpperCase();
+      return nameA.localeCompare(nameB);
+    });
+  }
 
   checkSubtaskLength(){
     if (this.subtask.length <= 30) {
