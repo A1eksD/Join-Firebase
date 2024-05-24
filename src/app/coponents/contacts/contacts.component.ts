@@ -164,6 +164,10 @@ export class ContactsComponent {
   }
 
   deleteContact(user: User) {
+    const filteredUser = this.getCleanIDFromLogedInUSer();
+    const contactIndex = filteredUser[0].savedUsers.filter((u: any) => u.uid === user.uid);
+    console.log(contactIndex);
+    
     // const index = this.SortedContacts.indexOf(user);
     // if (index > -1) {
     //   this.SortedContacts.splice(index, 1);
@@ -213,7 +217,6 @@ export class ContactsComponent {
   
   getCleanIDFromLogedInUSer(){
     const currentUser = localStorage.getItem('currentUser');
-    // Filter current user's contacts
     return this.userService.allUsers.filter((u) => u.id === this.userService.getCleanID(currentUser!));
   }
   
@@ -222,7 +225,7 @@ export class ContactsComponent {
       // Filter current user's contacts
       const filteredUser = this.getCleanIDFromLogedInUSer();
       // Filter common users based on search input
-      const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.includes(this.headerInputValue)));
+      const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())));
       const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
       //------------------- 
       const filterUserToAddName = this.userService.commonUsers.filter((user: any) =>
@@ -239,9 +242,6 @@ export class ContactsComponent {
         this.noUserFound = false;
       }
     } 
-    // else {
-    //   this.noUserFound = false;
-    // }
   }
 
   sortFilterUserExistingUserName(contacts: User[]): User[]{
