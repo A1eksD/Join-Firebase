@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
-import { ContactsComponent } from './coponents/contacts/contacts.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 import { LoginService } from './service/login.service';
 
 @Component({

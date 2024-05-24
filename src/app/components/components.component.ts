@@ -8,7 +8,7 @@ import { HeaderComponent } from './header/header.component';
 import { ToggleBooleansService } from '../service/toggle-booleans.service';
 
 @Component({
-  selector: 'app-coponents',
+  selector: 'app-components',
   standalone: true,
   imports: [
     CommonModule,
@@ -18,10 +18,10 @@ import { ToggleBooleansService } from '../service/toggle-booleans.service';
     ContactsComponent,
     HeaderComponent
   ],
-  templateUrl: './coponents.component.html',
-  styleUrl: './coponents.component.scss',
+  templateUrl: './components.component.html',
+  styleUrl: './components.component.scss',
 })
-export class CoponentsComponent {
+export class ComponentsComponent {
   selectedComponent: string = 'summary';
 
   constructor(private toggleService: ToggleBooleansService){
