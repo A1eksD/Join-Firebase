@@ -37,8 +37,10 @@ export class BoardComponent {
     },
   ];
   currentDraggedElement: number = 0;
-  openCategory: any[] = [];
-  closedCategory: any[] = [];
+  toDoCategory: any[] = [];
+  inProgressCategory: any[] = [];
+  awaitFeedbackCategory: any[] = [];
+  doneCategory: any[] = [];
   currentCategory: string = 'open';
 
 
@@ -46,32 +48,32 @@ export class BoardComponent {
 
 
   getToDOCategory() {
-    this.openCategory = this.todos.filter((t) => t.category === 'todo');
-    if (this.openCategory.length > 0) {
+    this.toDoCategory = this.todos.filter((t) => t.category === 'todo');
+    if (this.toDoCategory.length > 0) {
       return true;
     }
     return false;
   }
 
   getInProgressCategory() {
-    this.closedCategory = this.todos.filter((t) => t.category === 'inProgress');
-    if (this.closedCategory.length > 0) {
+    this.inProgressCategory = this.todos.filter((t) => t.category === 'inProgress');
+    if (this.inProgressCategory.length > 0) {
       return true;
     }
     return false;
   }
 
   getAwaitFeedbackCategory() {
-    this.closedCategory = this.todos.filter((t) => t.category === 'awaitFeedback');
-    if (this.closedCategory.length > 0) {
+    this.awaitFeedbackCategory = this.todos.filter((t) => t.category === 'awaitFeedback');
+    if (this.awaitFeedbackCategory.length > 0) {
       return true;
     }
     return false;
   }
 
   getDoneategory() {
-    this.closedCategory = this.todos.filter((t) => t.category === 'done');
-    if (this.closedCategory.length > 0) {
+    this.doneCategory = this.todos.filter((t) => t.category === 'done');
+    if (this.doneCategory.length > 0) {
       return true;
     }
     return false;
