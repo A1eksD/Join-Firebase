@@ -59,7 +59,7 @@
     <!-------------------render users------------------>
         @if (SortedContacts.length > 0) {
             <div class="renderAllContacts">
-                @for (user of showUserContacts();; track $index) {
+                @for (user of showUserContacts(); track $index) {
                     @if (getFirstCharacter(user)) {
                         <div class="firstCharacter">
                             <span>{{firstChar}}</span>

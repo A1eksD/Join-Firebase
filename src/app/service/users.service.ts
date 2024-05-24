@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteField, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { User } from '../interface/user';
 
 @Injectable({
@@ -87,8 +87,9 @@ export class UsersService {
     const contactIndex = savedUser.findIndex(c => c.uid === contact.uid);
     if (contactIndex !== -1) {
       savedUser.splice(contactIndex, 1);
+    } else {
+      savedUser.push(contact); 
     }
-    savedUser.push(contact);
     return savedUser;
   }
   
@@ -105,6 +106,17 @@ export class UsersService {
 
   getCleanID(currentUserFromStorage: string){
     return currentUserFromStorage.replace(/"/g, '');
+  }
+
+  async deleteContact(contact: User, logginUser: User[]){
+    const getCurrentSavedUsers = this.getCurrentSavedUsers(logginUser[0].savedUsers!, contact);
+    const docRef = doc(this.firestore, `users/${logginUser[0].id}/`);
+    try {
+      await updateDoc(docRef, {savedUsers : getCurrentSavedUsers});
+    } 
+    catch (error) {
+      console.error('Delete contact failed');
+    }
   }
 
   ngOnDestroy() {

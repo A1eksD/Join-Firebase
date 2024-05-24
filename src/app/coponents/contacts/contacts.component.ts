@@ -167,12 +167,8 @@ export class ContactsComponent {
     const filteredUser = this.getCleanIDFromLogedInUSer();
     const contactIndex = filteredUser[0].savedUsers.filter((u: any) => u.uid === user.uid);
     console.log(contactIndex);
-    
-    // const index = this.SortedContacts.indexOf(user);
-    // if (index > -1) {
-    //   this.SortedContacts.splice(index, 1);
-    // }
-    // this.returnBack();
+    this.userService.deleteContact(user, filteredUser);
+    this.returnBack();
   }
 
   saveUserEditData(){
@@ -231,10 +227,8 @@ export class ContactsComponent {
       const filterUserToAddName = this.userService.commonUsers.filter((user: any) =>
         user.savedUsers[0].firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())
       );
-      console.log(filterUserToAddName);
       const sortedFilterUserToAddName = this.sortFilterUserToAddName(filterUserToAddName);
       this.checkDifferentUser(sortedFilterUserExistingUserName, sortedFilterUserToAddName);
-      console.log(this.searchBarUsersArray.length === 0 || filterUserToAddName.length === 0);
 
       if (filterUserToAddName.length === 0) {
         this.noUserFound = true;
@@ -263,16 +257,16 @@ export class ContactsComponent {
   }
 
   
-  isEqual(arr1: any[], arr2: any[]): boolean {
-    if (arr1.length !== arr2.length) return false;
-    for (let i = 0; i < arr1.length; i++) {
-      if (typeof arr1[i] !== typeof arr2[i].savedUsers[i]) return false;
-      if (Array.isArray(arr1[i]) && Array.isArray(arr2[i].savedUsers[i])) {
-        if (!this.isEqual(arr1[i], arr2[i].savedUsers[i])) return false;
-      } else if (arr1[i] !== arr2[i].savedUsers[i]) return false;
-    }
-    return true;
-  }
+  // isEqual(arr1: any[], arr2: any[]): boolean {
+  //   if (arr1.length !== arr2.length) return false;
+  //   for (let i = 0; i < arr1.length; i++) {
+  //     if (typeof arr1[i] !== typeof arr2[i].savedUsers[i]) return false;
+  //     if (Array.isArray(arr1[i]) && Array.isArray(arr2[i].savedUsers[i])) {
+  //       if (!this.isEqual(arr1[i], arr2[i].savedUsers[i])) return false;
+  //     } else if (arr1[i] !== arr2[i].savedUsers[i]) return false;
+  //   }
+  //   return true;
+  // }
 
   checkDifferentUser(filterUserExistingUserName: User[], filterUserToAddName: User[]) {
     this.searchBarUsersArray = [];
@@ -289,11 +283,6 @@ export class ContactsComponent {
         this.noUserFound = true;
       }
     }
-  }
-  
-  
-  getSplitArray(savedUsers: User[]){
-
   }
 
   checkInputInSidebar(){
