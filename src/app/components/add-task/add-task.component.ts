@@ -58,10 +58,11 @@ export class AddTaskComponent {
         date: this.date,
         priority: this.priority || 'low',
         assignetTo: this.chackedUser || [],
-        category: this.category || 'Technical Task',
+        categoryTask: this.category || 'Technical Task',
         subtasks: this.subtaskArray || [],
         publishedTimestamp: unicTimestamp,
         createtBy: this.showUserContacts(),
+        category: 'toDo',
       };
       this.taskService.addTask([task]);
       this.clearValues(); 

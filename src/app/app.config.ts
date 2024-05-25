@@ -4,6 +4,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,6 @@ export const appConfig: ApplicationConfig = {
         appId: "1:668904791885:web:da2c6f78e7ef4087b4e104"
       })
     ),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore()), provideAnimationsAsync(),
   ],
 };

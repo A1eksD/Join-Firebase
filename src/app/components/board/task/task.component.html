@@ -1,5 +1,34 @@
 <section>
-    <div>
-        
+    @if(category === 'Technical Task'){
+        <span class="technicalTask">{{category}}</span>
+    } @else {
+        <span class="userStory">{{category}}</span>
+    }
+
+    <h1>{{title}}</h1>
+    <span class="description">{{description}}</span>
+
+    <div class="positionBar">
+        <mat-progress-bar mode="determinate" value="70" color="primary"   class="custom-progress-bar"></mat-progress-bar>
+        <span>0/{{checkAmountOfSubtasks()}}</span>
+    </div>
+
+    <div class="selectedContactBox">
+        <div class="selectedContacts">
+            @for(user of assignetTo; track $index;){
+                <div class="userNameBox">
+                    <span *ngIf="user.color!" [style.backgroundColor]="user.color!" class="userBackground"> 
+                        {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}
+                    </span>
+                </div>
+            }
+        </div>
+        @if(priority === 'low'){
+            <img src="assets/img/prio_baja.svg" alt="">
+        } @else if(priority === 'medium'){
+            <img src="assets/img/prio_media.svg" alt="">
+        } @else if(priority === 'high'){
+            <img src="assets/img/prio_alta.svg" alt="">
+        }
     </div>
 </section>

@@ -8,11 +8,12 @@ import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 import { OnDragHighlightDirective } from '../../directives/on-drag-highlight.directive';
 import { TasksService } from '../../service/tasks.service';
 import { TaskComponent } from './task/task.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, OnDragHighlightDirective, TaskComponent],
+  imports: [CommonModule, OnDragHighlightDirective, TaskComponent, FormsModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -37,7 +38,7 @@ export class BoardComponent {
       category: 'inProgress',
     },
   ];
-  currentDraggedElement: number = 0;
+  currentDraggedElement: string = '';
   toDoCategory: any[] = [];
   inProgressCategory: any[] = [];
   awaitFeedbackCategory: any[] = [];
@@ -49,7 +50,7 @@ export class BoardComponent {
 
 
   getToDOCategory() {
-    this.toDoCategory = this.todos.filter((t) => t.category === 'todo');
+    this.toDoCategory = this.taskService.allTasks.filter((t) => t.category === 'toDo');
     if (this.toDoCategory.length > 0) {
       return true;
     }
@@ -57,7 +58,7 @@ export class BoardComponent {
   }
 
   getInProgressCategory() {
-    this.inProgressCategory = this.todos.filter((t) => t.category === 'inProgress');
+    this.inProgressCategory = this.taskService.allTasks.filter((t) => t.category === 'inProgress');
     if (this.inProgressCategory.length > 0) {
       return true;
     }
@@ -65,7 +66,7 @@ export class BoardComponent {
   }
 
   getAwaitFeedbackCategory() {
-    this.awaitFeedbackCategory = this.todos.filter((t) => t.category === 'awaitFeedback');
+    this.awaitFeedbackCategory = this.taskService.allTasks.filter((t) => t.category === 'awaitFeedback');
     if (this.awaitFeedbackCategory.length > 0) {
       return true;
     }
@@ -73,15 +74,15 @@ export class BoardComponent {
   }
 
   getDoneategory() {
-    this.doneCategory = this.todos.filter((t) => t.category === 'done');
+    this.doneCategory = this.taskService.allTasks.filter((t) => t.category === 'done');
     if (this.doneCategory.length > 0) {
       return true;
     }
     return false;
   }
 
-  startDragging(id: number) {
-    this.currentDraggedElement = id;
+  startDragging(id: string) {
+    this.currentDraggedElement = id; 
   }
 
   allowDrop(event: Event) {
@@ -90,8 +91,9 @@ export class BoardComponent {
 
   moveTo(category: string) {
     const draggedIndex = this.currentDraggedElement;
-    if (draggedIndex !== -1) {
-      this.todos[draggedIndex].category = category;
+    if (draggedIndex !== null) {
+      const getCurrentTask = this.taskService.allTasks.filter((t) => t.id === this.currentDraggedElement);
+      getCurrentTask[0].category = category;
     }
   }
 

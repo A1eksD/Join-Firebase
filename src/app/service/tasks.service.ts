@@ -15,7 +15,7 @@ export class TasksService {
   }
 
   subTaskList() {
-    return onSnapshot(collection(this.firestore, 'users'), (list) => {
+    return onSnapshot(collection(this.firestore, 'tasks'), (list) => {
       this.allTasks = [];
       list.forEach((element) => {
         const userWithId = { id: element.id, ...element.data() } as Task;

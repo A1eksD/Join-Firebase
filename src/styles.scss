@@ -22,7 +22,7 @@ $blueButton: #0D6EFD;
 }
 
 .dragAreaHighlight{
-  background-color: rgba(0, 0, 0, 0.2) !important;
+  background-color: rgba(0, 0, 0, 0.096) !important;
 }
 
 @mixin displayFlex($d: flex, $j: center, $a: center, $g: 0) {
@@ -219,3 +219,5 @@ $blueButton: #0D6EFD;
     font-weight: 900;
     src: url('./assets/fonts/inter-v13-latin-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
   }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -15,11 +15,20 @@
           <img src="assets/img/plus_button.svg" alt="">
         </div>
         <div
-          appOnDragHighlight  id="todo" #todoArea class="dragArea"
-          (drop)="moveTo('todo')" (dragleave)="removeHighlight('todo')" (dragover)="allowDrop($event); highlight('todo')">
+          appOnDragHighlight  id="toDo" #todoArea class="dragArea"
+          (drop)="moveTo('toDo')" (dragleave)="removeHighlight('toDo')" (dragover)="allowDrop($event); highlight('toDo')">
           @if(getToDOCategory()){
             @for (item of toDoCategory; track $index;) {
-                <app-task (dragstart)="startDragging(item.id)" draggable="true" ></app-task>
+              <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                [category]="item.categoryTask"
+                [assignetTo]="item.assignetTo"
+                [createtBy]="item.createtBy"
+                [date]="item.date"
+                [description]="item.description"
+                [priority]="item.priority"
+                [subtasks]="item.subtasks"
+                [title]="item.title"
+              ></app-task>
             } 
           }
         </div>
@@ -34,7 +43,16 @@
         (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
         @if(getInProgressCategory()){ 
           @for (item of inProgressCategory; track $index;) {
-            <app-task (dragstart)="startDragging(item.id)" draggable="true" ></app-task>
+            <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+              [category]="item.categoryTask"
+              [assignetTo]="item.assignetTo"
+              [createtBy]="item.createtBy"
+              [date]="item.date"
+              [description]="item.description"
+              [priority]="item.priority"
+              [subtasks]="item.subtasks"
+              [title]="item.title"
+            ></app-task>          
           }
         }
         </div>
@@ -49,7 +67,16 @@
           (drop)="moveTo('awaitFeedback')" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
           @if(getAwaitFeedbackCategory()){ 
             @for (item of awaitFeedbackCategory; track $index;) {
-              <app-task (dragstart)="startDragging(item.id)" draggable="true"></app-task>
+              <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                [category]="item.categoryTask"
+                [assignetTo]="item.assignetTo"
+                [createtBy]="item.createtBy"
+                [date]="item.date"
+                [description]="item.description"
+                [priority]="item.priority"
+                [subtasks]="item.subtasks"
+                [title]="item.title"
+              ></app-task>            
             }
           }
         </div>
@@ -64,7 +91,16 @@
           (drop)="moveTo('done')" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
           @if(getDoneategory()){ 
             @for (item of doneCategory; track $index;) {
-              <app-task (dragstart)="startDragging(item.id)" draggable="true"></app-task>
+              <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                [category]="item.categoryTask"
+                [assignetTo]="item.assignetTo"
+                [createtBy]="item.createtBy"
+                [date]="item.date"
+                [description]="item.description"
+                [priority]="item.priority"
+                [subtasks]="item.subtasks"
+                [title]="item.title"
+              ></app-task>
             }
           }
         </div>
