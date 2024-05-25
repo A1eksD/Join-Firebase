@@ -1,0 +1,129 @@
+@import "../../../../../../styles.scss";
+
+section{
+    width: 100%;
+    height: 100%;
+    @include displayFlex($j: flex-start, $a:flex-start);
+    flex-direction: column;
+}
+
+.category{
+    width: 100%;
+    @include displayFlex($j: space-between);
+    span{
+        font-weight: 400;
+        font-size: 23px;
+    }
+    img{
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+        &:hover{
+            scale: 1.1;
+        }
+    }
+}
+
+h1{
+    overflow: auto;
+    word-wrap: break-word;
+    height: 88px;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 42px;
+    margin-top: 16px;
+}
+
+.description{
+    max-height: 101px;
+    margin-top: 25px;
+    overflow: auto;
+    word-wrap: break-word;
+    font-weight: 300;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.technicalTask{
+    border-radius: 12px;
+    background: #ff7a00;
+    padding: 8px;
+    color: white;
+    font-weight: 400;
+}
+
+.userStory{
+    border-radius: 12px;
+    background: #0ada1b;
+    padding: 8px;
+    color: white !important;
+    font-weight: 400;
+}
+
+.assignetTo{
+    display: flex;
+    .contactBox{
+        @include displayFlex($j: flex-start, $a:flex-start, $g: 4px);
+        flex-direction: column;
+        margin-left: 12px;
+        height: 134px;
+        .userNameBox{
+            @include displayFlex($g: 12px);
+            margin: 4px;
+            margin-left: 8px;
+            margin-right: 8px;
+            .userBackground{
+                box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+                border: 4px solid white;
+                min-height: 32px;
+                min-width: 32px;
+                border-radius: 50%;
+                @include displayFlex();
+                color: white !important;
+            }
+        }
+    }
+}
+
+
+.contactBox::-webkit-outer-spin-button,
+.contactBox::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.contactBox[type=string] {
+    -moz-appearance: textfield; 
+    -webkit-appearance: none;   
+    appearance: none;  
+}
+
+.boxOfSubtasks{
+    height: 90px;
+    width: 100%;
+    word-wrap: break-word;
+    overflow: auto;
+    .renderSubtask{
+        @include displayFlex($j: flex-start, $g: 12px);
+        width: 100%;
+    }
+}
+
+
+.buttonBox{
+    width: 100%;
+    @include displayFlex($j: space-between); 
+    .buttonBoxposition{
+        width: 100%;
+        @include displayFlex($j: flex-end,$g: 8px); 
+        .button{
+            @include displayFlex($g: 8px); 
+            transition: 0.2s ease-in-out;
+            cursor: pointer;
+            &:hover{
+                color: #176cff;
+                transform: scale(1.1);
+                font-weight: bolder;
+            }
+        }
+    }
+}

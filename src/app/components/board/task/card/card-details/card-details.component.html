@@ -1,0 +1,59 @@
+<section>
+    <div class="category">
+        @if(category === 'Technical Task'){
+            <span class="technicalTask">{{category}}</span>
+        } @else {
+            <span class="userStory">{{category}}</span>
+        }
+        <img src="assets/img/close.svg" alt="">
+    </div>
+    <h1>{{title}}</h1>
+    <span class="description">{{description}}</span>
+    <h2>Due date: &nbsp;&nbsp;{{date}}</h2>
+    <h2>Priority: &nbsp;&nbsp;{{priority}} <img src="assets/img/{{getProiImg()}}" alt=""></h2>
+
+    <div class="assignetTo">
+        <h2>Assignet To:</h2>
+        <div class="contactBox">
+            @for (user of assignetTo; track $index) {
+                <div class="userNameBox">
+                    <span *ngIf="user.color!" [style.backgroundColor]="user.color!" class="userBackground">
+                        {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}
+                    </span>
+                    <span>{{user.firstName}} {{user.lastName}}</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div>
+        <h2>Subtask's</h2>
+        @if (subtasks.length == 0) {
+            <span>No subtask's available</span>
+        } @else {
+            <div class="boxOfSubtasks">
+                @for (item of subtasks; track $index) {
+                    <div class="renderSubtask">
+                        <input type="checkbox" name="cheese" id="{{item}}"/>
+                        <label for="{{item}}">{{item.subtask}}</label>
+                    </div>
+                }
+            </div>
+        } 
+    </div>
+
+    <div class="buttonBox">
+        <span>{{getuserName()}}</span>
+        <div class="buttonBoxposition">
+            <div class="button">
+                <img src="assets/img/delete.svg" alt=""> 
+                <span>Delete</span>
+            </div>
+            <img src="assets/img/vector3.svg" alt="">
+            <div class="button">
+                <img src="assets/img/edit.svg" alt="">
+                <span>Edit</span>
+            </div>
+        </div>
+    </div>
+</section>

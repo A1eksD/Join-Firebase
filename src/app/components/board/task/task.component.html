@@ -1,4 +1,4 @@
-<section>
+<section (click)="openTaskCatd()">
     @if(category === 'Technical Task'){
         <span class="technicalTask">{{category}}</span>
     } @else {
@@ -32,3 +32,17 @@
         }
     </div>
 </section>
+
+<app-card 
+    [category]="category"
+    [assignetTo]="assignetTo"
+    [createtBy]="createtBy"
+    [date]="date"
+    [description]="description"
+    [priority]="priority"
+    [subtasks]="subtasks"
+    [title]="title"
+    [ngClass]="{dBlock: openCard, dNone: !openCard}"
+    [openCard]="openCard"
+    (closeBigWindow)="closeBigWindow($event)"
+></app-card>

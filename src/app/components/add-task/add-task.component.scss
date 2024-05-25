@@ -10,7 +10,7 @@ section{
 
 .taskBox{
     width: calc(50% - 32px);
-    height: calc(100% - 32px);
+    height: 100%;
     padding: 16px;
     padding-right: 8px;
     background-color: white;
@@ -26,6 +26,7 @@ section{
     font-size: 32px;
     padding-bottom: 12px;
     margin-bottom: 0px;
+    min-height: 56px;
 }
 
 .decriptionBox{
@@ -42,6 +43,7 @@ section{
         width: calc(100% - 36px);
         outline: none;
         font-size: 19px;
+        width: 100%;
     }
 }
 
@@ -102,7 +104,7 @@ section{
         margin: 6px;
         overflow-y: scroll;
         .checkedUsers{
-            height: auto;
+            min-height: 72px;
             width: 100%;
             overflow-x: scroll;
             display: flex;

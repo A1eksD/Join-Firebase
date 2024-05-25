@@ -1,0 +1,32 @@
+@import "../../../../../styles.scss";
+
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.grayBackround{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: rgba(128, 128, 128, 0.521);
+}
+
+.whiteBox{
+    z-index: 21;
+    width: 40vw;
+    height: 80vh;
+    background-color: white;
+    border-radius: 15px;
+    padding: 16px;
+}

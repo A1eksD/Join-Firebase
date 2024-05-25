@@ -23,7 +23,7 @@ export class AddTaskComponent {
   chackedUser: any[] = [];
   category: string = 'Technical Task';
   subtask: string = '';
-  subtaskArray: string[] = [];
+  subtaskArray: any[] = [];
   showCategoryWindow: boolean = false;
   addedUser: boolean = false;
   subtaskToLong: boolean = false;
@@ -173,7 +173,7 @@ export class AddTaskComponent {
   
   addSubtask(){
     if (this.subtaskToLong && this.subtask !=='') {
-      const subtaskValue = this.subtask;
+      const subtaskValue = {subtask: this.subtask, subtaskDone : false};
       this.subtaskArray.push(subtaskValue);
       this.subtask = ''; 
     }

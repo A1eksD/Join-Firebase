@@ -98,7 +98,7 @@
             @if(checkSubtaskLength()){
                 @for(task of subtaskArray; track $index){
                     <div class="taskList">
-                        <span>{{task}}</span>
+                        <span>{{task.subtask}}</span>
                         <img src="assets/img/delete.svg" alt="" (click)="deleteSubtask(task)">
                     </div>
                 }

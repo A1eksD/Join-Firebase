@@ -11,4 +11,5 @@ export class ToggleBooleansService {
   showCategoryWindow:boolean = false;
   showUserWindow:boolean = false;
   slideInRightWindow:boolean = false;
+  openEditCard:boolean = false;
 }
