@@ -28,8 +28,11 @@ export class CardComponent {
 
   constructor(public toggleService: ToggleBooleansService){}
 
+  // closeWindow(){
+  //   this.openCard = false;
+  //   this.closeBigWindow.emit(this.openCard);
+  // }
   closeWindow(){
-    this.openCard = false;
-    this.closeBigWindow.emit(this.openCard);
+    this.toggleService.openWhiteBox = false;
   }
 }

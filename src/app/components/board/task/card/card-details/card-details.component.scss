@@ -61,11 +61,14 @@ h1{
 
 .assignetTo{
     display: flex;
+    width: 100%;
     .contactBox{
         @include displayFlex($j: flex-start, $a:flex-start, $g: 4px);
         flex-direction: column;
         margin-left: 12px;
         height: 134px;
+        overflow: auto;
+        width: calc(100% - 125px);
         .userNameBox{
             @include displayFlex($g: 12px);
             margin: 4px;
@@ -85,20 +88,18 @@ h1{
 }
 
 
-.contactBox::-webkit-outer-spin-button,
-.contactBox::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
+.contactBox{
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
 }
 
-.contactBox[type=string] {
-    -moz-appearance: textfield; 
-    -webkit-appearance: none;   
-    appearance: none;  
+.contactBox::-webkit-scrollbar { 
+    display: none; 
 }
 
 .boxOfSubtasks{
-    height: 90px;
+    height: 82px;
+    margin-bottom: 12px;
     width: 100%;
     word-wrap: break-word;
     overflow: auto;
@@ -121,7 +122,7 @@ h1{
             cursor: pointer;
             &:hover{
                 color: #176cff;
-                transform: scale(1.1);
+                transform: scale(1.05);
                 font-weight: bolder;
             }
         }

@@ -3,6 +3,7 @@ import { User } from '../../../../../interface/user';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../../../../service/users.service';
+import { ToggleBooleansService } from '../../../../../service/toggle-booleans.service';
 
 @Component({
   selector: 'app-card-details',
@@ -21,7 +22,7 @@ export class CardDetailsComponent {
   @Input() assignetTo: User[] = [];
   @Input() subtasks: any[] = [];
 
-  constructor(private userService: UsersService){}
+  constructor(private userService: UsersService, public toggleService: ToggleBooleansService){}
 
   getProiImg(){
     if(this.priority === 'low'){
@@ -46,5 +47,9 @@ export class CardDetailsComponent {
     const currentUser = localStorage.getItem('currentUser');
     const filterUser = this.userService.allUsers.filter(u => u.id === this.userService.getCleanID(currentUser!))
     return `Task created by: ${filterUser[0].firstName} ${filterUser[0].lastName}`;
+  }
+
+  closeWindow(){
+    this.toggleService.openWhiteBox = false;
   }
 }

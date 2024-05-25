@@ -5,6 +5,7 @@ import { User } from '../../../interface/user';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CardComponent } from './card/card.component';
 import { enableNetwork } from '@angular/fire/firestore';
+import { ToggleBooleansService } from '../../../service/toggle-booleans.service';
 
 @Component({
   selector: 'app-task',
@@ -24,7 +25,7 @@ export class TaskComponent {
   @Input() assignetTo: User[] = [];
   @Input() subtasks: any[] = [];
 
-  constructor(){}
+  constructor(public toggleService: ToggleBooleansService){}
   openCard: boolean = false;
 
   getUserFirstLetter(user: User): string {
@@ -44,10 +45,10 @@ export class TaskComponent {
   }
 
   openTaskCatd(){
-    this.openCard = !this.openCard;
+    this.toggleService.openWhiteBox = true;
   }
 
-  closeBigWindow(event: boolean){
-    this.openCard = event;
-  }
+  // closeBigWindow(event: boolean){
+  //   this.openCard = event;
+  // }
 }

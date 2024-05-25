@@ -42,7 +42,5 @@
     [priority]="priority"
     [subtasks]="subtasks"
     [title]="title"
-    [ngClass]="{dBlock: openCard, dNone: !openCard}"
-    [openCard]="openCard"
-    (closeBigWindow)="closeBigWindow($event)"
+    [ngClass]="{dBlock: toggleService.openWhiteBox , dNone: !toggleService.openWhiteBox}"
 ></app-card>

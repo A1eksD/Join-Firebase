@@ -1,7 +1,7 @@
 @import "../../../../styles.scss";
 
 section{
-    width: 100%;
+    width: 240px;
     height: 220px;
     border-radius: 20px;
     border: 1px solid #176cff;
@@ -11,7 +11,8 @@ section{
     padding: 12px;
     transition: .3s ease-in-out;
     &:hover{
-        box-shadow: rgb(188, 214, 236) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+        scale: 1.05;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
     h1{
         color: #4589ff;
@@ -20,7 +21,8 @@ section{
         text-overflow: ellipsis;
         overflow: hidden;
         font-size: larger;
-        max-width: 260px;
+        max-width: 220px;
+        margin-bottom: 0;
     }
     .description{
         text-align: left;
@@ -28,7 +30,7 @@ section{
         text-overflow: ellipsis;
         overflow: hidden;
         color: #a8a8a8;
-        max-width: 260px;
+        max-width: 220px;
     }
 }
 
@@ -53,8 +55,11 @@ section{
     width: 100%;
     @include displayFlex($j: space-between);
     .selectedContacts{
-        margin-left: 12px;
         @include displayFlex($j: flex-start);
+        max-width: 182px;
+        padding: 4px;
+        padding-left: 20px;
+        overflow-x: scroll;
     }
 }
 

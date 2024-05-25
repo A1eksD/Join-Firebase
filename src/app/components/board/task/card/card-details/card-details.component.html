@@ -5,7 +5,7 @@
         } @else {
             <span class="userStory">{{category}}</span>
         }
-        <img src="assets/img/close.svg" alt="">
+        <img src="assets/img/close.svg" alt="" (click)="closeWindow()">
     </div>
     <h1>{{title}}</h1>
     <span class="description">{{description}}</span>
@@ -26,7 +26,7 @@
         </div>
     </div>
 
-    <div>
+    <div style="width: 100%;">
         <h2>Subtask's</h2>
         @if (subtasks.length == 0) {
             <span>No subtask's available</span>

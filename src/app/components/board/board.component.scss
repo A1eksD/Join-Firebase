@@ -54,13 +54,11 @@ section{
 }
 
 .droppBoxes{
-    @include displayFlex($j: space-between, $g:22px);
+    @include displayFlex($j: space-evenly, $g:22px);
     width: calc(100vw - 246px);
-    height: calc(100vh - 236px);
-    margin-left: 12px;
-    margin-right: 12px;
+    height: calc(100vh - 264px);
     .dragRow{
-        width: 100%;
+        width: 270px;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -71,15 +69,17 @@ section{
             width: 100%;
             h1{
                 font-size: x-large;
+                margin-bottom: 0;
             }
         }
         .dragArea{
             height: calc(100% - 58px);
-            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+            // box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
             border-radius: 20px;
-            display: flex;
+            @include displayFlex($j: flex-start);
             flex-direction: column;
             gap: 16px;
+            padding: 16px;
             overflow-y: scroll;
         }
     }
