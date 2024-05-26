@@ -9,7 +9,9 @@ export class TasksService {
 
   firestore: Firestore = inject(Firestore);
   allTasks: Task[] = [];
+  allTasksCopy: Task[] = [];
   clickedTask: any;
+  clickedTaskCopy: any;
 
   unsubTasks;
   constructor() {
@@ -22,6 +24,7 @@ export class TasksService {
       list.forEach((element) => {
         const userWithId = { id: element.id, ...element.data() } as Task;
         this.allTasks.push(userWithId);
+        this.allTasksCopy.push(userWithId);
       });
     });
   }

@@ -32,6 +32,7 @@ export class CardEditComponent {
   subtask: string = '';
   subtaskArray: any[] = [];
   chackedUser: any[] = [];
+  disabledButton: boolean = false;
 
   constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
@@ -137,5 +138,19 @@ export class CardEditComponent {
 
   closeWindow(){
     this.toggleService.openWhiteBox = false;
+  }
+
+  checkIfVluesChanged(){
+    const currentTaskID = this.taskService.clickedTask[0];
+      if (currentTaskID.title == '') {
+        return false;
+      }
+      if (currentTaskID.description == '') {
+        return false
+      }
+      if (currentTaskID.date == 0) {
+        return false
+      }
+      return true;
   }
 }

@@ -111,13 +111,14 @@
         <!-------------create btn----------------->
             <div class="buttonBox">
                 <div class="buttonBoxposition">
-                    <button>
+                    <button class="createTaskBtn" (click)="closeWindow()">
                         <img src="assets/img/delete.svg" alt="" class="buttonImg"> 
                         Close
                     </button>
                     <img src="assets/img/vector3.svg" alt="">
-                    <button >
-                        <img src="assets/img/edit.svg" alt="" class="buttonImg">
+                    <button disabled="{{checkIfVluesChanged()}}"
+                        [ngClass]="{'createTaskBtn': checkIfVluesChanged(), 'disabledBtn': !checkIfVluesChanged()}">
+                        <img src="assets/img/edit.svg" alt="" [ngClass]="{'': checkIfVluesChanged(), 'disabledBtnImg': !checkIfVluesChanged()}">
                         Save
                     </button>
                 </div>
