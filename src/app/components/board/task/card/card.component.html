@@ -1,6 +1,6 @@
 <section>
     <div class="grayBackround" (click)="closeWindow()"></div>
-    @if(!toggleService.openEditCard){
+    @if(toggleService.openEditCard){
         <app-card-details class="whiteBox"></app-card-details>
         <!-- <app-card-details class="whiteBox"
             [category]="category"

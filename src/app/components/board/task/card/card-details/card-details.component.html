@@ -46,15 +46,15 @@
         <div class="buttonBox">
             <span>{{getuserName()}}</span>
             <div class="buttonBoxposition">
-                <div class="button">
-                    <img src="assets/img/delete.svg" alt=""> 
-                    <span>Delete</span>
-                </div>
+                <button>
+                    <img src="assets/img/delete.svg" alt="" class="buttonImg"> 
+                    Delete
+                </button>
                 <img src="assets/img/vector3.svg" alt="">
-                <div class="button">
-                    <img src="assets/img/edit.svg" alt="">
-                    <span>Edit</span>
-                </div>
+                <button (click)="editCard()">
+                    <img src="assets/img/edit.svg" alt="" class="buttonImg">
+                    Edit
+                </button>
             </div>
         </div>
     </section>

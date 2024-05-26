@@ -1,0 +1,177 @@
+@import "../../../../../../styles.scss";
+
+section{
+    width: 100%;
+    height: 100%;
+    @include displayFlex($j: flex-start, $a:flex-start);
+    flex-direction: column;
+    position: relative;
+    overflow-y: auto;
+}
+
+
+.prioBox{
+    width: 100%;
+    .prioBoxHeader{
+        @include displayFlex($j: flex-start);
+    }
+    .prioBoxBtns{
+        margin-top: 12px;
+        margin-bottom: 12px;
+        @include displayFlex($j: space-around);
+        button{
+            @include displayFlex($g: 12px);
+            width: 136px;
+            height: 51px;
+            font-size: 19px;
+            font-weight: 400;
+            cursor: pointer;
+            background: white;
+            border: 0px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+            img{
+                width: 20px;
+                height: 20px;
+                object-fit: contain;
+            }
+        }
+        .greenBtn:hover {
+            box-shadow: 0px 3px rgb(154, 233, 93), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        }
+        
+        .orangeBtn:hover {
+            box-shadow: 0 3px rgb(255, 168, 0), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        }
+        
+        .redBtn:hover {
+            box-shadow: 0 3px rgb(255, 66, 6), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        }
+    }
+}
+
+.assignetToBox{
+    width: 100%;
+    .userWindow{
+        width: calc(100% - 22px);
+        @include displayFlex($j: flex-start, $a: flex-start); 
+        flex-direction: column;
+        padding-left: 10px;
+        margin: 6px;
+        overflow-y: scroll;
+        .checkedUsers{
+            min-height: 72px;
+            width: 100%;
+            overflow-x: scroll;
+            display: flex;
+            .userRing{
+                min-width: 40px;
+                height: 40px;
+                background-color: white;
+                border-radius: 50%;
+                box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+                @include displayFlex(); 
+                margin: 8px;
+                .userTag{
+                    width: 32px;
+                    height: 32px;
+                    background-color: springgreen;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    @include displayFlex(); 
+                    color: white;
+                    font-weight: 500;
+                }
+            }
+        }
+        .loadedUsers{
+            width: calc(100% - 16px);
+            @include displayFlex($j: flex-start, $g: 12px); 
+            border-radius: 5px;
+            padding: 2px;
+            padding-left: 8px;
+            padding-right: 8px;
+            &:hover{
+                background-color: #64718821;
+            }
+            .ringFromUser{
+                min-width: 40px;
+                min-height: 40px;
+                background-color: white;
+                border-radius: 50%;
+                box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+                @include displayFlex(); 
+                margin: 4px;
+                .tagFromUser{
+                    min-width: 32px;
+                    min-height: 32px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                    @include displayFlex(); 
+                    color: white;
+                    font-weight: 500;
+                }
+            }
+            .userNameAndChackbox{
+                width: 100%;
+                @include displayFlex($j: space-between); 
+                input{
+                    margin: 0;
+                    width: 16px;
+                    height: 16px;
+                    margin-right: 5px;
+                    cursor: pointer;
+                }
+            }
+            
+        }
+    }
+}
+
+.categoryBox{
+    width: 100%;
+    .taskBoxSection{
+        .taskWindow{
+            @include displayFlex($a: flex-start, $g: 12px); 
+            flex-direction: column;
+            width: calc(100% - 16px);
+            padding-left: 16px;
+            margin-bottom: 6px;
+            margin-top: 6px;
+            span{
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+                &:hover{
+                    color: #4589ff;
+                }
+            }
+        }
+    }
+}
+
+.buttonBox{
+    width: 100%;
+    @include displayFlex($j: space-between); 
+    position: absolute;
+    bottom: 0;
+    .buttonBoxposition{
+        width: 100%;
+        @include displayFlex($j: flex-end,$g: 8px); 
+        button{
+            @include displayFlex($g: 8px); 
+            background-color: white;
+            border: 2px solid #176cff;
+            border-radius: 10px;
+            padding: 8px;
+            transition: 0.2s ease-in-out;
+            cursor: pointer;
+            &:hover{
+                box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+                border: 2px solid #5995fc;
+                // .buttonImg {
+                //     filter: invert(1) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+                // }
+            }
+        }
+    }
+}

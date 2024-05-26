@@ -55,4 +55,8 @@ export class CardDetailsComponent {
   closeWindow(){
     this.toggleService.openWhiteBox = false;
   }
+
+  editCard(){
+    this.toggleService.openEditCard = false;
+  }
 }
