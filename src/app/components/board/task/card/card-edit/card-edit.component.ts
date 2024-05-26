@@ -98,7 +98,7 @@ export class CardEditComponent {
   }
 
   checkSubtaskLength(){
-    if (this.taskService.clickedTask[0].subtask.length <= 30) {
+    if (this.taskService.clickedTask[0].subtasks.length <= 30) {
       this.subtaskToLong = true;
       return true;
     } else{
@@ -121,5 +121,21 @@ export class CardEditComponent {
       this.subtaskArray.splice(taskMsg, 1);
       this.chackedUser.splice(taskMsg, 1); 
     }
+  }
+
+  checkDateAddTask() {
+    const today = new Date();
+    const tomorrow = new Date(today.setDate(today.getDate() + 1));
+    const input = document.getElementById('date') as HTMLInputElement;
+
+    if (input) {
+      input.setAttribute('min', tomorrow.toISOString().split('T')[0]);
+    } else {
+      console.error('Could not find input element with id="date"');
+    }
+  }
+
+  closeWindow(){
+    this.toggleService.openWhiteBox = false;
   }
 }
