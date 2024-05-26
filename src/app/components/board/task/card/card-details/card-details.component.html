@@ -1,59 +1,61 @@
-<section>
-    <div class="category">
-        @if(category === 'Technical Task'){
-            <span class="technicalTask">{{category}}</span>
-        } @else {
-            <span class="userStory">{{category}}</span>
-        }
-        <img src="assets/img/close.svg" alt="" (click)="closeWindow()">
-    </div>
-    <h1>{{title}}</h1>
-    <span class="description">{{description}}</span>
-    <h2>Due date: &nbsp;&nbsp;{{date}}</h2>
-    <h2>Priority: &nbsp;&nbsp;{{priority}} <img src="assets/img/{{getProiImg()}}" alt=""></h2>
-
-    <div class="assignetTo">
-        <h2>Assignet To:</h2>
-        <div class="contactBox">
-            @for (user of assignetTo; track $index) {
-                <div class="userNameBox">
-                    <span *ngIf="user.color!" [style.backgroundColor]="user.color!" class="userBackground">
-                        {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}
-                    </span>
-                    <span>{{user.firstName}} {{user.lastName}}</span>
-                </div>
+@if(taskService.clickedTask){
+    <section>
+        <div class="category">
+            @if(taskService.clickedTask[0].category === 'Technical Task'){
+                <span class="technicalTask">{{taskService.clickedTask[0].category}}</span>
+            } @else {
+                <span class="userStory">{{taskService.clickedTask[0].category}}</span>
             }
+            <img src="assets/img/close.svg" alt="" (click)="closeWindow()">
         </div>
-    </div>
-
-    <div style="width: 100%;">
-        <h2>Subtask's</h2>
-        @if (subtasks.length == 0) {
-            <span>No subtask's available</span>
-        } @else {
-            <div class="boxOfSubtasks">
-                @for (item of subtasks; track $index) {
-                    <div class="renderSubtask">
-                        <input type="checkbox" name="cheese" id="{{item}}"/>
-                        <label for="{{item}}">{{item.subtask}}</label>
+        <h1>{{taskService.clickedTask[0].title}}</h1>
+        <span class="description">{{taskService.clickedTask[0].description}}</span>
+        <h2>Due date: &nbsp;&nbsp;{{taskService.clickedTask[0].date}}</h2>
+        <h2>Priority: &nbsp;&nbsp;{{taskService.clickedTask[0].priority}} <img src="assets/img/{{getProiImg()}}" alt=""></h2>
+    
+        <div class="assignetTo">
+            <h2>Assignet To:</h2>
+            <div class="contactBox">
+                @for (user of taskService.clickedTask[0].assignetTo; track $index) {
+                    <div class="userNameBox">
+                        <span *ngIf="user.color!" [style.backgroundColor]="user.color!" class="userBackground">
+                            {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}
+                        </span>
+                        <span>{{user.firstName}} {{user.lastName}}</span>
                     </div>
                 }
             </div>
-        } 
-    </div>
-
-    <div class="buttonBox">
-        <span>{{getuserName()}}</span>
-        <div class="buttonBoxposition">
-            <div class="button">
-                <img src="assets/img/delete.svg" alt=""> 
-                <span>Delete</span>
-            </div>
-            <img src="assets/img/vector3.svg" alt="">
-            <div class="button">
-                <img src="assets/img/edit.svg" alt="">
-                <span>Edit</span>
+        </div>
+    
+        <div style="width: 100%;">
+            <h2>Subtask's</h2>
+            @if (taskService.clickedTask[0].subtasks.length == 0) {
+                <span>No subtask's available</span>
+            } @else {
+                <div class="boxOfSubtasks">
+                    @for (item of taskService.clickedTask[0].subtasks; track $index) {
+                        <div class="renderSubtask">
+                            <input type="checkbox" name="cheese" id="{{item}}"/>
+                            <label for="{{item}}">{{item.subtask}}</label>
+                        </div>
+                    }
+                </div>
+            } 
+        </div>
+    
+        <div class="buttonBox">
+            <span>{{getuserName()}}</span>
+            <div class="buttonBoxposition">
+                <div class="button">
+                    <img src="assets/img/delete.svg" alt=""> 
+                    <span>Delete</span>
+                </div>
+                <img src="assets/img/vector3.svg" alt="">
+                <div class="button">
+                    <img src="assets/img/edit.svg" alt="">
+                    <span>Edit</span>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+}

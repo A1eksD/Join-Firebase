@@ -4,16 +4,19 @@ import { CommonModule } from '@angular/common';
 import { CardDetailsComponent } from './card-details/card-details.component';
 import { CardEditComponent } from './card-edit/card-edit.component';
 import { ToggleBooleansService } from '../../../../service/toggle-booleans.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, CardDetailsComponent, CardEditComponent],
+  imports: [CommonModule, FormsModule, CardDetailsComponent, CardEditComponent],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
 export class CardComponent {
 
+  // @Input() currentTask: any;
+  @Input() id: string = '';
   @Input() category: string = '';
   @Input() createtBy: string = '';
   @Input() date: string = '';

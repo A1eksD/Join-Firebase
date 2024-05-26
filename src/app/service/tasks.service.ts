@@ -9,6 +9,8 @@ export class TasksService {
 
   firestore: Firestore = inject(Firestore);
   allTasks: Task[] = [];
+  clickedTask: any;
+
   unsubTasks;
   constructor() {
     this.unsubTasks = this.subTaskList();

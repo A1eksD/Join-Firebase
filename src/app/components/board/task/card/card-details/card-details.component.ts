@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../../../../service/users.service';
 import { ToggleBooleansService } from '../../../../../service/toggle-booleans.service';
+import { TasksService } from '../../../../../service/tasks.service';
 
 @Component({
   selector: 'app-card-details',
@@ -13,23 +14,25 @@ import { ToggleBooleansService } from '../../../../../service/toggle-booleans.se
   styleUrl: './card-details.component.scss'
 })
 export class CardDetailsComponent {
-  @Input() category: string = '';
-  @Input() createtBy: string = '';
-  @Input() date: string = '';
-  @Input() description: string = '';
-  @Input() priority: string = '';
-  @Input() title: string = '';
-  @Input() assignetTo: User[] = [];
-  @Input() subtasks: any[] = [];
+  // @Input() category: any;
+  // @Input() category: string = '';
+  // @Input() id: string = '';
+  // @Input() createtBy: string = '';
+  // @Input() date: string = '';
+  // @Input() description: string = '';
+  // @Input() priority: string = '';
+  // @Input() title: string = '';
+  // @Input() assignetTo: User[] = [];
+  // @Input() subtasks: any[] = [];
 
-  constructor(private userService: UsersService, public toggleService: ToggleBooleansService){}
+  constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
   getProiImg(){
-    if(this.priority === 'low'){
+    if(this.taskService.clickedTask[0].priority === 'low'){
       return 'prio_baja.svg';
-    } else if (this.priority === 'medium') {
+    } else if (this.taskService.clickedTask[0].priority === 'medium') {
       return 'prio_media.svg';
-    } else if (this.priority === 'high') {
+    } else if (this.taskService.clickedTask[0].priority === 'high') {
       return 'prio_alta.svg';
     }
     return '';

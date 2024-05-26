@@ -9,13 +9,14 @@ import { User } from '../../../../../interface/user';
   styleUrl: './card-edit.component.scss'
 })
 export class CardEditComponent {
-  @Input() category: string = '';
-  @Input() createtBy: string = '';
-  @Input() date: string = '';
-  @Input() description: string = '';
-  @Input() priority: string = '';
-  @Input() title: string = '';
-  @Input() assignetTo: User[] = [];
-  @Input() subtasks: string[] = [];
-
+  // @Input() category: string = '';
+  // @Input() id: string = '';
+  // @Input() createtBy: string = '';
+  // @Input() date: string = '';
+  // @Input() description: string = '';
+  // @Input() priority: string = '';
+  // @Input() title: string = '';
+  // @Input() assignetTo: User[] = [];
+  // @Input() subtasks: string[] = [];
+  // @Input() currentTask: any;
 }

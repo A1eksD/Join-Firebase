@@ -21,23 +21,6 @@ export class BoardComponent {
   @ViewChild('openArea') open!: ElementRef;
   @ViewChild('closedArea') closed!: ElementRef;
 
-  todos = [
-    {
-      id: 0,
-      title: 'Putzen',
-      category: 'todo',
-    },
-    {
-      id: 1,
-      title: 'Kochen',
-      category: 'todo',
-    },
-    {
-      id: 2,
-      title: 'Einkaufen',
-      category: 'inProgress',
-    },
-  ];
   currentDraggedElement: string = '';
   toDoCategory: any[] = [];
   inProgressCategory: any[] = [];

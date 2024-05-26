@@ -1,4 +1,4 @@
-<section (click)="openTaskCatd()">
+<section (click)="openTaskCatd(id)">
     @if(category === 'Technical Task'){
         <span class="technicalTask">{{category}}</span>
     } @else {
@@ -42,5 +42,6 @@
     [priority]="priority"
     [subtasks]="subtasks"
     [title]="title"
+    [id]="id"
     [ngClass]="{dBlock: toggleService.openWhiteBox , dNone: !toggleService.openWhiteBox}"
 ></app-card>
