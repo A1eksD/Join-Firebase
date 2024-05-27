@@ -77,6 +77,7 @@ export class BoardComponent {
     if (draggedIndex !== null) {
       const getCurrentTask = this.taskService.allTasks.filter((t) => t.id === this.currentDraggedElement);
       getCurrentTask[0].category = category;
+      this.taskService.updateTaskCategors( getCurrentTask[0].id! ,category);
     }
   }
 
