@@ -9,11 +9,12 @@ import { OnDragHighlightDirective } from '../../directives/on-drag-highlight.dir
 import { TasksService } from '../../service/tasks.service';
 import { TaskComponent } from './task/task.component';
 import { FormsModule } from '@angular/forms';
+import { BoardAddTaskComponent } from './board-add-task/board-add-task.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, OnDragHighlightDirective, TaskComponent, FormsModule],
+  imports: [CommonModule, OnDragHighlightDirective, TaskComponent, FormsModule, BoardAddTaskComponent],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -27,6 +28,8 @@ export class BoardComponent {
   awaitFeedbackCategory: any[] = [];
   doneCategory: any[] = [];
   currentCategory: string = 'open';
+  openAddNewTaskWindow: boolean = false;
+  CategorY: string= '';
 
 
   constructor(public toggleService: ToggleBooleansService, public taskService: TasksService) {}
@@ -88,5 +91,14 @@ export class BoardComponent {
   
   removeHighlight(category: string) {
     this.currentCategory = category;
+  }
+
+  createNewTask(taskCategory: string){
+    this.openAddNewTaskWindow = true;
+    this.CategorY = taskCategory;
+  }
+
+  toggleBoolean(vlaue: boolean){
+    this.openAddNewTaskWindow = vlaue;
   }
 }

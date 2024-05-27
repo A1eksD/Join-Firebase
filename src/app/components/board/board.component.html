@@ -12,7 +12,7 @@
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>To do</h1>
-          <img src="assets/img/plus_button.svg" alt="">
+          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('toDo')" class="curserPointer">
         </div>
         <div
           appOnDragHighlight  id="toDo" #todoArea class="dragArea"
@@ -37,7 +37,7 @@
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>In progress</h1>
-          <img src="assets/img/plus_button.svg" alt="">
+          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('inProgress')" class="curserPointer">
         </div>
         <div
         appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
@@ -62,7 +62,7 @@
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>Await feedback</h1>
-          <img src="assets/img/plus_button.svg" alt="">
+          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('awaitFeedback')" class="curserPointer">
         </div>
         <div
           appOnDragHighlight class="dragArea" id="awaitFeedback" #awaitFeedbackArea
@@ -87,7 +87,6 @@
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>Done</h1>
-          <img src="assets/img/plus_button.svg" alt="">
         </div>
         <div
           appOnDragHighlight class="dragArea" id="done" #doneArea
@@ -112,3 +111,9 @@
     </div>
   }
 </section>
+
+<app-board-add-task [ngClass]="{dBlock: openAddNewTaskWindow , dNone: !openAddNewTaskWindow}" 
+  [CategorY]="CategorY"
+  [openAddNewTaskWindow]="openAddNewTaskWindow" 
+  (closeBigWindow)="toggleBoolean($event)"
+></app-board-add-task>

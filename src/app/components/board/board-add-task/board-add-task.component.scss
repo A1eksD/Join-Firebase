@@ -1,32 +1,89 @@
-@import "../../../styles.scss";
+@import "../../../../styles.scss";
 
 section{
-    width: calc(100vw - 222px);
-    height: calc(100vh - 96px);
+    @include displayFlex();
     position: absolute;
-    bottom: 0;
-    right: 0;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+}
+
+.grayBackround{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background-color: rgba(128, 128, 128, 0.25);
+}
+
+.whiteBox{
+    z-index: 21;
+    width: 64vw;
+    height: 50vh;
+    background-color: white;
+    border-radius: 15px;
+    padding: 16px;
+    .positionCloseX{
+        width: 100%;
+        height: auto;
+        @include displayFlex($j: flex-end);
+        img{
+            transition: 0.3 ease-in-out;
+            &:hover{
+                scale: 1.1;
+            }
+        }
+    }
+    .innerWhiteBox{
+        width: 100%;
+        height: calc(100% - 32px);
+        @include displayFlex($j: space-around, $a: center);
+        .leftSide, .rightSide{
+            width: 49%;
+            height: 100%;
+            @include displayFlex($j: flex-start);
+            flex-direction: column;
+        }
+        .mid{
+            width: 2px;
+            height: 90%;
+            background-color: #8080809c;
+            border-radius: 9px;
+        }
+    }
 }
 
 .taskBox{
-    width: calc(50% - 32px);
+    width: 100%;
     height: 100%;
     padding: 16px;
     padding-right: 8px;
-    background-color: white;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
     z-index: 9;
     @include displayFlex($j: space-evenly, $a: flex-start);
     flex-direction: column;
-    overflow-y: scroll;
 }
 
 .titleInput{
     font-weight: 400;
-    font-size: 32px;
+    font-size: 30px;
     padding-bottom: 12px;
     margin-bottom: 0px;
     min-height: 56px;
+}
+
+input{
+    width: calc(100% - 4px);
+    height: 32px;
+    border: none;
+    border-bottom: 2px solid rgba(209, 209, 209, 1);
+    border-radius: 0;
+    outline: none;
+    font-size: large;
+    margin-bottom: 32px;
 }
 
 .decriptionBox{
@@ -47,50 +104,16 @@ section{
     }
 }
 
+.namePosition{
+    @include displayFlex($j: flex-start, $g: 4px); 
+}
+
+
 .dateBox{
     width: 100%;
     input{
         width: 100%;
         cursor: pointer;
-    }
-}
-
-.prioBox{
-    width: 100%;
-    .prioBoxHeader{
-        @include displayFlex($j: flex-start);
-    }
-    .prioBoxBtns{
-        margin-top: 12px;
-        margin-bottom: 12px;
-        @include displayFlex($j: space-around);
-        button{
-            @include displayFlex($g: 12px);
-            width: 136px;
-            height: 51px;
-            font-size: 19px;
-            font-weight: 400;
-            cursor: pointer;
-            border: 0px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-            img{
-                width: 20px;
-                height: 20px;
-                object-fit: contain;
-            }
-        }
-        .greenBtn:hover {
-            box-shadow: 0px 3px rgb(154, 233, 93), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-        }
-        
-        .orangeBtn:hover {
-            box-shadow: 0 3px rgb(255, 168, 0), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-        }
-        
-        .redBtn:hover {
-            box-shadow: 0 3px rgb(255, 66, 6), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
-        }
     }
 }
 
@@ -103,15 +126,57 @@ section{
     }
 }
 
+.prioBoxBtns{
+    margin-top: 12px;
+    margin-bottom: 12px;
+    @include displayFlex($j: space-around);
+    width: 100%;
+    button{
+        @include displayFlex($g: 12px);
+        width: 32%;
+        height: 44px;
+        font-size: 19px;
+        font-weight: 400;
+        cursor: pointer;
+        background: white;
+        border: 0px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+        img{
+            width: 20px;
+            height: 20px;
+            object-fit: contain;
+        }
+    }
+    .greenBtn:hover {
+        box-shadow: 0px 3px rgb(154, 233, 93), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    }
+    
+    .orangeBtn:hover {
+        box-shadow: 0 3px rgb(255, 168, 0), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    }
+    
+    .redBtn:hover {
+        box-shadow: 0 3px rgb(255, 66, 6), 0px 0px 4px 0px rgba(0, 0, 0, 0.16);
+    }
+}
+
 .assignetToBox{
     width: 100%;
+    position: relative;
     .userWindow{
+        position: absolute;
+        top: 100%;
+        z-index: 12;
         width: calc(100% - 22px);
+        height: 160px;
         @include displayFlex($j: flex-start, $a: flex-start); 
         flex-direction: column;
         padding-left: 10px;
         margin: 6px;
         overflow-y: scroll;
+        background-color: white;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
         .checkedUsers{
             min-height: 72px;
             width: 100%;
@@ -181,6 +246,55 @@ section{
     }
 }
 
+.assignedSelect{
+    @include displayFlex($j: space-between); 
+    padding-left: 16px;
+    border: 0;
+    font-size: 19px;
+    appearance: none;
+    border-bottom: 1px solid rgba(209, 209, 209, 1);
+    line-height: 39px;
+    cursor: pointer;
+}
+
+.headLetters{
+    @include displayFlex($j: space-between); 
+    width: 100%;
+    .headLine{
+        @include displayFlex($j: flex-start, $g: 4px); 
+    }
+    h2{
+        margin-bottom: 0;
+    }
+}
+
+.categoryBox{
+    width: 100%;
+    .taskBoxSection{
+        position: relative;
+        .taskWindow{
+            position: absolute;
+            top: 100%;
+            @include displayFlex($a: flex-start, $g: 12px); 
+            flex-direction: column;
+            width: calc(100% - 16px);
+            padding-left: 16px;
+            margin-bottom: 6px;
+            margin-top: 6px;
+            background-color: white;
+            z-index: 12;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            span{
+                cursor: pointer;
+                transition: 0.2s ease-in-out;
+                &:hover{
+                    color: #4589ff;
+                }
+            }
+        }
+    }
+}
+
 .categoryBox{
     width: 100%;
     .taskBoxSection{
@@ -227,163 +341,32 @@ section{
             }
         }
     }
-    .taskList{
-        width: calc(100% - 24px);
-        margin: 12px;
-        @include displayFlex($j: space-between);
-        padding: 2px;
-        padding-left: 4px;
-        padding-right: 4px;
-        &:hover{
-            background-color: #64718821;
-            border-radius: 5px;
-        } 
-        img{
-            cursor: pointer;
+    .addedSubtaskBox{
+        width: 100%;
+        height: 40%;
+        @include displayFlex($j: flex-start);
+        flex-direction: column;
+        overflow-y: scroll;
+        .taskList{
+            width: calc(100% - 24px);
+            margin: 12px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            @include displayFlex($j: space-between);
+            padding: 2px;
+            padding-left: 4px;
+            padding-right: 4px;
             &:hover{
-                scale: 1.1;
+                background-color: #64718821;
+                border-radius: 5px;
+            } 
+            img{
+                cursor: pointer;
+                &:hover{
+                    scale: 1.1;
+                }
             }
         }
-    }
-}
-
-
-.positionBtn{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 24px;
-    .ClearBtn {
-        width: 120px;
-        height: 61px;
-        border-radius: 10px;
-        border: 1px solid #647188;
-        color: #647188;
-        background-color: white;
-        font-size: 22px;
-        margin-right: 8px;
-        cursor: pointer;
-    }
-    .ClearBtn:hover {
-        border: 2px solid #4589ff;
-        color: #4589ff;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
-    .ClearBtn:hover .clearBtnImg{
-        filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
-    }
-    .createTaskBtn {
-        width: 174px;
-        height: 61px;
-        border-radius: 10px;
-        color: white;
-        font-size: 22px;
-        cursor: pointer;
-        background-color: #4589ff;
-        border: 1px solid #4589ff;
-        animation: 0.3s acriveBtn;
-        
-    }
-    .createTaskBtn:hover {
-        background-color: #176cff;
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    }
-}
-
-@keyframes acriveBtn {
-    from {
-        background-color: #a3a5a7;
-    }
-    to {
-        background-color: #4589ff;
-        border: 1px solid #4589ff;
-    }
-}
-
-.namePosition{
-    @include displayFlex($j: flex-start, $g: 4px); 
-}
-
-.assignedSelect{
-    @include displayFlex($j: space-between); 
-    padding-left: 16px;
-    border: 0;
-    margin-top: 16px;
-    font-size: 19px;
-    appearance: none;
-    border-bottom: 1px solid rgba(209, 209, 209, 1);
-    line-height: 39px;
-    cursor: pointer;
-}
-
-.headLetters{
-    @include displayFlex($j: space-between); 
-    width: 100%;
-    .headLine{
-        @include displayFlex($j: flex-start, $g: 4px); 
-    }
-}
-
-input{
-    width: calc(100% - 4px);
-    height: 32px;
-    border: none;
-    border-bottom: 2px solid rgba(209, 209, 209, 1);
-    border-radius: 0;
-    outline: none;
-    font-size: large;
-    margin-bottom: 32px;
-}
-
-.disabledBtn{
-    width: 174px;
-    height: 61px;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    font-size: 22px;
-    background-color: #a3a5a7;
-}
-
-
-//----------------------------- animation tasks---------------------------------------------
-.slideInUpTask {
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    animation: slideInUp 0.2s forwards;
-}
-  
-.slideOutDownTask {
-    max-height: 56px;
-    opacity: 1;
-    overflow: hidden;
-    animation: slideOutDown 0.2s forwards;
-}
-  
-@keyframes slideInUp {
-    from {
-        max-height: 0;
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        max-height: 56px;
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-  
-@keyframes slideOutDown {
-    from {
-        max-height: 56px;
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        max-height: 0;
-        opacity: 0;
-        transform: translateY(20px);
     }
 }
 
@@ -426,3 +409,43 @@ input{
     }
 }
 
+//----------------------------- animation tasks---------------------------------------------
+.slideInUpTask {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    animation: slideInUp 0.2s forwards;
+}
+  
+.slideOutDownTask {
+    max-height: 56px;
+    opacity: 1;
+    overflow: hidden;
+    animation: slideOutDown 0.2s forwards;
+}
+  
+@keyframes slideInUp {
+    from {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        max-height: 56px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+  
+@keyframes slideOutDown {
+    from {
+        max-height: 56px;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        max-height: 0;
+        opacity: 0;
+        transform: translateY(20px);
+    }
+}

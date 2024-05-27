@@ -37,15 +37,7 @@ export class CardEditComponent {
 
   constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
-  prioLow(priority: string) {
-    this.priority = priority;
-  }
-
-  prioMedium(priority: string) {
-    this.priority = priority;
-  }
-
-  prioHigh(priority: string) {
+  checkPrio(priority: string) {
     this.priority = priority;
   }
 

@@ -34,15 +34,7 @@ export class AddTaskComponent {
     public userService: UsersService
   ) {}
 
-  prioLow(priority: string) {
-    this.priority = priority;
-  }
-
-  prioMedium(priority: string) {
-    this.priority = priority;
-  }
-
-  prioHigh(priority: string) {
+  checkPrio(priority: string) {
     this.priority = priority;
   }
 
