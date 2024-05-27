@@ -12,6 +12,7 @@ export class TasksService {
   allTasksCopy: Task[] = [];
   clickedTask: any;
   clickedTaskCopy: any;
+  subtaskLenghtValue: number = 0;
 
   unsubTasks;
   constructor() {
@@ -48,6 +49,17 @@ export class TasksService {
        });
     } catch (error) {
       console.error('Update taskCategory failed');
+    }
+  }
+
+  async updateSubtasks(subtasks: any, id: string){
+    const docRef = doc(this.firestore, `tasks/${id}`);
+    try {
+      await updateDoc(docRef,  { 
+        subtasks: subtasks
+       });
+    } catch (error) {
+      console.error('Update Subtask failed');
     }
   }
 

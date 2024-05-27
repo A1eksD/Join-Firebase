@@ -98,6 +98,10 @@ section{
     --mdc-linear-progress-active-indicator-height: 12px;
 }
 
+.mat-mdc-progress-bar {
+    --mdc-linear-progress-active-indicator-color: rgb(51, 137, 235);
+    --mdc-linear-progress-track-color: rgb(219, 219, 219);
+}
 
 // .selectedContacts{
 //     -ms-overflow-style: none;  

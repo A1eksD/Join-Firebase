@@ -1,10 +1,10 @@
 @if(taskService.clickedTask){
     <section>
         <div class="category">
-            @if(taskService.clickedTask[0].category === 'Technical Task'){
-                <span class="technicalTask">{{taskService.clickedTask[0].category}}</span>
+            @if(taskService.clickedTask[0].categoryTask === 'Technical Task'){
+                <span class="technicalTask">{{taskService.clickedTask[0].categoryTask}}</span>
             } @else {
-                <span class="userStory">{{taskService.clickedTask[0].category}}</span>
+                <span class="userStory">{{taskService.clickedTask[0].categoryTask}}</span>
             }
             <img src="assets/img/close.svg" alt="" (click)="closeWindow()">
         </div>
@@ -35,7 +35,8 @@
                 <div class="boxOfSubtasks">
                     @for (item of taskService.clickedTask[0].subtasks; track $index) {
                         <div class="renderSubtask">
-                            <input type="checkbox" name="cheese" id="{{item}}"/>
+                            <input type="checkbox" name="cheese" id="{{item}}" 
+                            [checked]="item.subtaskDone" (click)="subtaskDone($index)"/>
                             <label for="{{item}}">{{item.subtask}}</label>
                         </div>
                     }

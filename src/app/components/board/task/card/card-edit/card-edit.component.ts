@@ -111,7 +111,7 @@ export class CardEditComponent {
 
   changeTask(task: string, event: Event) {
     event.stopPropagation();
-    this.category = task;
+    this.taskService.clickedTaskCopy[0].categoryTask = task;
     this.toggleService.showCategoryWindow = false;
   }
 
@@ -161,6 +161,7 @@ export class CardEditComponent {
 
   closeWindow(){
     this.toggleService.openWhiteBox = false;
+    this.toggleService.openEditCard = false;
   }
 
   checkIfVluesChanged(){
@@ -211,7 +212,7 @@ export class CardEditComponent {
         date: this.taskService.clickedTaskCopy[0].date,
         priority: this.taskService.clickedTaskCopy[0].priority || 'low',
         assignetTo: this.taskService.clickedTaskCopy[0].assignetTo || [],
-        categoryTask: this.taskService.clickedTaskCopy[0].categoryTask || 'Technical Task',
+        categoryTask: this.taskService.clickedTaskCopy[0].categoryTask,
         subtasks: this.taskService.clickedTaskCopy[0].subtasks || [],
         publishedTimestamp: unicTimestamp,
         createtBy: this.taskService.clickedTaskCopy[0].createtBy,
@@ -221,6 +222,7 @@ export class CardEditComponent {
       };
       this.taskService.updateTask([task]);
     }
+    this.toggleService.openEditCard = false;
     this.toggleService.openWhiteBox = false;
   }
 

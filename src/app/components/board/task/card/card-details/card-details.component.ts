@@ -57,6 +57,25 @@ export class CardDetailsComponent {
   }
 
   editCard(){
-    this.toggleService.openEditCard = false;
+    this.toggleService.openEditCard = true;
+  }
+
+  subtaskDone(index : number){
+    const task = this.taskService.clickedTask[0].subtasks;
+    if (index >= 0 && index < task.length) {
+      task[index].subtaskDone = this.checkSubtaskValue(index);
+      this.taskService.updateSubtasks(task, this.taskService.clickedTask[0].id);
+    } else {
+      console.error('Subtask not found at index:', index);
+    }
+  }
+
+  checkSubtaskValue(index: number){
+    const task = this.taskService.clickedTask[0].subtasks;
+    if(task[index].subtaskDone){
+      return false;
+    } else {
+      return true;
+    }
   }
 }
