@@ -50,7 +50,6 @@ export class TaskComponent {
 
   openTaskCatd(taskID: string){
     const getTask = this.taskService.allTasks.filter(t => t.id === taskID);
-    // const getTaskCopy = this.taskService.allTasksCopy.filter(t => t.id === taskID);
     const getTaskCopy = JSON.parse(JSON.stringify(getTask)); 
     this.taskService.clickedTask = getTask;
     this.taskService.clickedTaskCopy = getTaskCopy;
@@ -64,7 +63,4 @@ export class TaskComponent {
       return false;
     }
   }
-  // closeBigWindow(event: boolean){
-  //   this.openCard = event;
-  // }
 }

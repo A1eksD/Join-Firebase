@@ -5,6 +5,7 @@ import { TasksService } from '../../../../../service/tasks.service';
 import { UsersService } from '../../../../../service/users.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Task } from 'zone.js/lib/zone-impl';
 
 @Component({
   selector: 'app-card-edit',
@@ -79,11 +80,27 @@ export class CardEditComponent {
 
   addUser(user: User, event: Event) {
     event.stopPropagation();
-    if (!this.chackedUserArray.some(u => u.uid === user.uid)) {
-      this.chackedUserArray.push(user);
+    const userIndex = this.chackedUser.findIndex(u => u.uid === user.uid);
+  
+    if (userIndex !== -1) {
+      this.chackedUser.splice(userIndex, 1);
     } else {
-      this.chackedUserArray = this.chackedUserArray.filter(u => u.uid !== user.uid);
+      this.chackedUser.push(user);
     }
+  }
+  
+
+  getChackedUserArray(){
+    this.chackedUser = this.taskService.clickedTaskCopy[0].assignetTo;
+    return this.chackedUser;
+  }
+
+  chackAssigedToContacts(){
+    const arrayLenght = this.taskService.clickedTaskCopy[0].assignetTo;
+    if (arrayLenght.length > 0) {
+      return true;
+    }
+    return false;
   }
 
   openCategory(event: Event) {
@@ -147,16 +164,44 @@ export class CardEditComponent {
   }
 
   checkIfVluesChanged(){
-    const currentTaskID = this.taskService.clickedTaskCopy[0];
-      if (currentTaskID.title == '') {
-        return false;
-      }
-      if (currentTaskID.description == '') {
-        return false
-      }
-      if (currentTaskID.date == 0) {
-        return false
-      }
-      return true;
+    const currentTaskIdCopy = this.taskService.clickedTaskCopy[0];
+    const currentTaskID = this.taskService.clickedTask[0];
+    if(this.checkArray(currentTaskIdCopy, currentTaskID)){
+      return false;
+    }
+    if (currentTaskIdCopy.title == '') {
+      return false;
+    }
+    if (currentTaskIdCopy.description == '') {
+      return false
+    }
+    if (currentTaskIdCopy.date == 0) {
+      return false
+    }
+    return true;
   }
+  
+  checkArray(currentTaskIdCopy: any, currentTaskID: any){
+    return  currentTaskIdCopy.title === currentTaskID.title &&
+    currentTaskIdCopy.description === currentTaskID.description &&
+    currentTaskIdCopy.date === currentTaskID.date &&
+    currentTaskIdCopy.priority === currentTaskID.priority &&
+    currentTaskIdCopy.category === currentTaskID.category &&
+    JSON.stringify(currentTaskIdCopy.assignetTo) === JSON.stringify(currentTaskID.assignetTo) &&
+    JSON.stringify(currentTaskIdCopy.subtasks) === JSON.stringify(currentTaskID.subtasks);
+  }
+
+  getSubtaskArrayData(){
+    this.subtaskArray = this.taskService.clickedTaskCopy[0].subtasks;
+    return this.subtaskArray;
+  }
+
+  isChecked(user: User): boolean {
+    // Get the assigned users from the task copy
+    const assignedUsers = this.taskService.clickedTaskCopy[0].assignetTo;
+  
+    // Find the user by ID in the assigned users array
+    return assignedUsers.some((assignedUser: any) => assignedUser.uid === user.uid);
+  }
+  
 }

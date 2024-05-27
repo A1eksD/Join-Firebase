@@ -44,26 +44,26 @@
                     <span>Select contacts to assign</span>
                     <img src="assets/img/arrow_drop_down.svg" alt="">
                 </div>
+                @if (chackAssigedToContacts()) {
+                    <div class="checkedUsers">
+                        @for (user of getChackedUserArray(); track $index) {
+                            <div class="userRing">
+                                <span class="userTag" *ngIf="user.color!" [style.backgroundColor]="user.color!">
+                                    {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
+                            </div>
+                        }
+                    </div>
+                }
                 <div class="userWindow" [ngClass]="{'slideInUpUser': toggleService.showUserWindow , 'slideOutDownUser': !toggleService.showUserWindow,}">
-                    @if (chackedUser.length > 0) {
-                        <div class="checkedUsers">
-                            @for (user of chackedUser; track $index) {
-                                <div class="userRing">
-                                    <span class="userTag" *ngIf="user.color!" [style.backgroundColor]="user.color!">
-                                        {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
-                                </div>
-                            }
-                        </div>
-                    }
                     @for(user of getContactsFromCurrenUser(); track $index){
-                        <div class="loadedUsers">
+                        <div class="loadedUsers" (click)="addUser(user, $event)">
                             <div class="ringFromUser">
                                 <span class="tagFromUser"  *ngIf="user.color!" [style.backgroundColor]="user.color!">
                                     {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
                             </div>
                             <div class="userNameAndChackbox">
                                 <label for="{{user.id}}"> {{user.firstName}} {{user.lastName}}</label>
-                                <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/>
+                                <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)" [checked]="isChecked(user)"/>
                             </div>
                         </div>
                     }
@@ -100,7 +100,7 @@
                     <img src="assets/img/subtask_icons.svg" alt="" (click)="addSubtask()">
                 </div>
                 @if(checkSubtaskLength()){
-                    @for(task of subtaskArray; track $index){
+                    @for(task of getSubtaskArrayData(); track $index){
                         <div class="taskList">
                             <span>{{task.subtask}}</span>
                             <img src="assets/img/delete.svg" alt="" (click)="deleteSubtask(task)">
