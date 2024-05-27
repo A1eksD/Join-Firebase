@@ -48,8 +48,6 @@ export class AddTaskComponent {
 
   checkValues(event: Event) {
     event.stopPropagation();
-    console.log(this.checkAllValues());
-    
     if (this.checkAllValues()) {
       const unicTimestamp = new Date().getTime();
       const task = {

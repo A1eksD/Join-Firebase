@@ -53,7 +53,7 @@ export class TaskComponent {
     const getTaskCopy = JSON.parse(JSON.stringify(getTask)); 
     this.taskService.clickedTask = getTask;
     this.taskService.clickedTaskCopy = getTaskCopy;
-    this.toggleService.openWhiteBox = true;
+    this.toggleService.openWhiteBox = true;    
   }
 
   checkCategory(){

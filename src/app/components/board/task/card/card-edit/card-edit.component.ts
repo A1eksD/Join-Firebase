@@ -197,11 +197,35 @@ export class CardEditComponent {
   }
 
   isChecked(user: User): boolean {
-    // Get the assigned users from the task copy
     const assignedUsers = this.taskService.clickedTaskCopy[0].assignetTo;
-  
-    // Find the user by ID in the assigned users array
     return assignedUsers.some((assignedUser: any) => assignedUser.uid === user.uid);
   }
   
+  saveEditTask(event: Event){
+    event.stopPropagation();
+    if (this.checkIfVluesChanged()) {
+      const unicTimestamp = new Date().getTime();
+      const task = {
+        title: this.taskService.clickedTaskCopy[0].title,
+        description: this.taskService.clickedTaskCopy[0].description,
+        date: this.taskService.clickedTaskCopy[0].date,
+        priority: this.taskService.clickedTaskCopy[0].priority || 'low',
+        assignetTo: this.taskService.clickedTaskCopy[0].assignetTo || [],
+        categoryTask: this.taskService.clickedTaskCopy[0].categoryTask || 'Technical Task',
+        subtasks: this.taskService.clickedTaskCopy[0].subtasks || [],
+        publishedTimestamp: unicTimestamp,
+        createtBy: this.taskService.clickedTaskCopy[0].createtBy,
+        category: this.taskService.clickedTaskCopy[0].category,
+        id: this.taskService.clickedTaskCopy[0].id,
+        edit: this.showUserContacts()
+      };
+      this.taskService.updateTask([task]);
+    }
+    this.toggleService.openWhiteBox = false;
+  }
+
+  showUserContacts(){
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser!.replace(/"/g, '');
+  }
 }
