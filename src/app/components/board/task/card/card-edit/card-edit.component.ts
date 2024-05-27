@@ -99,12 +99,18 @@ export class CardEditComponent {
   }
 
   checkSubtaskLength(){
-    if (this.taskService.clickedTask[0].subtasks.length <= 30) {
+    if (this.taskService.clickedTaskCopy[0].subtasks.length <= 30) {
       this.subtaskToLong = true;
       return true;
     } else{
       this.subtaskToLong = false;
       return false;
+    }
+  }
+
+  addSubtaskByEnter(event: KeyboardEvent){
+    if(event.keyCode == 13){
+      this.addSubtask();
     }
   }
 
@@ -141,7 +147,7 @@ export class CardEditComponent {
   }
 
   checkIfVluesChanged(){
-    const currentTaskID = this.taskService.clickedTask[0];
+    const currentTaskID = this.taskService.clickedTaskCopy[0];
       if (currentTaskID.title == '') {
         return false;
       }

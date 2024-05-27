@@ -1,18 +1,18 @@
-@if(taskService.clickedTask){
+@if(taskService.clickedTaskCopy){
     <section>
         <div class="positionCloseX">
             <img src="assets/img/close.svg" alt="" (click)="closeWindow()">
         </div>
         <div class="taskBox">
         <!-------------title----------------->
-            <input type="text" name="" id="" class="titleInput" placeholder="Enter a title (required)" [(ngModel)]="taskService.clickedTask[0].title">
+            <input type="text" name="" id="" class="titleInput" placeholder="Enter a title (required)" [(ngModel)]="taskService.clickedTaskCopy[0].title">
         <!-------------descrptipon----------------->
             <div class="decriptionBox">
                 <div class="namePosition">
                     <h2>Decription</h2>
                     <p>(required)</p>
                 </div>
-                <textarea name="" id="" [(ngModel)]="taskService.clickedTask[0].description"></textarea>
+                <textarea name="" id="" [(ngModel)]="taskService.clickedTaskCopy[0].description"></textarea>
             </div>
         <!-------------date----------------->
             <div class="dateBox">
@@ -20,7 +20,7 @@
                     <h2>Due date</h2>
                     <p>(required)</p>
                 </div>
-                <input type="date" id="date" [(ngModel)]="taskService.clickedTask[0].date" (click)="checkDateAddTask()">
+                <input type="date" id="date" [(ngModel)]="taskService.clickedTaskCopy[0].date" (click)="checkDateAddTask()">
             </div>
         <!-------------prio Btn----------------->
             <div class="prioBox">
@@ -76,7 +76,7 @@
                 </div>
                 <div class="taskBoxSection">
                     <div class="assignedSelect" (click)="openCategory($event)">
-                        <span>{{ taskService.clickedTask[0].categoryTask }}</span>
+                        <span>{{ taskService.clickedTaskCopy[0].categoryTask }}</span>
                         <img src="assets/img/arrow_drop_down.svg" alt="">
                     </div>
                     <div class="taskWindow" #taskWindoW 
@@ -96,7 +96,7 @@
                     }
                 </div>
                 <div class="email">
-                    <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask"/>
+                    <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask" (keypress)="addSubtaskByEnter($event)"/>
                     <img src="assets/img/subtask_icons.svg" alt="" (click)="addSubtask()">
                 </div>
                 @if(checkSubtaskLength()){

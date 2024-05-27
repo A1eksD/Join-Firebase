@@ -49,9 +49,11 @@ export class TaskComponent {
   }
 
   openTaskCatd(taskID: string){
-    const getTasl = this.taskService.allTasks.filter(t => t.id === taskID)
-    this.taskService.clickedTask = getTasl;
-    this.taskService.clickedTaskCopy = getTasl;
+    const getTask = this.taskService.allTasks.filter(t => t.id === taskID);
+    // const getTaskCopy = this.taskService.allTasksCopy.filter(t => t.id === taskID);
+    const getTaskCopy = JSON.parse(JSON.stringify(getTask)); 
+    this.taskService.clickedTask = getTask;
+    this.taskService.clickedTaskCopy = getTaskCopy;
     this.toggleService.openWhiteBox = true;
   }
 
