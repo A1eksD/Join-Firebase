@@ -9,8 +9,8 @@
     <span class="description">{{description}}</span>
 
     <div class="positionBar">
-        <mat-progress-bar mode="determinate" value="70"   class="custom-progress-bar"></mat-progress-bar>
-        <span>0/{{checkAmountOfSubtasks()}}</span>
+        <mat-progress-bar mode="determinate" value="{{chackPercentage()}}"   class="custom-progress-bar"></mat-progress-bar>
+        <span>{{taskDone}}/{{checkAmountOfSubtasks()}}</span>
     </div>
 
     <div class="selectedContactBox">

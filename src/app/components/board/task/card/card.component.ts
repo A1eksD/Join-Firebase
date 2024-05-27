@@ -37,5 +37,6 @@ export class CardComponent {
   // }
   closeWindow(){
     this.toggleService.openWhiteBox = false;
+    this.toggleService.openEditCard = false;
   }
 }

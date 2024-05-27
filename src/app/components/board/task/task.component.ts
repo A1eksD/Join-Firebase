@@ -28,6 +28,7 @@ export class TaskComponent {
   @Input() assignetTo: User[] = [];
   @Input() subtasks: any[] = [];
   currentTask: any;
+  taskDone: number = 0;
   
   constructor(public toggleService: ToggleBooleansService, private taskService: TasksService){}
   openCard: boolean = false;
@@ -63,4 +64,17 @@ export class TaskComponent {
       return false;
     }
   }
+
+  chackPercentage(): number {
+    if (!this.subtasks || this.subtasks.length === 0) {
+      return 0; 
+    }
+  
+    this.taskDone = this.subtasks.filter(task => task.subtaskDone === true).length;
+    const totalTasks = this.subtasks.length;
+  
+    const percentage = Math.round((this.taskDone / totalTasks) * 100);
+    return percentage;
+  }
+  
 }
