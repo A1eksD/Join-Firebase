@@ -23,6 +23,7 @@ export class BoardComponent {
   @ViewChild('closedArea') closed!: ElementRef;
 
   currentDraggedElement: string = '';
+  filterTaskValue: string = '';
   toDoCategory: any[] = [];
   inProgressCategory: any[] = [];
   awaitFeedbackCategory: any[] = [];
@@ -30,6 +31,7 @@ export class BoardComponent {
   currentCategory: string = 'open';
   openAddNewTaskWindow: boolean = false;
   CategorY: string= '';
+  filteredTasks: any[] = [];
 
 
   constructor(public toggleService: ToggleBooleansService, public taskService: TasksService) {}
@@ -100,5 +102,35 @@ export class BoardComponent {
 
   toggleBoolean(vlaue: boolean){
     this.openAddNewTaskWindow = vlaue;
+  }
+
+  filterExistingTask() {
+    const filteredTasks = this.taskService.allTasks.filter(task =>
+      task.title.replace(/\s/g, '').toLowerCase().includes(this.filterTaskValue.replace(/\s/g, '').toLowerCase())
+    );
+
+    if (filteredTasks.length === 1) {
+      this.toDoCategory = [];
+      this.inProgressCategory = [];
+      this.awaitFeedbackCategory  = [];
+      this.doneCategory = [];
+      const singleTask = filteredTasks;
+      this.updateCategoryLists(singleTask);
+      return true;
+    } else {
+      this.toDoCategory = this.taskService.allTasks.filter(t => t.category === 'toDo');
+      this.inProgressCategory = this.taskService.allTasks.filter(t => t.category === 'inProgress');
+      this.awaitFeedbackCategory = this.taskService.allTasks.filter(t => t.category === 'awaitFeedback');
+      this.doneCategory = this.taskService.allTasks.filter(t => t.category === 'done');    
+      return false;
+    }
+  }
+
+
+  updateCategoryLists(tasks : any) {
+    this.toDoCategory = tasks.filter((task: any) => task.category === 'toDo');
+    this.inProgressCategory = tasks.filter((task: any) => task.category === 'inProgress');
+    this.awaitFeedbackCategory = tasks.filter((task: any) => task.category === 'awaitFeedback');
+    this.doneCategory = tasks.filter((task: any) => task.category === 'done');
   }
 }

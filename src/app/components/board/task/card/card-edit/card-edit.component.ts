@@ -37,6 +37,7 @@ export class CardEditComponent {
 
   constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
+  
   checkPrio(priority: string) {
     this.priority = priority;
   }
@@ -143,7 +144,7 @@ export class CardEditComponent {
     const today = new Date();
     const tomorrow = new Date(today.setDate(today.getDate() + 1));
     const input = document.getElementById('date') as HTMLInputElement;
-
+  
     if (input) {
       input.setAttribute('min', tomorrow.toISOString().split('T')[0]);
     } else {

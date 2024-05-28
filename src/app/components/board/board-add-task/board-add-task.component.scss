@@ -33,6 +33,7 @@ section{
         @include displayFlex($j: flex-end);
         img{
             transition: 0.3 ease-in-out;
+            cursor: pointer;
             &:hover{
                 scale: 1.1;
             }
@@ -74,7 +75,7 @@ section{
 
 .titleInput{
     font-weight: 400;
-    font-size: 30px;
+    font-size: 26px;
     padding-bottom: 12px;
     margin-bottom: 0px;
     min-height: 56px;
@@ -181,7 +182,9 @@ input{
         margin: 6px;
         overflow-y: scroll;
         background-color: white;
-        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
         .checkedUsers{
             min-height: 72px;
             width: 100%;
@@ -283,33 +286,16 @@ input{
             @include displayFlex($a: flex-start, $g: 12px); 
             flex-direction: column;
             width: calc(100% - 16px);
+            height: auto;
             padding-left: 16px;
             margin-bottom: 6px;
             margin-top: 6px;
             background-color: white;
             z-index: 12;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-            span{
-                cursor: pointer;
-                transition: 0.2s ease-in-out;
-                &:hover{
-                    color: #4589ff;
-                }
-            }
-        }
-    }
-}
-
-.categoryBox{
-    width: 100%;
-    .taskBoxSection{
-        .taskWindow{
-            @include displayFlex($a: flex-start, $g: 12px); 
-            flex-direction: column;
-            width: calc(100% - 16px);
-            padding-left: 16px;
-            margin-bottom: 6px;
-            margin-top: 6px;
+            box-shadow: rgb(162 178 195) 0px 20px 30px -10px;
+            padding-bottom: 6px;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
             span{
                 cursor: pointer;
                 transition: 0.2s ease-in-out;

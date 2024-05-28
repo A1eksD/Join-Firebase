@@ -45,7 +45,7 @@ export class TasksService {
     const docRef = doc(this.firestore, `tasks/${id}`);
     try {
       await updateDoc(docRef,  { 
-        categoryTask: taskCategory
+        category: taskCategory
        });
     } catch (error) {
       console.error('Update taskCategory failed');

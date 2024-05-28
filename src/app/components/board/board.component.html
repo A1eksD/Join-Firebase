@@ -1,11 +1,11 @@
 <section>
   <div class="searchBox">
     <div class="inputBox">
-      <input type="text">
+      <input type="text" placeholder="Enter title" [(ngModel)]="filterTaskValue" (keyup)="filterExistingTask()">
       <img src="assets/img/vector3.svg" alt="">
       <img src="assets/img/search.svg" alt="" class="searchImg">
     </div>
-    <button>New Task <img src="assets/img/plus.svg" alt=""></button>
+    <button (click)="createNewTask('toDo')" >New Task <img src="assets/img/plus.svg" alt=""></button>
   </div>
   @if (toggleService.openBoard) {
     <div class="droppBoxes">
@@ -17,7 +17,23 @@
         <div
           appOnDragHighlight  id="toDo" #todoArea class="dragArea"
           (drop)="moveTo('toDo')" (dragleave)="removeHighlight('toDo')" (dragover)="allowDrop($event); highlight('toDo')">
-          @if(getToDOCategory()){
+          @if( !filterExistingTask() ){
+            @if(getToDOCategory()){
+              @for (item of toDoCategory; track $index;) {
+                <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                  [category]="item.categoryTask"
+                  [assignetTo]="item.assignetTo"
+                  [createtBy]="item.createtBy"
+                  [date]="item.date"
+                  [description]="item.description"
+                  [priority]="item.priority"
+                  [subtasks]="item.subtasks"
+                  [title]="item.title"
+                  [id]="item.id"
+                ></app-task>
+              } 
+            }
+          } @else {
             @for (item of toDoCategory; track $index;) {
               <app-task (dragstart)="startDragging(item.id)" draggable="true" 
                 [category]="item.categoryTask"
@@ -42,7 +58,23 @@
         <div
         appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
         (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
-        @if(getInProgressCategory()){ 
+        @if( !filterExistingTask() ){
+          @if(getInProgressCategory()){ 
+            @for (item of inProgressCategory; track $index;) {
+              <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                [category]="item.categoryTask"
+                [assignetTo]="item.assignetTo"
+                [createtBy]="item.createtBy"
+                [date]="item.date"
+                [description]="item.description"
+                [priority]="item.priority"
+                [subtasks]="item.subtasks"
+                [title]="item.title"
+                [id]="item.id"
+              ></app-task>          
+            }
+          }
+        } @else {
           @for (item of inProgressCategory; track $index;) {
             <app-task (dragstart)="startDragging(item.id)" draggable="true" 
               [category]="item.categoryTask"
@@ -57,6 +89,7 @@
             ></app-task>          
           }
         }
+
         </div>
       </div>
       <div class="dragRow">
@@ -67,7 +100,23 @@
         <div
           appOnDragHighlight class="dragArea" id="awaitFeedback" #awaitFeedbackArea
           (drop)="moveTo('awaitFeedback')" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
-          @if(getAwaitFeedbackCategory()){ 
+          @if( !filterExistingTask() ){
+            @if(getAwaitFeedbackCategory()){ 
+              @for (item of awaitFeedbackCategory; track $index;) {
+                <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                  [category]="item.categoryTask"
+                  [assignetTo]="item.assignetTo"
+                  [createtBy]="item.createtBy"
+                  [date]="item.date"
+                  [description]="item.description"
+                  [priority]="item.priority"
+                  [subtasks]="item.subtasks"
+                  [title]="item.title"
+                  [id]="item.id"
+                ></app-task>            
+              }
+            }
+          } @else{
             @for (item of awaitFeedbackCategory; track $index;) {
               <app-task (dragstart)="startDragging(item.id)" draggable="true" 
                 [category]="item.categoryTask"
@@ -91,7 +140,23 @@
         <div
           appOnDragHighlight class="dragArea" id="done" #doneArea
           (drop)="moveTo('done')" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
-          @if(getDoneategory()){ 
+          @if( !filterExistingTask() ){
+            @if(getDoneategory()){ 
+              @for (item of doneCategory; track $index;) {
+                <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                  [category]="item.categoryTask"
+                  [assignetTo]="item.assignetTo"
+                  [createtBy]="item.createtBy"
+                  [date]="item.date"
+                  [description]="item.description"
+                  [priority]="item.priority"
+                  [subtasks]="item.subtasks"
+                  [title]="item.title"
+                  [id]="item.id"
+                ></app-task>
+              }
+            }
+          } @else {
             @for (item of doneCategory; track $index;) {
               <app-task (dragstart)="startDragging(item.id)" draggable="true" 
                 [category]="item.categoryTask"
@@ -106,6 +171,7 @@
               ></app-task>
             }
           }
+
         </div>
       </div>
     </div>
