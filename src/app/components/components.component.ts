@@ -6,6 +6,7 @@ import { BoardComponent } from './board/board.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { HeaderComponent } from './header/header.component';
 import { ToggleBooleansService } from '../service/toggle-booleans.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-components',
@@ -16,19 +17,21 @@ import { ToggleBooleansService } from '../service/toggle-booleans.service';
     AddTaskComponent,
     BoardComponent,
     ContactsComponent,
-    HeaderComponent
+    HeaderComponent,
+    FormsModule
   ],
   templateUrl: './components.component.html',
   styleUrl: './components.component.scss',
 })
 export class ComponentsComponent {
-  // selectedComponent: string = 'summary';
+  clickCategory: string = '';
 
   constructor(public toggleService: ToggleBooleansService){
   }
 
   selectComponent(componentName: string) {
     this.toggleService.selectedComponent = componentName;
+    this.clickCategory = componentName;
   }
 
   checkBooleansSummary(){

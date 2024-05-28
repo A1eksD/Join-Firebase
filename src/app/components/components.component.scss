@@ -14,23 +14,47 @@ section {
         display: flex;
         .buttons {
             height: calc(100vh - 96px);
+            padding-top: 64px;
             width: 222px;
             @include displayFlex($j: flex-start, $g: 32px);
             flex-direction: column;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
             z-index: 10;
-            span {
-                cursor: pointer;
-                &:hover {
-                    scale: 1.1;
-                    background-color: crimson;
+            .buttonsPositionWidth{
+                @include displayFlex();
+                width: 176px;
+                .buttonsPosition{
+                    @include displayFlex($j: flex-start, $a: flex-start, $g:20px);
+                    flex-direction: column;
+                    width: 100%;
+                    height: auto;
                 }
-            }
-            .firstButton{
-                margin-top: 32px;
             }
         }
     }
+}
+
+.sidebarBtns{
+    @include displayFlex($j: flex-start, $g: 12px);
+    color: rgba(66, 82, 110, 1);
+    padding: 8px 30px;
+    width: 100%;
+    cursor: pointer;
+    &:hover {
+        scale: 1.1;
+        background-color: #D2E3FF;
+        border-radius: 10px;
+    }
+    span{
+        font-size: larger;
+    }
+}
+
+.highlighted {
+    background-color: #D2E3FF;
+    border-radius: 10px;
+    transform: scale(1.1);
+    width: 100%;
 }
 
 app-contacts{

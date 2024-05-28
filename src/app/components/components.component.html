@@ -4,11 +4,28 @@
     </div>
     <div class="positionContent">
         <div class="buttons">
-            <span (click)="selectComponent('summary'); checkBooleansSummary()" routerLink="/summary" class="firstButton">summary</span>
-            <span (click)="selectComponent('addTask'); checkBooleansAddTask()" routerLink="/addTask">addTask</span>
-            <span (click)="selectComponent('board'); checkBooleansBoard()" routerLink="/board">board</span>
-            <span (click)="selectComponent('contact'); checkBooleansContacts()" routerLink="/contact">contact</span>
+            <div class="buttonsPositionWidth">
+                <div class="buttonsPosition">
+                    <div routerLink="/summary" class="sidebarBtns"  [ngClass]="{'highlighted': clickCategory == 'summary'}" >
+                        <img src="assets/img/menu_icons.svg" alt="">
+                        <span (click)="selectComponent('summary'); checkBooleansSummary()" class="firstButton">Summary</span>
+                    </div>
+                    <div routerLink="/addTask" class="sidebarBtns" [ngClass]="{'highlighted': clickCategory == 'addTask'}">
+                        <img src="assets/img/menu_icons2.svg" alt="">
+                        <span (click)="selectComponent('addTask'); checkBooleansAddTask()">Add Task</span>
+                    </div>
+                    <div routerLink="/board" class="sidebarBtns" [ngClass]="{'highlighted': clickCategory == 'board'}">
+                        <img src="assets/img/menu_icons1.svg" alt="">
+                        <span (click)="selectComponent('board'); checkBooleansBoard()">Board</span>
+                    </div>
+                    <div routerLink="/contact" class="sidebarBtns" [ngClass]="{'highlighted': clickCategory == 'contact'}">
+                        <img src="assets/img/menu_icons3.svg" alt="">
+                        <span (click)="selectComponent('contact'); checkBooleansContacts()">Contact</span>
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="components">
             <app-summary *ngIf="toggleService.selectedComponent === 'summary'"></app-summary>
             <app-add-task *ngIf="toggleService.selectedComponent === 'addTask'"></app-add-task>
