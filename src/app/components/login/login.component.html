@@ -24,10 +24,11 @@
         <img src="assets/img/lock.svg" alt="">
       </div>
     </div>
-    <div class="positionRememberUser">
+    <!-- <div class="positionRememberUser">
       <img src="assets/img/{{ rememberUser ? 'iconChecked.svg' : 'iconUnchecked.svg' }}" alt="" (click)="changeIcon()">
       <p>Remeber me</p>
-    </div>
+    </div> -->
+    <button class="googleBtn"><img src="assets/img/googleIcon.webp" alt="">Sing in with Google</button>
     <div class="buttonDiv">
         <button (click)="loginService.login()">login</button>
         <button (click)="loginService.guestLogin()" class="guestBtn">Guest login</button>
