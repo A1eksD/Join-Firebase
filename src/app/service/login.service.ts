@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { User } from '../interface/user';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Firestore, QuerySnapshot, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 
@@ -230,6 +230,50 @@ export class LoginService {
   deleteUserIdInLocalStorage() {
     localStorage.removeItem('currentUser');
   }
-}
 
+//--------------- google login -------------------------------------------------
+  googleLogin() {
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider();
+  
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        const usersCollection = collection(this.firestore, 'users');
+        const querySnapshot = query(
+          usersCollection,
+          where('uid', '==', user.uid)
+        );
+        getDocs(querySnapshot).then((snapshot) => {
+          if (snapshot.empty) {
+            this.createUserInFirestore({
+              uid: user.uid,
+              email: user.email || 'leer@gmail.com',
+              firstName: user.displayName
+                ? user.displayName.split(' ')[0]
+                : 'FirstName',
+              lastName: user.displayName
+                ? user.displayName.split(' ').slice(1).join(' ')
+                : 'LastName',
+              status: true,
+            });
+          } else {
+            this.ifExistUser(snapshot);
+          }
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  
+  /**
+   * Processes existing user data after successful Google login.
+   * @param {QuerySnapshot} snapshot - Firestore snapshot containing the user's data.
+   */
+  ifExistUser(snapshot: QuerySnapshot) {
+    this.currentUser = snapshot.docs[0].id;
+    this.getUserIdInLocalStorage(this.currentUser);
+  }
+}
 

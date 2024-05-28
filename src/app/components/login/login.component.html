@@ -28,7 +28,7 @@
       <img src="assets/img/{{ rememberUser ? 'iconChecked.svg' : 'iconUnchecked.svg' }}" alt="" (click)="changeIcon()">
       <p>Remeber me</p>
     </div> -->
-    <button class="googleBtn"><img src="assets/img/googleIcon.webp" alt="">Sing in with Google</button>
+    <button class="googleBtn" (click)="googleLogin()"><img src="assets/img/googleIcon.webp" alt="">Sing in with Google</button>
     <div class="buttonDiv">
         <button (click)="loginService.login()">login</button>
         <button (click)="loginService.guestLogin()" class="guestBtn">Guest login</button>
