@@ -78,4 +78,10 @@ export class CardDetailsComponent {
       return true;
     }
   }
+
+  deleteTask(){
+    const id = this.taskService.clickedTask[0].id;
+    this.taskService.deleteTask(id);
+    this.closeWindow();
+  }
 }

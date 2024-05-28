@@ -22,13 +22,13 @@ import { ToggleBooleansService } from '../service/toggle-booleans.service';
   styleUrl: './components.component.scss',
 })
 export class ComponentsComponent {
-  selectedComponent: string = 'summary';
+  // selectedComponent: string = 'summary';
 
-  constructor(private toggleService: ToggleBooleansService){
+  constructor(public toggleService: ToggleBooleansService){
   }
 
   selectComponent(componentName: string) {
-    this.selectedComponent = componentName;
+    this.toggleService.selectedComponent = componentName;
   }
 
   checkBooleansSummary(){

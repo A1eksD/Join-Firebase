@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
 import { Task } from '../interface/task';
 
 @Injectable({
@@ -59,7 +59,7 @@ export class TasksService {
         subtasks: subtasks
        });
     } catch (error) {
-      console.error('Update Subtask failed');
+      console.error('Update subtask failed');
     }
   }
 
@@ -70,6 +70,14 @@ export class TasksService {
       await updateDoc(docRef,  { ...task[0] });
     } catch (error) {
       console.error('Update task failed');
+    }
+  }
+
+  async deleteTask(id :string){
+    try {
+      await deleteDoc(doc(this.firestore, `tasks/${id}`));
+    } catch (error) {
+      console.error('Delete task failed');
     }
   }
 

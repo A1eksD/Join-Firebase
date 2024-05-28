@@ -10,10 +10,10 @@
             <span (click)="selectComponent('contact'); checkBooleansContacts()" routerLink="/contact">contact</span>
         </div>
         <div class="components">
-            <app-summary *ngIf="selectedComponent === 'summary'"></app-summary>
-            <app-add-task *ngIf="selectedComponent === 'addTask'"></app-add-task>
-            <app-board *ngIf="selectedComponent === 'board'"></app-board>
-            <app-contacts *ngIf="selectedComponent === 'contact'"></app-contacts>
+            <app-summary *ngIf="toggleService.selectedComponent === 'summary'"></app-summary>
+            <app-add-task *ngIf="toggleService.selectedComponent === 'addTask'"></app-add-task>
+            <app-board *ngIf="toggleService.selectedComponent === 'board'"></app-board>
+            <app-contacts *ngIf="toggleService.selectedComponent === 'contact'"></app-contacts>
         </div>        
     </div>
 </section>

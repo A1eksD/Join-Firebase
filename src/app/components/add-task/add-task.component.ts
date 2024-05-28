@@ -5,6 +5,7 @@ import { TasksService } from '../../service/tasks.service';
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 import { UsersService } from '../../service/users.service';
 import { User } from '../../interface/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -31,7 +32,8 @@ export class AddTaskComponent {
   constructor(
     public taskService: TasksService,
     public toggleService: ToggleBooleansService,
-    public userService: UsersService
+    public userService: UsersService,
+    private router: Router
   ) {}
 
   checkPrio(priority: string) {
@@ -56,6 +58,8 @@ export class AddTaskComponent {
       };
       this.taskService.addTask([task]);
       this.clearValues(); 
+      this.toggleService.openBoard = true;
+      this.toggleService.selectedComponent = 'board';
     }
   }
 
@@ -110,10 +114,10 @@ export class AddTaskComponent {
     this.title = '';
     this.description = '';
     this.date = 0;
-    this.priority = '';
+    this.priority = 'low';
     this.assignetTo = [];
     this.chackedUser = [];
-    this.category = '';
+    this.category = 'Technical Task';
     this.subtask = '';
     this.subtaskArray = [];
   }
@@ -173,7 +177,7 @@ export class AddTaskComponent {
     const taskMsg = this.subtaskArray.indexOf(task);
     if (taskMsg !== -1) {
       this.subtaskArray.splice(taskMsg, 1);
-      this.chackedUser.splice(taskMsg, 1); 
+      // this.chackedUser.splice(taskMsg, 1); 
     }
   }
 

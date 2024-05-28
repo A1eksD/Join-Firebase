@@ -36,7 +36,6 @@ export class BoardAddTaskComponent {
     this.priority = priority;
   }
 
-
   closeWindow(){
     this.openAddNewTaskWindow = false;
     this.closeBigWindow.emit(this.openAddNewTaskWindow);
@@ -103,7 +102,7 @@ export class BoardAddTaskComponent {
 
   changeTask(task: string, event: Event) {
     event.stopPropagation();
-    this.taskService.clickedTaskCopy[0].categoryTask = task;
+    this.category = task;
     this.toggleService.showCategoryWindow = false;
   }
 
@@ -121,7 +120,7 @@ export class BoardAddTaskComponent {
     const taskMsg = this.subtaskArray.indexOf(task);
     if (taskMsg !== -1) {
       this.subtaskArray.splice(taskMsg, 1);
-      this.chackedUser.splice(taskMsg, 1); 
+      // this.chackedUser.splice(taskMsg, 1); 
     }
   }
 
@@ -156,10 +155,10 @@ export class BoardAddTaskComponent {
     this.title = '';
     this.description = '';
     this.date = 0;
-    this.priority = '';
+    this.priority = 'low';
     this.assignetTo = [];
     this.chackedUser = [];
-    this.category = '';
+    this.category = 'Technical Task';
     this.subtask = '';
     this.subtaskArray = [];
   }
@@ -182,6 +181,7 @@ export class BoardAddTaskComponent {
       };
       this.taskService.addTask([task]);
       this.clearValues(); 
+      this.closeWindow();
     }
   }
 

@@ -13,4 +13,5 @@ export class ToggleBooleansService {
   slideInRightWindow:boolean = false;
   openEditCard:boolean = false;
   openWhiteBox:boolean = false;
+  selectedComponent: string = 'summary';
 }
