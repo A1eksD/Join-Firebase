@@ -18,7 +18,7 @@ export class BoardAddTaskComponent {
   @Input() openAddNewTaskWindow!: boolean;
   @Output() closeBigWindow = new EventEmitter<boolean>();
   title: string = '';
-  descrption: string = '';
+  description: string = '';
   date: number = 0;
   priority: string = '';
   assignetTo: any[] = [];
@@ -137,6 +137,57 @@ export class BoardAddTaskComponent {
       this.subtaskArray.push(subtaskValue);
       this.subtask = ''; 
     }
+  }
+
+  checkAllValues(){
+    if (this.title == '') {
+      return false;
+    }
+    if (this.description == '') {
+      return false
+    }
+    if (this.date == 0) {
+      return false
+    }
+    return true;
+  }
+
+  clearValues() {
+    this.title = '';
+    this.description = '';
+    this.date = 0;
+    this.priority = '';
+    this.assignetTo = [];
+    this.chackedUser = [];
+    this.category = '';
+    this.subtask = '';
+    this.subtaskArray = [];
+  }
+
+  checkValues(event: Event) {
+    event.stopPropagation();
+    if (this.checkAllValues()) {
+      const unicTimestamp = new Date().getTime();
+      const task = {
+        title: this.title,
+        description: this.description,
+        date: this.date,
+        priority: this.priority || 'low',
+        assignetTo: this.chackedUser || [],
+        categoryTask: this.category || 'Technical Task',
+        subtasks: this.subtaskArray || [],
+        publishedTimestamp: unicTimestamp,
+        createtBy: this.showUserContacts(),
+        category: 'toDo',
+      };
+      this.taskService.addTask([task]);
+      this.clearValues(); 
+    }
+  }
+
+  showUserContacts(){
+    const currentUser = localStorage.getItem('currentUser');
+    return currentUser!.replace(/"/g, '');
   }
 
 }

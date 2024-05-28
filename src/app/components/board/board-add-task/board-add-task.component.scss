@@ -43,6 +43,7 @@ section{
         height: calc(100% - 32px);
         @include displayFlex($j: space-around, $a: center);
         .leftSide, .rightSide{
+            padding: 12px;
             width: 49%;
             height: 100%;
             @include displayFlex($j: flex-start);
@@ -55,6 +56,10 @@ section{
             border-radius: 9px;
         }
     }
+}
+
+.rightSide{
+    position: relative;
 }
 
 .taskBox{
@@ -343,7 +348,7 @@ input{
     }
     .addedSubtaskBox{
         width: 100%;
-        height: 40%;
+        max-height: 62px;
         @include displayFlex($j: flex-start);
         flex-direction: column;
         overflow-y: scroll;
@@ -367,6 +372,68 @@ input{
                 }
             }
         }
+    }
+}
+
+.positionBtn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    // margin: 24px;
+    .ClearBtn {
+        width: 124px;
+        height: 40px;
+        border-radius: 10px;
+        border: 1px solid #647188;
+        color: #647188;
+        background-color: white;
+        font-size: 16px;
+        margin-right: 8px;
+        cursor: pointer;
+    }
+    .ClearBtn:hover {
+        border: 2px solid #4589ff;
+        color: #4589ff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+    .ClearBtn:hover .clearBtnImg{
+        filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
+    }
+    .createTaskBtn {
+        width: 124px;
+        height: 40px;
+        border-radius: 10px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4589ff;
+        border: 1px solid #4589ff;
+        animation: 0.3s acriveBtn;
+        
+    }
+    .createTaskBtn:hover {
+        background-color: #176cff;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+}
+
+.disabledBtn{
+    width: 124px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    font-size: 16px;
+    background-color: #a3a5a7;
+}
+
+@keyframes acriveBtn {
+    from {
+        background-color: #a3a5a7;
+    }
+    to {
+        background-color: #4589ff;
+        border: 1px solid #4589ff;
     }
 }
 

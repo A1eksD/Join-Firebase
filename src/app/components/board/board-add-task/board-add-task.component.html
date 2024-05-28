@@ -17,7 +17,7 @@
                             <h2>Decription</h2>
                             <p>(required)</p>
                         </div>
-                        <textarea name="" id="" [(ngModel)]="descrption"></textarea>
+                        <textarea name="" id="" [(ngModel)]="description"></textarea>
                     </div>
             <!-------------date----------------->
                     <div class="dateBox">
@@ -112,7 +112,7 @@
                         }
                     </div>
                     <div class="email">
-                        <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask"/>
+                        <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask" (keypress)="addSubtaskByEnter($event)"/>
                         <img src="assets/img/subtask_icons.svg" alt="" (click)="addSubtask()">
                     </div>
                     @if(checkSubtaskLength()){
@@ -125,6 +125,16 @@
                             }
                         </div>
                     }
+                </div>
+    <!-------------create btn----------------->
+                <div class="positionBtn">
+                    <button class="ClearBtn" (click)="clearValues()">Clear <img src="assets/img/vector.svg" alt="" class="clearBtnImg"></button>
+                    <button 
+                        (click)="checkValues($event)" 
+                        [disabled]="!checkAllValues()" 
+                        [ngClass]="{'createTaskBtn': checkAllValues(), 'disabledBtn': !checkAllValues()}">
+                        Create task <img src="assets/img/check.svg">
+                    </button>
                 </div>
             </div>
         </div>
