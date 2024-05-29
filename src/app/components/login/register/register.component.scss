@@ -36,25 +36,13 @@ section{
         border-radius: 25px;
         padding: 32px;
         background-color: white;
-        .buttonDiv{
-            @include displayFlex($g: 40px);
-            min-width: 40vw;
-            button{
-                cursor: pointer;
-                min-width: 120px;
-                background-color: $blueButton;
-                padding: 16px;
-                color: white;
-                border-radius: 10px;
-                border: none;
-                font-size: large;
-                transition: 0.3s ease-in-out;
-                &:hover{
-                    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-                }
-            }
-        }
     }
+}
+
+.warningSpan{
+    color: red;
+    margin-top: -34px;
+    margin-bottom: 24px;
 }
 
 .arrowLeft{
@@ -140,6 +128,37 @@ a{
     color: #4589FF;
 }
 
+.disabledBtn{
+    min-width: 96px;
+    padding: 16px;
+    font-size: large;
+    border-radius: 10px;
+    border: none;
+    color: rgb(85, 85, 85);
+    background-color: #a3a5a7;
+    transition: 0.3s ease-in-out;
+}
+
+.buttonDiv{
+    @include displayFlex($g: 40px);
+    min-width: 40vw;
+}
+
+.registerBtn{
+    cursor: pointer;
+    min-width: 96px;
+    background-color: $blueButton;
+    padding: 16px;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    font-size: large;
+    transition: 0.3s ease-in-out;
+    &:hover{
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+}
+
 @media (max-width: 800px) {
     .inputDiv{
         .email{
@@ -158,18 +177,17 @@ a{
         width: 80%;
     }
 
-    section{
-        .whiteBox{
-            .buttonDiv{
+    // section{
+    //     .whiteBox{
+            // .buttonDiv{
                 button{
-                    cursor: pointer;
                     min-width: 96px;
                     padding: 8px;
                     font-size: medium;
                 }
-            }
-        }
-    }
+            // }
+    //     }
+    // }
 
     .logo{
         display: none;

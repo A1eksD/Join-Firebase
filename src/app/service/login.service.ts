@@ -22,37 +22,41 @@ export class LoginService {
   samePw: boolean = false;
   currentUser: string = '';
   errorMessage: string = '';
+  loginBoolean: boolean = false;
 
   constructor(private route: Router,) {}
 
   //--------------- register new user -------------------------------------------------
   register() {
-    this.getFirstAndLastName();
-    const auth = getAuth();
-    const password = this.checkPW();
-    if (!this.samePw) {
-      console.error('Passwords do not match');
-      return;
+    if (this.loginBoolean) {
+      this.getFirstAndLastName();
+      const auth = getAuth();
+      const password = this.checkPW();
+      if (!this.samePw) {
+        console.error('Passwords do not match');
+        return;
+      }
+      createUserWithEmailAndPassword(auth, this.email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          console.log('user', user);
+          const userData: User = {
+            uid: user.uid,
+            firstName: this.firstName,
+            lastName: this.lastName || '',
+            savedUsers: [],
+            email: this.email,
+            status: true
+          }
+          this.createUserInFirestore(userData);
+          this.clearUserData();
+          window.location.reload();
+        })
+        .catch((error: any) => {
+          console.error('Registration failed: error.code', error.code);
+          console.error('Registration failed: error.message', error.message);
+        }); 
     }
-    createUserWithEmailAndPassword(auth, this.email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log('user', user);
-        const userData: User = {
-          uid: user.uid,
-          firstName: this.firstName,
-          lastName: this.lastName || '',
-          savedUsers: [],
-          email: this.email,
-          status: true
-        }
-        this.createUserInFirestore(userData);
-        this.clearUserData();
-      })
-      .catch((error: any) => {
-        console.error('Registration failed: error.code', error.code);
-        console.error('Registration failed: error.message', error.message);
-      });
   }
 
 
