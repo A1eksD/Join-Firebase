@@ -34,9 +34,10 @@ section{
     z-index: 1;
     flex-direction: column;
     min-width: 40vw;
-    height: 52vh;
+    height: auto;
     border: 1px solid;
     border-radius: 25px;
+    padding: 16px;
     .positionHeadline{
         @include displayFlex();
         flex-direction: column;
@@ -245,4 +246,12 @@ section{
             color: $blueButton;
         }
     }
+}
+
+.error{
+    color: #ed1e79;
+    // position: absolute;
+    text-align: center;
+    margin: 4px;
+    font-size: 14px;
 }

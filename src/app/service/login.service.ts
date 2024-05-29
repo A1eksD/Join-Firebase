@@ -161,14 +161,14 @@ export class LoginService {
     switch (errorCode) {
       case 'auth/invalid-credential':
         this.errorMessage =
-          '*Ungültige Anmeldeinformationen. Bitte überprüfen Sie Ihre Eingaben.';
+          '*Invalid credentials. Please check your entries.';
         break;
       case 'auth/too-many-requests':
         this.errorMessage =
-          '*Der Zugriff auf dieses Konto wurde aufgrund zahlreicher fehlgeschlagener Anmeldeversuche vorübergehend deaktiviert.';
+          '*Access to this account has been temporarily disabled due to numerous failed login attempts.';
         break;
       default:
-        this.errorMessage = '*Bitte Überprüfe deine Eingaben.';
+        this.errorMessage = '*Please check your entries.';
         break;
     }
   }

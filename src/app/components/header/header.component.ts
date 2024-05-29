@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { User } from '../../interface/user';
 import { UsersService } from '../../service/users.service';
+import { RouterLink } from '@angular/router';
+import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -16,8 +18,9 @@ export class HeaderComponent {
   currentUser: User[] = [];
   firstLetter: string = '';
   secondLetter: string = '';
+  openWindow: boolean = false;
 
-  constructor(public loginService: LoginService, public userService: UsersService) {
+  constructor(public loginService: LoginService, public userService: UsersService, private toggleService: ToggleBooleansService) {
   }
 
    getUserLetters(){
@@ -52,4 +55,15 @@ export class HeaderComponent {
     return [newFirstName, newLastName];
   }
 
+  openOptionWindow(){
+    this.openWindow = true;
+  }
+
+  closeWhiteWindow(){
+    this.openWindow = false;
+  }
+
+  changeRout(component: string){
+    this.toggleService.selectedComponent = component;
+  }
 }

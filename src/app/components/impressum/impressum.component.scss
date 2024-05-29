@@ -1,0 +1,21 @@
+@import "../../../styles.scss";
+
+section{
+    width: calc(100vw - 222px);
+    height: calc(100vh - 96px);
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .impressum{
+        width: calc(100% - 80px);
+        height: calc(100% - 80px);
+        margin: 40px;
+        overflow-y: auto;
+        h1{
+            color: $blueButton;
+        }
+        strong{
+            color: $blueButton;
+        }
+    }
+}

@@ -7,6 +7,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { HeaderComponent } from './header/header.component';
 import { ToggleBooleansService } from '../service/toggle-booleans.service';
 import { FormsModule } from '@angular/forms';
+import { ImpressumComponent } from './impressum/impressum.component';
+import { DatenschutzComponent } from './datenschutz/datenschutz.component';
 
 @Component({
   selector: 'app-components',
@@ -18,7 +20,9 @@ import { FormsModule } from '@angular/forms';
     BoardComponent,
     ContactsComponent,
     HeaderComponent,
-    FormsModule
+    FormsModule, 
+    ImpressumComponent,
+    DatenschutzComponent
   ],
   templateUrl: './components.component.html',
   styleUrl: './components.component.scss',

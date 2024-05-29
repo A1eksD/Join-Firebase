@@ -1,11 +1,17 @@
 <section>
     <img src="assets/img/join-white.svg" alt="" class="logo">
     <div class="positionInitial">
-        <p (click)="loginService.logout()" class="logout">logout</p>
-        <div class="initialBox">
+        <div class="initialBox" (click)="openOptionWindow()">
             @if (getUserLetters()) {
                 <h1 class="letters">{{ firstLetter }}{{secondLetter}}</h1>
             }
+        </div>
+        <div class="transparentBackground" (mouseleave)="closeWhiteWindow()" [ngClass]="{dBlock: openWindow , dNone: !openWindow}">
+            <div class="whiteBox">
+                <p (click)="changeRout('impressum')">Legal Notice</p>
+                <p (click)="changeRout('datenschutz')">Privacy Policy</p>
+                <p (click)="loginService.logout()">Log out</p>
+            </div>
         </div>
     </div>
 </section>
