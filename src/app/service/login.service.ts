@@ -256,6 +256,8 @@ export class LoginService {
                 ? user.displayName.split(' ').slice(1).join(' ')
                 : 'LastName',
               status: true,
+              savedUsers: [],
+              color: '',
             });
           } else {
             this.ifExistUser(snapshot);

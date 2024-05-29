@@ -3,18 +3,20 @@
     <!-------------------add user header------------------>
         <div class="stickyHeader">
             <div class="inputBox">
-                <input type="text" placeholder="Search for existing user" (keyup)="getHeaderInputValue()" [(ngModel)]="headerInputValue">
+                <input type="text" placeholder="Search for existing user" (keyup)="getHeaderInputValue($event)" [(ngModel)]="toggleService.headerInputValue">
                 @if (checkInputInSidebar()) {
-                    @if (!noUserFound) {
                     <div [ngClass]="{showSearchWindow: checkInputInSidebar(), hideSearchWindow: !checkInputInSidebar()}" class="renderedUsers">
-                        @for (user of searchBarUsersArray; track $index) {
-                            <div class="renderFilteredUsers" (click)="addUserToContacts(user)">
-                                <p>{{user.firstName!}} {{user.lastName}}</p>
-                                <img src="assets/img/plus.svg" alt="" class="checkImg">
-                            </div>
+                        @if (searchBarUsersArray.length > 0) {
+                            @for (user of searchBarUsersArray; track $index) {
+                                <div class="renderFilteredUsers" (click)="addUserToContacts(user, $event)">
+                                    <p>{{user.firstName!}} {{user.lastName}}</p>
+                                    <img src="assets/img/subtask_icons.svg" alt="" class="checkImg">
+                                </div>
+                            }
+                        } @else {
+                            <p style="margin-bottom: 0;">No user found</p>
                         }
                     </div>
-                    }
                 }
             </div>
             <button (click)="openAddContactWindow($event)">Add new member  <img src="assets/img/person_add.svg" alt=""></button>
@@ -71,8 +73,6 @@
                         </div>
                         <div class="userNameAndChackbox">
                             <label>{{user.firstName}} {{user.lastName}}</label>
-                            <!-- for="{{user.id}}"> -->
-                            <!-- <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/> -->
                         </div>
                     </div>
                 }

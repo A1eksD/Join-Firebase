@@ -54,5 +54,6 @@ export class ComponentsComponent {
     this.toggleService.showCategoryWindow = false;
     this.toggleService.showUserWindow = false;
     this.toggleService.slideInRightWindow = false;
+    this.toggleService.headerInputValue = '';
   }
 }

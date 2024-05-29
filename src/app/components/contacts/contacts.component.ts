@@ -25,7 +25,6 @@ export class ContactsComponent {
   firstName:string = '';
   lastName:string = '';
   firstChar:string = '';
-  headerInputValue:string = '';
   closeUserWindow:boolean = false;
   closeUserEditWindow:boolean = false;
   userDetails: any = '';
@@ -216,16 +215,17 @@ export class ContactsComponent {
     return this.userService.allUsers.filter((u) => u.id === this.userService.getCleanID(currentUser!));
   }
   
-  getHeaderInputValue() {
-    if (this.headerInputValue !== '') {
+  getHeaderInputValue(event: KeyboardEvent) {
+    this.searchBarUsersArray = [];
+    if (this.toggleService.headerInputValue !== '' || event.keyCode == 	8) {
       // Filter current user's contacts
       const filteredUser = this.getCleanIDFromLogedInUSer();
       // Filter common users based on search input
-      const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())));
+      const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.toLowerCase().includes(this.toggleService.headerInputValue.toLowerCase())));
       const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
       //------------------- 
       const filterUserToAddName = this.userService.commonUsers.filter((user: any) =>
-        user.savedUsers[0].firstName.toLowerCase().includes(this.headerInputValue.toLowerCase())
+        user.savedUsers[0].firstName.toLowerCase().includes(this.toggleService.headerInputValue.toLowerCase())
       );
       const sortedFilterUserToAddName = this.sortFilterUserToAddName(filterUserToAddName);
       this.checkDifferentUser(sortedFilterUserExistingUserName, sortedFilterUserToAddName);
@@ -256,47 +256,41 @@ export class ContactsComponent {
     });
   }
 
-  
-  // isEqual(arr1: any[], arr2: any[]): boolean {
-  //   if (arr1.length !== arr2.length) return false;
-  //   for (let i = 0; i < arr1.length; i++) {
-  //     if (typeof arr1[i] !== typeof arr2[i].savedUsers[i]) return false;
-  //     if (Array.isArray(arr1[i]) && Array.isArray(arr2[i].savedUsers[i])) {
-  //       if (!this.isEqual(arr1[i], arr2[i].savedUsers[i])) return false;
-  //     } else if (arr1[i] !== arr2[i].savedUsers[i]) return false;
-  //   }
-  //   return true;
-  // }
 
-  checkDifferentUser(filterUserExistingUserName: User[], filterUserToAddName: User[]) {
+  checkDifferentUser(filterUserExistingUserName: User[], filterUserToAddName: User[]): void {
     this.searchBarUsersArray = [];
-    for (let i = 0; i < filterUserToAddName.length; i++) {
-      const userContacts = filterUserExistingUserName[i];
-      
-      if (!userContacts) {
-        this.searchBarUsersArray.push(filterUserToAddName[i].savedUsers![0]);
-        continue; // Skip to the next iteration if userContacts is undefined
-      }
   
-      if (userContacts.uid === '' || userContacts.uid !== filterUserToAddName[i].savedUsers![0].uid) {
-        this.searchBarUsersArray.push(filterUserToAddName[i].savedUsers![0]);
-        this.noUserFound = true;
+    for (let i = 0; i < filterUserToAddName.length; i++) {
+      const userToAdd = filterUserToAddName[i].savedUsers![0];
+      const existingUser = filterUserExistingUserName.find(
+        (existing) => existing.uid === userToAdd.uid
+      );
+  
+      if (!existingUser) {
+        this.searchBarUsersArray.push(userToAdd);
+      } else if (existingUser.uid !== userToAdd.uid) {
+        this.searchBarUsersArray.push(userToAdd);
       }
     }
+  
+    this.noUserFound = this.searchBarUsersArray.length === 0;
   }
+  
 
   checkInputInSidebar(){
-    if (this.headerInputValue) {
+    if (this.toggleService.headerInputValue) {
       return true;
     } else {
       return false;
     }
   }
 
-  addUserToContacts(user: User){
+  addUserToContacts(user: User, event: Event){
+    event.stopPropagation();
     const filteredContact = this.searchBarUsersArray.filter(c => c.uid === user.uid);
     console.log('filteredContact', filteredContact);
     this.userService.updateEditContact(filteredContact);
+    this.toggleService.headerInputValue = '';
   }
   
 }

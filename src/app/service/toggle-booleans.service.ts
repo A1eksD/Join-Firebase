@@ -14,4 +14,5 @@ export class ToggleBooleansService {
   openEditCard:boolean = false;
   openWhiteBox:boolean = false;
   selectedComponent: string = 'summary';
+  headerInputValue = '';
 }
