@@ -192,7 +192,9 @@ section{
 @media (max-width: 1000px) {
     section{
         width: 100vw;
-        height: calc(100vh - 22px);
+        height: calc(100vh - 196px);
+        position: absolute;
+        bottom: 100px;
         @include displayFlex();
         .contantBox{
             width: 912px;
