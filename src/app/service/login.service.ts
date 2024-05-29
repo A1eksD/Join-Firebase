@@ -262,6 +262,7 @@ export class LoginService {
           } else {
             this.ifExistUser(snapshot);
           }
+          window.location.reload();
         });
       })
       .catch((error) => {
