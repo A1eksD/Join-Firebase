@@ -3,21 +3,7 @@
 section{
     width: calc(100vw - 222px);
     height: calc(100vh - 96px);
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    top: 96px;
-    left: 222px;
-    // overflow-x: hidden;
-    // -ms-overflow-style: none; /* for Internet Explorer, Edge */
-    // scrollbar-width: none; /* for Firefox */
-    // overflow-y: scroll; 
 }
-
-// .section::-webkit-scrollbar {
-//   display: none; /* for Chrome, Safari, and Opera */
-//   }
-
 
 .allContacsBox{
     width: 40%;
@@ -26,7 +12,6 @@ section{
     box-shadow: rgba(50, 50, 93, 0.25) 0px 0px 0px 0px, rgba(0, 0, 0, 0.2) 2px 0px 5px 0px;
     @include displayFlex($j: flex-start);
     flex-direction: column;
-    // align-items: stretch;
     overflow-y: scroll;
     .stickyHeader{
         box-shadow: 0 2px 4px -2px gray;
@@ -59,13 +44,12 @@ section{
                 z-index: 5;
                 @include displayFlex($j: flex-start);
                 flex-direction: column;
-                overflow-y: scroll;
+                overflow-y: auto;
                 .renderFilteredUsers{
                     width: calc(100% - 4px);
                     height: auto;
                     @include displayFlex($j: space-between);
                     flex-direction: row;
-                    overflow: hidden;
                     border: none;
                     padding: 2px;
                     &:hover{
@@ -143,7 +127,7 @@ section{
 
 .grayBackground{
     position: absolute;
-    top: -96px;
+    top: 0;
     right: 0;
     bottom: 0;
     width: 100vw;
@@ -416,83 +400,84 @@ span{
     appearance: none;  
 }
 
-.positionUserContactBox{
-    position: absolute;
-    // right: 0;
-    left: calc(40% + 84px);
-    top: 80px;
-    // width: 50%;
+.positionUserContactBoXX{
     width: auto;
     height: auto;
-    @include displayFlex($j: flex-start, $a: flex-start, $g: 40px); 
-    flex-direction: column;
-    // overflow-y: auto;
-    .userContactHeader{
-        @include displayFlex($j: flex-start, $g: 56px); 
-        margin-left: 4px;
-        .positionBackground{
-            min-width: 132px;
-            min-height: 132px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-            border-radius: 50%;
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-            .backgroundColor{
-                width: 122px;
-                height: 122px;
-                @include displayFlex();
+    position: absolute;
+    top: 160px;
+    left: 54%;
+    .positionUserContactBox{
+        width: auto;
+        height: auto;
+        @include displayFlex($j: flex-start, $a: flex-start, $g: 40px); 
+        flex-direction: column;
+        .userContactHeader{
+            @include displayFlex($j: flex-start, $g: 56px); 
+            margin-left: 4px;
+            .positionBackground{
+                min-width: 132px;
+                min-height: 132px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
                 border-radius: 50%;
-                p{
-                    text-align: left;
-                    font-size: 59px; 
-                    color: white;
-                    margin-bottom: 0;
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+                .backgroundColor{
+                    width: 122px;
+                    height: 122px;
+                    @include displayFlex();
+                    border-radius: 50%;
+                    p{
+                        text-align: left;
+                        font-size: 59px; 
+                        color: white;
+                        margin-bottom: 0;
+                    }
                 }
             }
-        }
-        .positionName{
-            @include displayFlex($j: flex-start, $a:flex-start, $g: 16px); 
-            flex-direction: column;
-            h1{
+            .positionName{
+                @include displayFlex($j: flex-start, $a:flex-start, $g: 16px); 
                 flex-direction: column;
-                font-size: 40px;
-                font-weight: bold;
-                margin: 0;
-            }
-            .positionEditDelete{
-                @include displayFlex($j: flex-start, $g: 20px); 
-                .editBox{
-                    @include displayFlex($g: 8px); 
-                    transition: 0.2s ease-in-out;
-                    cursor: pointer;
-                    &:hover{
-                        color: #176cff;
-                        transform: scale(1.1);
-                        font-weight: bolder;
+                h1{
+                    flex-direction: column;
+                    font-size: 40px;
+                    font-weight: bold;
+                    margin: 0;
+                }
+                .positionEditDelete{
+                    @include displayFlex($j: flex-start, $g: 20px); 
+                    .editBox{
+                        @include displayFlex($g: 8px); 
+                        transition: 0.2s ease-in-out;
+                        cursor: pointer;
+                        &:hover{
+                            color: #176cff;
+                            transform: scale(1.1);
+                            font-weight: bolder;
+                        }
                     }
                 }
             }
         }
-    }
-    .positionContactInfo{
-        @include displayFlex($a:flex-start, $g: 16px); 
-        flex-direction: column;
-        h2{
-            font-size: xx-large;
-        }
-        h3{
-            font-size: x-large;
-        }
-        a{
-            text-decoration: none;
-            color: #2776ff;
-            font-size: large;
-        }
-        p{
-            color: #176CFF;
-            font-size: large;
+        .positionContactInfo{
+            @include displayFlex($a:flex-start, $g: 16px); 
+            flex-direction: column;
+            h2{
+                font-size: xx-large;
+            }
+            h3{
+                font-size: x-large;
+            }
+            a{
+                text-decoration: none;
+                color: #2776ff;
+                font-size: large;
+            }
+            p{
+                color: #176CFF;
+                font-size: large;
+            }
         }
     }
 }
@@ -531,8 +516,8 @@ span{
 
 .grayBackgroundLeft{
     position: absolute;
-    top: -96px;
-    left: -222px;
+    top: 0;
+    left: 0;
     bottom: 0;
     width: 100vw;
     height: 100vh;
@@ -727,5 +712,47 @@ span{
     }
     to{
         transform: translateX(0);
+    }
+}
+
+.arrowRightSide{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 24px;
+    cursor: pointer;
+    &:hover{
+        scale: 1.1;
+    }
+}
+// ----------------------------- mobile ----------------------------------
+
+@media (max-width: 1380px) {
+    section{
+        width: 100vw;
+        height: calc(100vh - 196px);
+        @include displayFlex();
+        box-shadow: -5px 0 5px -5px rgba(51, 51, 51, 0.2705882353), 5px 0 5px -5px rgba(51, 51, 51, 0.2705882353);
+    }
+
+    .allContacsBox{
+        width: 56%;
+    }
+
+    .positionUserContactBoXX {
+        width: 100vw;
+        height: calc(100vh - 196px);
+        background-color: white;
+        left: 0;
+        top: 96px;
+        bottom: 0;
+        z-index: 2;
+        @include displayFlex();
+        position: fixed; 
+    }
+
+    .arrowRightSide{
+        top: -120px;
+        right: -100%;
     }
 }

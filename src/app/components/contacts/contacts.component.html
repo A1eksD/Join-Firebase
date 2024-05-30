@@ -81,36 +81,39 @@
     </div>
     <!-------------------render user details------------------>
         @if(userDetails !==''){
-            <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', dNone: userDetails ==''}">
-                <div class="userContactHeader">
-                    <div class="positionBackground">
-                        <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
-                            <p>{{getUserFirstLetter(userDetails)}}{{getUserSecondLetter(userDetails)}}</p>
-                        </div>
-                    </div>
-                    <div class="positionName">
-                        <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
-                        <div class="positionEditDelete">
-                            <div class="editBox" (click)="editContact(userDetails)">
-                                <img src="assets/img/edit.svg" alt="">
-                                <span>Edit</span>
-                            </div>
-                            <div class="editBox" (click)="deleteContact(userDetails)">
-                                <img src="assets/img/delete.svg" alt="">
-                                <span>Delete</span>
+            <div class="positionUserContactBoXX">
+                <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', dNone: userDetails ==''}">
+                    <img src="assets/img/arrow-left-line.svg" alt="" class="arrowRightSide" (click)="returnBack()">
+                    <div class="userContactHeader">
+                        <div class="positionBackground">
+                            <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
+                                <p>{{getUserFirstLetter(userDetails)}}{{getUserSecondLetter(userDetails)}}</p>
                             </div>
                         </div>
+                        <div class="positionName">
+                            <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
+                            <div class="positionEditDelete">
+                                <div class="editBox" (click)="editContact(userDetails)">
+                                    <img src="assets/img/edit.svg" alt="">
+                                    <span>Edit</span>
+                                </div>
+                                <div class="editBox" (click)="deleteContact(userDetails)">
+                                    <img src="assets/img/delete.svg" alt="">
+                                    <span>Delete</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="positionContactInfo">
-                    <h2>Contact Information</h2>
-                    <h3>Email</h3>
-                    <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
-                    <h3>Phone</h3>
-                    @if (userDetails.phoneNumber == '') {
-                        <p>no number available</p>
-                    }
-                    <p>{{userDetails.phoneNumber}}</p>
+                    <div class="positionContactInfo">
+                        <h2>Contact Information</h2>
+                        <h3>Email</h3>
+                        <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
+                        <h3>Phone</h3>
+                        @if (userDetails.phoneNumber == '') {
+                            <p>no number available</p>
+                        }
+                        <p>{{userDetails.phoneNumber}}</p>
+                    </div>
                 </div>
             </div>
         }
