@@ -11,10 +11,46 @@ section{
         height: calc(100% - 80px);
         margin: 40px;
         overflow-y: auto;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .datenschutz::-webkit-scrollbar { 
+        display: none;  
     }
 }
 
 h1, h2, h3, h4{
     color: $blueButton;
     font-weight: 500;
+}
+
+
+@media (max-width: 1380px) {
+    section{
+        width: 100%;
+        bottom: 0;
+        .datenschutz{
+            width: auto;
+            height: calc(100% - 102px);
+            margin: 0;
+            margin-left: 40px;
+            margin-right: 40px;
+            overflow-y: auto;
+            -ms-overflow-style: none; 
+            scrollbar-width: none;  
+        }
+    }
+
+    .datenschutz::-webkit-scrollbar { 
+        display: none;  
+    }
+}
+
+@media (max-width: 780px) {
+    section{
+        .datenschutz{
+            width: auto;
+            height: calc(100% - 74px);
+        }
+    }
 }

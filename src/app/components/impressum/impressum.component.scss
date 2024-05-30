@@ -11,12 +11,17 @@ section{
         height: calc(100% - 80px);
         margin: 40px;
         overflow-y: auto;
+        -ms-overflow-style: none; 
+        scrollbar-width: none;  
         h1{
             color: $blueButton;
         }
         strong{
             color: $blueButton;
         }
+    }
+    .impressum::-webkit-scrollbar { 
+        display: none;  
     }
 }
 
