@@ -53,7 +53,7 @@
                     <div class="btnBox">
                         <span class="closeBtn" (click)="returnBack()">Close<img src="assets/img/vector.svg" alt=""></span>
                         <span class="saveBtn" (click)="saveUserData()" [ngClass]="checkCurrentData() ? 'saveBtn' : 'disabledBtn'"
-                        >Create contact<img src="assets/img/check.svg" alt=""></span>
+                        >Create<img src="assets/img/check.svg" alt=""></span>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                             <span class="tagFromUser" *ngIf="user.color!" [style.backgroundColor]="user.color!">{{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
                         </div>
                         <div class="userNameAndChackbox">
-                            <label>{{user.firstName}} {{user.lastName}}</label>
+                            <span>{{user.firstName}} {{user.lastName}}</span>
                         </div>
                     </div>
                 }
@@ -80,38 +80,40 @@
         }
     </div>
     <!-------------------render user details------------------>
-        <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', slideOutContactInfo: userDetails ==''}">
-            <div class="userContactHeader">
-                <div class="positionBackground">
-                    <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
-                        <p>{{getUserFirstLetter(userDetails)}}{{getUserSecondLetter(userDetails)}}</p>
-                    </div>
-                </div>
-                <div class="positionName">
-                    <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
-                    <div class="positionEditDelete">
-                        <div class="editBox" (click)="editContact(userDetails)">
-                            <img src="assets/img/edit.svg" alt="">
-                            <span>Edit</span>
-                        </div>
-                        <div class="editBox" (click)="deleteContact(userDetails)">
-                            <img src="assets/img/delete.svg" alt="">
-                            <span>Delete</span>
+        @if(userDetails !==''){
+            <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', dNone: userDetails ==''}">
+                <div class="userContactHeader">
+                    <div class="positionBackground">
+                        <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
+                            <p>{{getUserFirstLetter(userDetails)}}{{getUserSecondLetter(userDetails)}}</p>
                         </div>
                     </div>
+                    <div class="positionName">
+                        <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
+                        <div class="positionEditDelete">
+                            <div class="editBox" (click)="editContact(userDetails)">
+                                <img src="assets/img/edit.svg" alt="">
+                                <span>Edit</span>
+                            </div>
+                            <div class="editBox" (click)="deleteContact(userDetails)">
+                                <img src="assets/img/delete.svg" alt="">
+                                <span>Delete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="positionContactInfo">
+                    <h2>Contact Information</h2>
+                    <h3>Email</h3>
+                    <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
+                    <h3>Phone</h3>
+                    @if (userDetails.phoneNumber == '') {
+                        <p>no number available</p>
+                    }
+                    <p>{{userDetails.phoneNumber}}</p>
                 </div>
             </div>
-            <div class="positionContactInfo">
-                <h2>Contact Information</h2>
-                <h3>Email</h3>
-                <a href="mailto:{{userDetails.email}}">{{userDetails.email}}</a>
-                <h3>Phone</h3>
-                @if (userDetails.phoneNumber == '') {
-                    <p>no number available</p>
-                }
-                <p>{{userDetails.phoneNumber}}</p>
-            </div>
-        </div>
+        }
     <!-------------------render user leftWindow------------------>
         <div class="grayBackgroundLeft"  [ngClass]="{dBlock: closeUserEditWindow , dNone: !closeUserEditWindow}" (click)="returnBack()">
             <div class="userLeftWindow" [ngClass]="{slideinLeftWindow: closeUserEditWindow}">
