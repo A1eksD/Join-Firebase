@@ -58,7 +58,10 @@ section{
 .prioBox{
     width: 100%;
     .prioBoxHeader{
-        @include displayFlex($j: flex-start);
+        @include displayFlex($j: flex-start, $g: 4px); 
+        span{
+            margin-bottom: 14px;
+        }
     }
     .prioBoxBtns{
         margin-top: 12px;
@@ -193,6 +196,7 @@ section{
             margin-top: 6px;
             span{
                 cursor: pointer;
+                font-size: large;
                 transition: 0.2s ease-in-out;
                 &:hover{
                     color: #4589ff;
@@ -205,7 +209,10 @@ section{
 .subtaskBox{
     width: 100%;
     .headLetters{
-        @include displayFlex($j: flex-start); 
+        @include displayFlex($j: flex-start, $g: 4px); 
+        span{
+            margin-bottom: 14px;
+        }
         p{
             color: red;
             margin-left: 16px;
@@ -321,6 +328,9 @@ section{
     width: 100%;
     .headLine{
         @include displayFlex($j: flex-start, $g: 4px); 
+        span{
+            margin-bottom: 14px;
+        }
     }
 }
 
@@ -426,3 +436,129 @@ input{
     }
 }
 
+
+@media (max-width: 1380px) {
+    section{
+        width: 100vw;
+        height: calc(100vh - 196px);
+        position: absolute;
+        bottom: 100px;
+        @include displayFlex(); 
+    }
+
+    .taskBox{
+        box-shadow: -5px 0 5px -5px #33333345, 5px 0 5px -5px #33333345;
+    }
+
+    .positionBtn{
+        position: relative;
+        width: calc(100% - 52px);
+        @include displayFlex(); 
+        margin-top: 44px;
+        margin-bottom: 44px;
+        .ClearBtn {
+            width: 120px;
+            height: 40px;
+        }
+        .createTaskBtn {
+            width: 160px;
+            height: 41px;   
+        }
+    }
+
+    .disabledBtn{
+        width: 160px;
+        height: 41px;
+    }
+}
+
+@media (max-width: 1000px) {
+    section{
+        height: calc(100vh - 168px);
+        bottom: 72px;
+    }
+    .taskBox{
+        width: 100%;
+    }
+    .positionBtn{
+        @include displayFlex($j: space-evenly);
+    }
+}
+
+
+@media (max-width: 600px) {
+    .prioBox{
+        .prioBoxHeader{
+            h2{
+                margin-bottom: 0;
+            }
+            span{
+                margin-bottom: 0;
+            }
+        }
+        .prioBoxBtns{
+            button{
+                @include displayFlex($g: 8px);
+                width: 96px;
+                height: 40px;
+                font-size: 14px;
+                img{
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+
+    .headLetters{
+        .headLine{
+            @include displayFlex($j: flex-start, $g: 4px); 
+            h2{
+                margin-bottom: 0;
+            }
+            span{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .assignedSelect{
+        margin-top: 4px;
+    }
+
+    .positionBtn{
+        @include displayFlex($j: space-evenly);
+        width: 100%;
+        margin: 0;
+        margin-top: 32px;
+        margin-bottom: 12px;
+        .ClearBtn {
+            font-size: 20px;
+        }
+        .createTaskBtn {
+            font-size: 20px;
+        }
+    }
+
+    .disabledBtn{
+        font-size: 20px;
+    }
+
+    .subtaskBox{
+        .headLetters{
+            span{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .headLetters{
+        h2{
+            margin-bottom: 0;
+        }
+        span{
+            margin-bottom: 0;
+        }
+    }
+
+}
