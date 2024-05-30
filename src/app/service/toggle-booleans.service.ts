@@ -15,4 +15,5 @@ export class ToggleBooleansService {
   openWhiteBox:boolean = false;
   selectedComponent: string = 'summary';
   headerInputValue = '';
+  openEditDeleteWindow:boolean = false;
 }

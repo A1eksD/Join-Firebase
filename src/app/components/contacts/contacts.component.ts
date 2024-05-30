@@ -292,5 +292,17 @@ export class ContactsComponent {
     this.userService.updateEditContact(filteredContact);
     this.toggleService.headerInputValue = '';
   }
+
+  checkWidthWindow(){
+    if (window.innerWidth <= 1380) {
+      return false;
+    } else {
+      return true;
+    }
+  }
   
+  openEditDeleteWindow(event: Event){
+    event.stopPropagation();
+    this.toggleService.openEditDeleteWindow = true
+  }
 }

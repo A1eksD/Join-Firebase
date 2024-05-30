@@ -3,7 +3,7 @@
     <!-------------------add user header------------------>
         <div class="stickyHeader">
             <div class="inputBox">
-                <input type="text" placeholder="Search for existing user" (keyup)="getHeaderInputValue($event)" [(ngModel)]="toggleService.headerInputValue">
+                <input type="text" placeholder="Search user" (keyup)="getHeaderInputValue($event)" [(ngModel)]="toggleService.headerInputValue">
                 @if (checkInputInSidebar()) {
                     <div [ngClass]="{showSearchWindow: checkInputInSidebar(), hideSearchWindow: !checkInputInSidebar()}" class="renderedUsers">
                         @if (searchBarUsersArray.length > 0) {
@@ -82,8 +82,10 @@
     <!-------------------render user details------------------>
         @if(userDetails !==''){
             <div class="positionUserContactBoXX">
-                <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', dNone: userDetails ==''}">
+                @if (!checkWidthWindow()) {
                     <img src="assets/img/arrow-left-line.svg" alt="" class="arrowRightSide" (click)="returnBack()">
+                }
+                <div class="positionUserContactBox" [ngClass]="{slideInContactInfo: userDetails !=='', dNone: userDetails ==''}">
                     <div class="userContactHeader">
                         <div class="positionBackground">
                             <div *ngIf="userDetails.color" [style.backgroundColor]="userDetails.color" class="backgroundColor">
@@ -92,16 +94,18 @@
                         </div>
                         <div class="positionName">
                             <h1>{{userDetails.firstName}} {{userDetails.lastName}}</h1>
-                            <div class="positionEditDelete">
-                                <div class="editBox" (click)="editContact(userDetails)">
-                                    <img src="assets/img/edit.svg" alt="">
-                                    <span>Edit</span>
+                            @if (checkWidthWindow()) {
+                                <div class="positionEditDelete" >
+                                    <div class="editBox" (click)="editContact(userDetails)">
+                                        <img src="assets/img/edit.svg" alt="">
+                                        <span>Edit</span>
+                                    </div>
+                                    <div class="editBox" (click)="deleteContact(userDetails)">
+                                        <img src="assets/img/delete.svg" alt="">
+                                        <span>Delete</span>
+                                    </div>
                                 </div>
-                                <div class="editBox" (click)="deleteContact(userDetails)">
-                                    <img src="assets/img/delete.svg" alt="">
-                                    <span>Delete</span>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                     <div class="positionContactInfo">
@@ -115,6 +119,21 @@
                         <p>{{userDetails.phoneNumber}}</p>
                     </div>
                 </div>
+                @if (!checkWidthWindow()) {
+                    <img src="assets/img/more_vert.svg" alt="" class="moreVertImg" (click)="openEditDeleteWindow($event)">
+                }
+                @if (toggleService.openEditDeleteWindow) {
+                    <div [ngClass]="{slideInContactInfo: toggleService.openEditDeleteWindow, dNone: !toggleService.openEditDeleteWindow}" class="styleResponsiveEdit">
+                        <div class="editBox2" (click)="editContact(userDetails)">
+                            <img src="assets/img/edit.svg" alt="">
+                            <span>Edit</span>
+                        </div>
+                        <div class="editBox2" (click)="deleteContact(userDetails)">
+                            <img src="assets/img/delete.svg" alt="">
+                            <span>Delete</span>
+                        </div>
+                    </div>
+                }
             </div>
         }
     <!-------------------render user leftWindow------------------>

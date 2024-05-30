@@ -721,10 +721,54 @@ span{
     right: 0;
     margin: 24px;
     cursor: pointer;
+    z-index: 3;
     &:hover{
         scale: 1.1;
     }
 }
+
+.moreVertImg{
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 22px;
+    background-color: #4589FF;
+    border-radius: 10px;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.styleResponsiveEdit{
+    display: none;
+    width: 120px;
+    height: 80px;
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.20);
+    background-color: white;
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    z-index: 100;
+    @include displayFlex($j: space-around, $a: flex-start);
+    flex-direction: column;
+    margin: 16px;
+    transition: all 0.3s ease-in-out;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .editBox2{
+        @include displayFlex($g: 8px); 
+        transition: 0.2s ease-in-out;
+        margin-left: 20px;
+        cursor: pointer;
+        &:hover{
+            color: #176cff;
+            transform: scale(1.1);
+            font-weight: bolder;
+        }
+    }
+}
+
 // ----------------------------- mobile ----------------------------------
 
 @media (max-width: 1380px) {
@@ -751,8 +795,282 @@ span{
         position: fixed; 
     }
 
-    .arrowRightSide{
-        top: -120px;
-        right: -100%;
+    .grayBackground{
+        position: fixed;  
+    }
+
+    .grayBackgroundLeft{
+        position: fixed;
+    }
+}
+
+@media (max-width: 1380px) {
+    .allContacsBox{
+        width: 100%;
+    }
+
+    .grayBackground{
+        .userRightWindow{
+            width: 50%;
+        }
+    }
+
+    .grayBackgroundLeft{
+        .userLeftWindow{
+            width: 36%;
+        }
+    }  
+    
+    .allContacsBox{
+        width: 100%;
+        .stickyHeader{
+            .inputBox{
+                width: 60%;
+                input{
+                    width: 50%;
+                }
+                div{
+                    width: 50%;
+                }
+            }
+        }
+        button{
+            width: 30%;
+            height: 44px;
+            font-size: 18px;
+        }
+    }
+
+    .showSearchWindow {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 780px) {
+    section{
+        height: calc(100vh - 168px);
+    }
+
+    .positionUserContactBoXX {
+        height: calc(100vh - 168px);
+        .positionUserContactBox{
+            .userContactHeader{
+                @include displayFlex($j: flex-start, $g: 24px); 
+                .positionBackground{
+                    min-width: 96px;
+                    min-height: 96px;
+                    .backgroundColor{
+                        width: 84px;
+                        height: 84px;
+                        p{
+                            font-size: 46px; 
+                        }
+                    }
+                }
+                .positionName{
+                    h1{
+                        font-size: 32px;
+                    }
+                }
+            }
+            .positionContactInfo{
+                @include displayFlex($a:flex-start, $g: 16px); 
+                flex-direction: column;
+                h2{
+                    font-size: x-large;
+                }
+                h3{
+                    font-size: large;
+                }
+                a{
+                    font-size: medium;
+                }
+                p{
+                    font-size: medium;
+                }
+            }
+        }
+    }
+
+    .grayBackground{
+        .userRightWindow{
+            width: 100%;
+            .bleueTop{
+                border-radius: 0;
+            }
+            .whiteBox{
+                border-radius: 0;
+            }
+        }    
+    }
+
+    .grayBackgroundLeft{
+        .userLeftWindow{
+            width: 100%;
+            .bleueTopLeft{
+                border-radius: 0;
+            }
+            .whiteBox{
+                border-radius: 0;
+            }
+        }
+    } 
+}
+
+@media (max-width: 440px) {
+
+    .allContacsBox{
+        .stickyHeader{
+            .inputBox{
+                width:60%;
+                input{
+                    width: 80%;
+                }
+                div{
+                    width: 80%;
+                }
+            }
+        }
+        button{
+            width: 48%;
+        }
+    }
+
+    .grayBackground{
+        .userRightWindow{
+            .bleueTop{
+                height: 34%;
+            }
+            .whiteBox{
+                height: 66%;
+                .imgBackground{
+                    width: 96px;
+                    height: 96px;
+                }
+            }
+        }
+    }
+
+
+
+    .grayBackgroundLeft{
+        .userLeftWindow{
+            .bleueTopLeft{
+                height: 34%;
+            }
+            .whiteBox{
+                height: 66%;
+                .imgBackground{
+                    width: 104px;
+                    height: 104px;
+                    .imgBackgroundEdit{
+                        width: 92px;
+                        height: 92px;
+                        span{
+                            font-size: 52px;
+                        }
+                    }
+                }
+                .inputBox{
+                    width: auto;
+                    height: auto;
+                    .inputBoxWithImgLeft{
+                        @include displayFlex();
+                        width: 320px;
+                        position: relative;
+                        margin-bottom: 28px;
+                        input{
+                            border: 0px;
+                            border-bottom: 1px solid rgba(209, 209, 209, 1);
+                            padding: 13px 32px 0px 16px;
+                            gap: 10px;
+                            display: flex;
+                            font-weight: 400;
+                            font-size: 16px;
+                            outline: none;
+                            border-radius: 0;
+                            width: 100%;
+                        }
+                        img{
+                            margin-left: -28px;
+                        }
+                        p{
+                            position: absolute;
+                            bottom: -32px;
+                            left: 0;
+                            margin-left: 16px;
+                            color: #176CFF;
+                        }
+                    }
+                }
+                .btnBoxLeft{
+                    @include displayFlex($g: 24px);
+                    .closeBtn{
+                        padding: 12px;
+                        border-radius: 5px;
+                        background-color: white;
+                        color: #647188;
+                        border: 1px solid #647188;
+                        font-size: 16px;
+                        z-index: 11;
+                        width: auto;
+                        height: 40px;
+                        cursor: pointer;
+                        &:hover {
+                            outline: 0.1px solid #4589ff;
+                            color: #4589ff;
+                            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                        }
+                        &:hover img{
+                            filter: invert(47%) sepia(53%) saturate(6716%) hue-rotate(208deg) brightness(101%) contrast(101%);
+                        }
+                        img{
+                            width: 14px;
+                            height: 14px;
+                            object-fit: contain;
+                            margin-left: 8px;
+                        }
+                    }
+                    .saveBtnLeft{
+                        padding: 12px;
+                        background-color: #4589FF;
+                        border: 1px #4589FF;
+                        border-radius: 5px;
+                        color: white;
+                        font-size: 16px;
+                        z-index: 11;
+                        width: auto;
+                        height: 40px;
+                        cursor: pointer;
+                        transition: 0.3s ease-in-out;
+                        &:hover{
+                            background-color: #176cff;
+                            box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+                        }
+                        img{
+                            width: 14px;
+                            height: 14px;
+                            object-fit: contain;
+                            margin-left: 8px;
+                        }
+                    }
+                    .disabledBtnLeft{
+                        width: auto;
+                        height: 40px;
+                        border: none;
+                        padding: 12px;
+                        color: white;
+                        font-size: 16px;
+                        background-color: #a3a5a7;
+                        cursor: context-menu;
+                        transition: 0.3s ease-in-out;
+                        &:hover{
+                            background-color: #a3a5a7;
+                            box-shadow: none
+                        }
+                    }
+                }
+            }
+        }
     }
 }
