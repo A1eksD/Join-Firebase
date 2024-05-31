@@ -103,13 +103,38 @@ section{
     --mdc-linear-progress-track-color: rgb(219, 219, 219);
 }
 
-// .selectedContacts{
-//     -ms-overflow-style: none;  
-//     scrollbar-width: none; 
-// }
+  
+@media (max-width: 1380px) {
+    section{
+        width: 200px;
+        height: 192px;
+        h1{
+            max-width: 160px;
+        }
+        .description{
+            max-width: 160px;
+        }
+    }
 
-// .selectedContacts::-webkit-scrollbar { 
-//     display: none; 
-// }
-  
-  
+    .mat-mdc-progress-bar {
+        --mdc-linear-progress-track-height: 10px;
+        --mdc-linear-progress-active-indicator-height: 10px;
+    }
+
+    .selectedContactBox{
+        .selectedContacts{
+            max-width: 128px;
+        }
+    }
+
+    .userNameBox{
+        .userBackground{
+            border: 3px solid white;
+        }
+    }
+}
+
+
+@media (max-width: 780px) {
+
+}

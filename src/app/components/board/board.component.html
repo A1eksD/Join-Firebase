@@ -14,11 +14,27 @@
           <h1>To do</h1>
           <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('toDo')" class="curserPointer">
         </div>
-        <div
-          appOnDragHighlight  id="toDo" #todoArea class="dragArea"
-          (drop)="moveTo('toDo')" (dragleave)="removeHighlight('toDo')" (dragover)="allowDrop($event); highlight('toDo')">
-          @if( !filterExistingTask() ){
-            @if(getToDOCategory()){
+        <div class="dragAreaBox">
+          <div
+            appOnDragHighlight  id="toDo" #todoArea class="dragArea"
+            (drop)="moveTo('toDo')" (dragleave)="removeHighlight('toDo')" (dragover)="allowDrop($event); highlight('toDo')">
+            @if( !filterExistingTask() ){
+              @if(getToDOCategory()){
+                @for (item of toDoCategory; track $index;) {
+                  <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                    [category]="item.categoryTask"
+                    [assignetTo]="item.assignetTo"
+                    [createtBy]="item.createtBy"
+                    [date]="item.date"
+                    [description]="item.description"
+                    [priority]="item.priority"
+                    [subtasks]="item.subtasks"
+                    [title]="item.title"
+                    [id]="item.id"
+                  ></app-task>
+                } 
+              }
+            } @else {
               @for (item of toDoCategory; track $index;) {
                 <app-task (dragstart)="startDragging(item.id)" draggable="true" 
                   [category]="item.categoryTask"
@@ -33,63 +49,50 @@
                 ></app-task>
               } 
             }
-          } @else {
-            @for (item of toDoCategory; track $index;) {
-              <app-task (dragstart)="startDragging(item.id)" draggable="true" 
-                [category]="item.categoryTask"
-                [assignetTo]="item.assignetTo"
-                [createtBy]="item.createtBy"
-                [date]="item.date"
-                [description]="item.description"
-                [priority]="item.priority"
-                [subtasks]="item.subtasks"
-                [title]="item.title"
-                [id]="item.id"
-              ></app-task>
-            } 
-          }
-        </div>
+          </div>
+        </div>  
       </div>
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>In progress</h1>
           <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('inProgress')" class="curserPointer">
         </div>
-        <div
-        appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
-        (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
-        @if( !filterExistingTask() ){
-          @if(getInProgressCategory()){ 
-            @for (item of inProgressCategory; track $index;) {
-              <app-task (dragstart)="startDragging(item.id)" draggable="true" 
-                [category]="item.categoryTask"
-                [assignetTo]="item.assignetTo"
-                [createtBy]="item.createtBy"
-                [date]="item.date"
-                [description]="item.description"
-                [priority]="item.priority"
-                [subtasks]="item.subtasks"
-                [title]="item.title"
-                [id]="item.id"
-              ></app-task>          
+        <div class="dragAreaBox">
+          <div
+            appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
+            (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
+            @if( !filterExistingTask() ){
+              @if(getInProgressCategory()){ 
+                @for (item of inProgressCategory; track $index;) {
+                  <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                    [category]="item.categoryTask"
+                    [assignetTo]="item.assignetTo"
+                    [createtBy]="item.createtBy"
+                    [date]="item.date"
+                    [description]="item.description"
+                    [priority]="item.priority"
+                    [subtasks]="item.subtasks"
+                    [title]="item.title"
+                    [id]="item.id"
+                  ></app-task>          
+                }
+              }
+            } @else {
+              @for (item of inProgressCategory; track $index;) {
+                <app-task (dragstart)="startDragging(item.id)" draggable="true" 
+                  [category]="item.categoryTask"
+                  [assignetTo]="item.assignetTo"
+                  [createtBy]="item.createtBy"
+                  [date]="item.date"
+                  [description]="item.description"
+                  [priority]="item.priority"
+                  [subtasks]="item.subtasks"
+                  [title]="item.title"
+                  [id]="item.id"
+                ></app-task>          
+              }
             }
-          }
-        } @else {
-          @for (item of inProgressCategory; track $index;) {
-            <app-task (dragstart)="startDragging(item.id)" draggable="true" 
-              [category]="item.categoryTask"
-              [assignetTo]="item.assignetTo"
-              [createtBy]="item.createtBy"
-              [date]="item.date"
-              [description]="item.description"
-              [priority]="item.priority"
-              [subtasks]="item.subtasks"
-              [title]="item.title"
-              [id]="item.id"
-            ></app-task>          
-          }
-        }
-
+          </div>
         </div>
       </div>
       <div class="dragRow">
@@ -97,7 +100,8 @@
           <h1>Await feedback</h1>
           <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('awaitFeedback')" class="curserPointer">
         </div>
-        <div
+        <div class="dragAreaBox">
+          <div
           appOnDragHighlight class="dragArea" id="awaitFeedback" #awaitFeedbackArea
           (drop)="moveTo('awaitFeedback')" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
           @if( !filterExistingTask() ){
@@ -132,12 +136,14 @@
             }
           }
         </div>
+        </div>
       </div>
-      <div class="dragRow">
+      <div class="dragRow paddingBottom">
         <div class="headerOfBar">
           <h1>Done</h1>
         </div>
-        <div
+        <div class="dragAreaBox">
+          <div
           appOnDragHighlight class="dragArea" id="done" #doneArea
           (drop)="moveTo('done')" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
           @if( !filterExistingTask() ){
@@ -171,7 +177,7 @@
               ></app-task>
             }
           }
-
+        </div>
         </div>
       </div>
     </div>
