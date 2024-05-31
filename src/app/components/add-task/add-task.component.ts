@@ -181,5 +181,10 @@ export class AddTaskComponent {
     }
   }
 
+  addSubtaskByEnter(event: KeyboardEvent){
+    if (event.keyCode == 13) {
+      this.addSubtask();
+    }
+  }
 
 }

@@ -103,7 +103,7 @@
                 }
             </div>
             <div class="email">
-                <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask"/>
+                <input type="email" placeholder="Add nea subtask" [(ngModel)]="subtask" (keypress)="addSubtaskByEnter($event)"/>
                 <img src="assets/img/subtask_icons.svg" alt="" (click)="addSubtask()">
             </div>
             @if(checkSubtaskLength()){
