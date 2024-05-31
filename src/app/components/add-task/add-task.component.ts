@@ -132,12 +132,16 @@ export class AddTaskComponent {
 
   addUser(user: User, event: Event) {
     event.stopPropagation();
-    if (!this.chackedUser.some(u => u.uid === user.uid)) {
-      this.chackedUser.push(user);
+    const userIndex = this.chackedUser.findIndex(u => u.uid === user.uid);
+
+    if (userIndex !== -1) {
+      this.chackedUser.splice(userIndex, 1);
     } else {
-      this.chackedUser = this.chackedUser.filter(u => u.uid !== user.uid);
+      this.chackedUser.push(user);
     }
   }
+  
+
   
   getContactsFromCurrenUser(){
     const currentUser = localStorage.getItem('currentUser');
@@ -185,6 +189,10 @@ export class AddTaskComponent {
     if (event.keyCode == 13) {
       this.addSubtask();
     }
+  }
+
+  dontCloseWindow(event: Event){
+    event.stopPropagation();
   }
 
 }

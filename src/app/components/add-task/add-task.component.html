@@ -63,7 +63,7 @@
                     </div>
                 }
                 @for(user of getContactsFromCurrenUser(); track $index){
-                    <div class="loadedUsers">
+                    <div class="loadedUsers" (click)="dontCloseWindow($event)">
                         <div class="ringFromUser">
                             <span class="tagFromUser"  *ngIf="user.color!" [style.backgroundColor]="user.color!">
                                 {{getUserFirstLetter(user)}}{{getUserSecondLetter(user)}}</span>
