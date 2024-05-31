@@ -30,3 +30,17 @@ section{
     border-radius: 15px;
     padding: 16px;
 }
+
+@media (max-width: 1380px) {
+    section{
+        top: auto;
+        bottom: 0;
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .whiteBox{
+        width: 80vw;
+    }
+}

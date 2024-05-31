@@ -487,6 +487,14 @@ input{
     }
 }
 
+@media (max-width: 780px) {
+    .assignetToBox{
+        .userWindow{
+            width: calc(100% - 9px);
+            margin: 0;
+        }
+    }
+}
 
 @media (max-width: 600px) {
     .prioBox{

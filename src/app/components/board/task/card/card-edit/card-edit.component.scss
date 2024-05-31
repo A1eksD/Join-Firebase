@@ -15,6 +15,7 @@ section{
     height: auto;
     @include displayFlex($j: flex-end);
     img{
+        margin-right: -6px;
         transition: 0.3 ease-in-out;
         &:hover{
             scale: 1.1;
@@ -485,4 +486,107 @@ input{
             }
         }
     }
+}
+
+
+
+@media (max-width: 780px) {
+
+    .taskBox{
+        padding: 0;
+        padding-right: 8px;
+    }
+    
+    .decriptionBox{
+        textarea{
+            font-size: 16px;
+            padding: 12px;
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+        }
+        textarea::-webkit-scrollbar { 
+            display: none; 
+        }
+    }
+
+    .namePosition{
+        @include displayFlex($j: flex-start, $g: 4px); 
+        h2{
+            margin-bottom: 0;
+        }
+        p{
+            margin-bottom: 0;
+        }
+    }
+
+    .titleInput{
+        font-size: 26px;
+        padding-bottom: 0px;
+        margin-bottom: 16px;
+        min-height: 42px;
+    }
+
+    .prioBox{
+        .prioBoxBtns{
+            margin-top: 12px;
+            margin-bottom: 12px;
+            @include displayFlex($j: space-around);
+            button{
+                @include displayFlex($g: 8px);
+                width: 96px;
+                height: 42px;
+                font-size: 16px;
+                img{
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+    }
+    
+}
+
+@media (max-width: 440px) {
+
+    .prioBox{
+        .prioBoxBtns{
+            margin-top: 12px;
+            margin-bottom: 12px;
+            @include displayFlex($j: space-around);
+            button{
+                @include displayFlex($g: 0);
+                width: 72px;
+                height: 36px;
+                font-size: 14px;
+                flex-direction: column-reverse;
+                img{
+                    width: 20px;
+                    height: 20px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+    .assignedSelect{
+        font-size: 14px;
+        line-height: 38px;
+    }
+
+    .checkedUsers{
+        min-height: 56px;
+    }
+
+    .assignetToBox{
+        .userWindow{
+            width: 100%;
+            padding-left: 0;
+            margin: 0;
+            .loadedUsers{
+                width: calc(100% - 8px);
+                padding-right: 0;
+            }
+        }
+    }
+    
 }

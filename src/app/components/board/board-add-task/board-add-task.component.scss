@@ -634,8 +634,8 @@ input{
         .userWindow{
             padding-left: 8px;
             padding-right: 8px;
-            margin: 6px;
-            width: calc(100% - 16px);
+            margin: 0;
+            width: calc(100% - 10px);
             .loadedUsers{
                 width: 100%;
                 .userNameAndChackbox{

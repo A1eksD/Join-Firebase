@@ -84,4 +84,12 @@ export class CardDetailsComponent {
     this.taskService.deleteTask(id);
     this.closeWindow();
   }
+
+  chechWidth(){
+    if (window.innerWidth >= 780) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
