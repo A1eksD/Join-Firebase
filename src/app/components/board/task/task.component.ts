@@ -4,9 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { User } from '../../../interface/user';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CardComponent } from './card/card.component';
-import { enableNetwork } from '@angular/fire/firestore';
 import { ToggleBooleansService } from '../../../service/toggle-booleans.service';
-import { Task } from 'zone.js/lib/zone-impl';
 import { TasksService } from '../../../service/tasks.service';
 
 @Component({
@@ -29,6 +27,7 @@ export class TaskComponent {
   @Input() subtasks: any[] = [];
   currentTask: any;
   taskDone: number = 0;
+  currentDraggedElement: string = '';
   
   constructor(public toggleService: ToggleBooleansService, private taskService: TasksService){}
   openCard: boolean = false;
@@ -77,4 +76,33 @@ export class TaskComponent {
     return percentage;
   }
   
+  checkScreanWidth(){
+    if (window.innerWidth <= 1380) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  
+  openWindowToSwitshTask(event: Event){
+    event.stopPropagation();
+    this.toggleService.clickedTask = this.id;
+  }
+
+  moveTo(event: Event, category: string) {
+    event.stopPropagation();
+    const draggedIndex = this.id;
+    if (draggedIndex !== null) {
+      const getCurrentTask = this.taskService.allTasks.filter((t) => t.id === draggedIndex);
+      getCurrentTask[0].category = category;
+      this.taskService.updateTaskCategors( getCurrentTask[0].id! ,category);
+    }
+    this.toggleService.clickedTask = '';
+  }
+
+  closeSmallWindow(event: Event){
+    event.stopPropagation();
+    this.toggleService.clickedTask = '';
+  }
 }

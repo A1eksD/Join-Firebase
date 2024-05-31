@@ -14,6 +14,9 @@ export class ToggleBooleansService {
   openEditCard:boolean = false;
   openWhiteBox:boolean = false;
   selectedComponent: string = 'summary';
-  headerInputValue = '';
+  headerInputValue: string  = '';
+  clickedTask: string = '';
   openEditDeleteWindow:boolean = false;
+  openWindowSwitshTask:boolean = false;
+
 }

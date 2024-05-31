@@ -60,5 +60,6 @@ export class ComponentsComponent {
     this.toggleService.slideInRightWindow = false;
     this.toggleService.openEditDeleteWindow = false;
     this.toggleService.headerInputValue = '';
+    this.toggleService.clickedTask = '';
   }
 }

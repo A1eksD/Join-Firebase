@@ -114,7 +114,7 @@ export class AddTaskComponent {
     this.title = '';
     this.description = '';
     this.date = 0;
-    this.priority = 'low';
+    this.priority = '';
     this.assignetTo = [];
     this.chackedUser = [];
     this.category = 'Technical Task';

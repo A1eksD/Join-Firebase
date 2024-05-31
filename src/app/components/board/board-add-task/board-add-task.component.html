@@ -10,7 +10,7 @@
             <div class="leftSide">
                 <div class="taskBox">
             <!-------------title----------------->
-                    <input type="text" name="" id="" class="titleInput" placeholder="Enter a title (required)" [(ngModel)]="title">
+                    <input type="text" name="" id="" class="titleInput" placeholder="Title (required)" [(ngModel)]="title">
             <!-------------descrptipon----------------->
                     <div class="decriptionBox">
                         <div class="namePosition">
@@ -133,7 +133,7 @@
                         (click)="checkValues($event)" 
                         [disabled]="!checkAllValues()" 
                         [ngClass]="{'createTaskBtn': checkAllValues(), 'disabledBtn': !checkAllValues()}">
-                        Create task <img src="assets/img/check.svg">
+                        Create <img src="assets/img/check.svg">
                     </button>
                 </div>
             </div>

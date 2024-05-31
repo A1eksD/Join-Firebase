@@ -490,3 +490,20 @@ section{
         }
     }
 }
+
+@media (max-width: 440px) {
+    .showTasksInBoard{
+        width: 300px;
+        height: 88px; 
+        @include displayFlex($g: 0);
+    }
+
+    .taskRow1{
+        @include displayFlex( $g: 16px);
+        flex-direction: column;
+        .blueTask{    
+            height: 102px;        
+        }
+    }
+
+}

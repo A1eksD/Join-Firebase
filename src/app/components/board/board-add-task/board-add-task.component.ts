@@ -39,6 +39,7 @@ export class BoardAddTaskComponent {
   closeWindow(){
     this.openAddNewTaskWindow = false;
     this.closeBigWindow.emit(this.openAddNewTaskWindow);
+    this.clearValues();
   }
 
   checkDateAddTask() {
@@ -155,7 +156,7 @@ export class BoardAddTaskComponent {
     this.title = '';
     this.description = '';
     this.date = 0;
-    this.priority = 'low';
+    this.priority = '';
     this.assignetTo = [];
     this.chackedUser = [];
     this.category = 'Technical Task';

@@ -178,7 +178,8 @@ input{
         height: 160px;
         @include displayFlex($j: flex-start, $a: flex-start); 
         flex-direction: column;
-        padding-left: 10px;
+        padding-left: 8px;
+        padding-right: 8px;
         margin: 6px;
         overflow-y: scroll;
         background-color: white;
@@ -299,6 +300,7 @@ input{
             span{
                 cursor: pointer;
                 transition: 0.2s ease-in-out;
+                font-size: larger;
                 &:hover{
                     color: #4589ff;
                 }
@@ -501,4 +503,150 @@ input{
         opacity: 0;
         transform: translateY(20px);
     }
+}
+
+//------------------------------------------ mobile ----------------------------------
+
+@media (max-width: 1380px) {
+    section{
+        position: absolute;
+        bottom: 0;
+        top: auto;
+    }
+
+    .grayBackround{
+        width: 100vw;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 20;
+        background-color: rgba(128, 128, 128, 0.25);
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .whiteBox{
+        width: 64vw;
+        height: 72vh;
+        .innerWhiteBox{
+            width: 100%;
+            height: calc(100% - 32px);
+            flex-direction: column;
+            overflow-y: scroll;
+            .leftSide, .rightSide{
+                padding: 12px;
+                width: 100%;
+                padding-top: 0;
+            }
+            .mid{
+                display: none;
+            }
+        }
+    }
+
+    .whiteBox{
+        .innerWhiteBox{
+            .leftSide{
+                .taskBox{
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    .dateBox{
+        input{
+            margin-bottom: 0;
+        }
+    }
+    
+    .prioBoxBtns{
+        button{
+            width: 26%;
+        }
+    }
+
+    .positionBtn{
+        position: relative;
+        margin: 24px;
+    }
+
+}
+
+@media (max-width: 780px) {
+
+    .whiteBox{
+        width: 82vw;
+        height: 72vh;
+        .innerWhiteBox{
+            width: 100%;
+            height: calc(100% - 32px);
+            flex-direction: column;
+            overflow-y: scroll;
+            .leftSide, .rightSide{
+                padding: 12px;
+                width: 100%;
+                padding-top: 0;
+            }
+            .mid{
+                display: none;
+            }
+        }
+    }
+
+    .prioBoxBtns{
+        margin-top: 12px;
+        margin-bottom: 12px;
+        @include displayFlex($j: space-around);
+        width: 100%;
+        button{
+            width: 28%;
+            @include displayFlex($g: 8px);
+            height: 34px;
+            font-size: 14px;
+            img{
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+    
+
+    .positionBtn{
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        .ClearBtn {
+            width: 96px;
+        }
+        .createTaskBtn {
+            width: 96px;
+        }
+    }
+
+    .disabledBtn{
+        width: 96px;
+    }
+
+    .assignetToBox{
+        .userWindow{
+            padding-left: 8px;
+            padding-right: 8px;
+            margin: 6px;
+            width: calc(100% - 16px);
+            .loadedUsers{
+                width: 100%;
+                .userNameAndChackbox{
+                    input{
+                        margin-right: 0;
+                    }
+                }
+                
+            }
+        }
+    }
+    
+    
 }
