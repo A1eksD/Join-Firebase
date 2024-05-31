@@ -1,11 +1,11 @@
 <section>
     <div class="contantBox">
         <div class="positionGreed">
-            <h1 class="greed">{{getTime()}}</h1>&nbsp;<h1 class="userNmae">{{getUserName()}}</h1>
+            <h1 class="greed">{{getTime()}}</h1>&nbsp;<h1 class="userNmae"> &nbsp;{{getUserName()}}</h1>
         </div>
 
         <div class="taskRow1">
-            <div class="blueTask">
+            <div class="blueTask" (click)="routeToBoard()">
                 <div class="leftSide">
                    <div class="imgBox">
                         <img src="assets/img/clock.svg" alt="">
@@ -19,7 +19,7 @@
                     <span class="UpcomingDeadline">Upcoming Deadline</span>
                 </div>
             </div>
-            <div class="showTasksInBoard">
+            <div class="showTasksInBoard" (click)="routeToBoard()">
                 <div class="amountTasks">
                     <img src="assets/img/board.svg" alt="">
                     <span class="amountTasksNr">{{showTaskOnBoard()}}</span>
@@ -29,7 +29,7 @@
         </div>
 
         <div  class="taskRow2">
-            <div class="smallBoX">
+            <div class="smallBoX" (click)="routeToBoard()">
                 <div class="amountTasks2">
                     <img src="assets/img/urgent.svg" alt="">
                     <span class="amountTasksNr2">{{amountTaskToDo()}}</span>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="smallBoX">
+            <div class="smallBoX" (click)="routeToBoard()">
                 <div class="amountTasks2">
                     <img src="assets/img/inProgress.svg" alt="">
                     <span class="amountTasksNr2">{{amountTaskProgress()}}</span>
@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-            <div class="smallBoX">
+            <div class="smallBoX" (click)="routeToBoard()">
                 <div class="amountTasks2">
                     <img src="assets/img/awaitingFeedback.svg" alt="">
                     <span class="amountTasksNr2">{{amountTaskFeedback()}}</span>
@@ -62,7 +62,7 @@
                 </div>
             </div>
 
-            <div class="smallBoX">
+            <div class="smallBoX" (click)="routeToBoard()">
                 <div class="amountTasks2">
                     <img src="assets/img/done.svg" alt="">
                     <span class="amountTasksNr2">{{amountTaskDone()}}</span>

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
 import { Task } from 'zone.js/lib/zone-impl';
+import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 
 @Component({
   selector: 'app-summary',
@@ -15,7 +16,7 @@ import { Task } from 'zone.js/lib/zone-impl';
 export class SummaryComponent {
   currentValues: any;
 
-  constructor(private taskService: TasksService, private userService: UsersService ){}
+  constructor(private taskService: TasksService, private userService: UsersService, private toggleService: ToggleBooleansService ){}
 
 
   getTime(){
@@ -142,5 +143,8 @@ export class SummaryComponent {
     return `${this.currentValues.done || ''}`;
   }
 
-
+  routeToBoard(){
+    this.toggleService.selectedComponent = 'board';
+    this.toggleService.openBoard = true;
+  }
 }
