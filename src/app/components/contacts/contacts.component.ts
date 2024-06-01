@@ -165,7 +165,6 @@ export class ContactsComponent {
   deleteContact(user: User) {
     const filteredUser = this.getCleanIDFromLogedInUSer();
     const contactIndex = filteredUser[0].savedUsers.filter((u: any) => u.uid === user.uid);
-    console.log(contactIndex);
     this.userService.deleteContact(user, filteredUser);
     this.returnBack();
   }
@@ -288,7 +287,6 @@ export class ContactsComponent {
   addUserToContacts(user: User, event: Event){
     event.stopPropagation();
     const filteredContact = this.searchBarUsersArray.filter(c => c.uid === user.uid);
-    console.log('filteredContact', filteredContact);
     this.userService.updateEditContact(filteredContact);
     this.toggleService.headerInputValue = '';
   }
