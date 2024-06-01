@@ -182,6 +182,7 @@ export class ContactsComponent {
       uid: this.getUserToEdit.uid
     };
     this.userService.updateEditContact([user]);
+    this.showUserContacts();
     this.returnBack();
   }
 

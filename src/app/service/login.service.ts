@@ -27,43 +27,42 @@ export class LoginService {
   lastActivityTimestamp: number = 0;
   autoLogoutTimer: number | null = null;
 
-  constructor(private route: Router,) {}
-
-  startAutoLogoutTimer() {
-    const timeout = 20 * 60 * 1000; // 20 minutes in milliseconds
-
-    // Create an observable to track user activity
-    const userActivityObservable = fromEvent(document, 'mousemove')
-      .pipe(
-        distinctUntilChanged(), // Ignore consecutive mousemove events
-        tap(() => {
-          this.lastActivityTimestamp = Date.now(); // Update timestamp on activity
-        })
-      );
-
-    // Subscribe to the observable and update the timer accordingly
-    userActivityObservable.subscribe(() => {
-      if (this.autoLogoutTimer) {
-        clearTimeout(this.autoLogoutTimer); // Clear existing timer
-      }
-
-      this.autoLogoutTimer = setTimeout(() => {
-        this.deleteUserIdInLocalStorage();
-      }, timeout) as unknown as number;
-    });
+  constructor(private route: Router,) {
+    this.startAutoLogoutTimer();
   }
-
 
   // startAutoLogoutTimer() {
   //   const timeout = 20 * 60 * 1000; // 20 minutes in milliseconds
-  //   setTimeout(() => {
-  //     this.deleteUserIdInLocalStorage();
-  //   }, timeout);
+
+  //   // Create an observable to track user activity
+  //   const userActivityObservable = fromEvent(document, 'mousemove')
+  //     .pipe(
+  //       distinctUntilChanged(), // Ignore consecutive mousemove events
+  //       tap(() => {
+  //         this.lastActivityTimestamp = Date.now(); // Update timestamp on activity
+  //       })
+  //     );
+
+  //   // Subscribe to the observable and update the timer accordingly
+  //   userActivityObservable.subscribe(() => {
+  //     if (this.autoLogoutTimer) {
+  //       clearTimeout(this.autoLogoutTimer); // Clear existing timer
+  //     }
+
+  //     this.autoLogoutTimer = setTimeout(() => {
+  //       this.deleteUserIdInLocalStorage();
+  //     }, timeout) as unknown as number;
+  //   });
   // }
 
-  // deleteUserIdInLocalStorage() {
-  //   localStorage.removeItem('currentUser');
-  // }
+
+  startAutoLogoutTimer() {
+    const timeout = 20 * 60 * 1000; // 20 minutes in milliseconds
+    setTimeout(() => {
+      localStorage.removeItem('currentUser');
+    }, timeout);
+  }
+
 
   //--------------- register new user -------------------------------------------------
   register() {

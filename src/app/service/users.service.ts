@@ -73,15 +73,30 @@ export class UsersService {
   async updateEditContact(user: User[]){
     const currentUser = localStorage.getItem('currentUser');
     const filteredUser = this.allUsers.filter(u => u.id === this.getCleanID(currentUser!));
-    const getCurrentSavedUsers = this.getCurrentSavedUsers(filteredUser[0].savedUsers, user[0]);
+    const getCurrentSavedUsers = this.getCurrentEditUsers(filteredUser[0].savedUsers, user[0]);
     try {
+      // const docRef = doc(this.firestore, `users/${filteredUser[0].id}/savedUsers/${index}`);
       const docRef = doc(this.firestore, `users/${filteredUser[0].id}`);
+      // await updateDoc(docRef, {getCurrentSavedUsers});
       await updateDoc(docRef, {savedUsers : getCurrentSavedUsers});
       this.updateContactDocToCommonUsers(user);
     } catch (error) {
       console.error('Added contact failed');
     }
   }
+
+  getCurrentEditUsers(savedUser: User[], contact: User): User[] {
+    const contactIndex = savedUser.findIndex(c => c.uid === contact.uid);
+  
+    if (contactIndex !== -1) {
+      savedUser[contactIndex] = contact;
+    } else {
+      savedUser.push(contact);
+    }
+  
+    return savedUser;
+  }
+  
 
   getCurrentSavedUsers(savedUser: User[], contact: User): User[] {
     const contactIndex = savedUser.findIndex(c => c.uid === contact.uid);
