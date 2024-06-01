@@ -603,9 +603,10 @@ input{
         @include displayFlex($j: space-around);
         width: 100%;
         button{
-            width: 28%;
-            @include displayFlex($g: 8px);
-            height: 34px;
+            width: 30%;
+            @include displayFlex($g: 0px);
+            flex-direction: column-reverse;
+            height: 40px;
             font-size: 14px;
             img{
                 width: 16px;

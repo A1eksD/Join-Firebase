@@ -6,16 +6,14 @@ section{
     position: absolute;
     bottom: 0;
     right: 0;
+    word-break: break-word !important;
     .datenschutz{
         width: calc(100% - 80px);
         height: calc(100% - 80px);
         margin: 40px;
         overflow-y: auto;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-    }
-    .datenschutz::-webkit-scrollbar { 
-        display: none;  
+        overflow-x: hidden !important;
+        word-break: break-word !important;
     }
 }
 
@@ -23,7 +21,9 @@ h1, h2, h3, h4{
     color: $blueButton;
     font-weight: 500;
 }
-
+a{
+    word-break: break-word !important;
+}
 
 @media (max-width: 1380px) {
     section{
@@ -35,14 +35,9 @@ h1, h2, h3, h4{
             margin: 0;
             margin-left: 40px;
             margin-right: 40px;
-            overflow-y: auto;
-            -ms-overflow-style: none; 
-            scrollbar-width: none;  
+            overflow-x: hidden !important;
+            word-break: break-word !important;
         }
-    }
-
-    .datenschutz::-webkit-scrollbar { 
-        display: none;  
     }
 }
 
@@ -51,6 +46,8 @@ h1, h2, h3, h4{
         .datenschutz{
             width: auto;
             height: calc(100% - 74px);
+            overflow-x: hidden !important;
+            word-break: break-word !important;
         }
     }
 }
