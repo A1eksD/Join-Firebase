@@ -94,6 +94,11 @@ export class BoardAddTaskComponent {
       this.chackedUser.push(user);
     }
   }
+
+  isChecked(user: User): boolean {
+    const assignedUsers = this.chackedUser.filter(u => u.uid === user.uid);;
+    return assignedUsers.some((assignedUser: any) => assignedUser.uid === user.uid);
+  }
   
   openCategory(event: Event) {
     event.stopPropagation();

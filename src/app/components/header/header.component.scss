@@ -84,4 +84,12 @@ section{
 
 .transparentBackground.dNone {
     display: none;
-  }
+}
+
+@media (max-width: 780px) {
+    section{
+        .logo{
+            height: 56px;
+        }
+    }
+}

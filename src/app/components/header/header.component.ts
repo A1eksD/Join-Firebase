@@ -20,7 +20,7 @@ export class HeaderComponent {
   secondLetter: string = '';
   openWindow: boolean = false;
 
-  constructor(public loginService: LoginService, public userService: UsersService, private toggleService: ToggleBooleansService) {
+  constructor(public loginService: LoginService, public userService: UsersService, public toggleService: ToggleBooleansService) {
   }
 
    getUserLetters(){
@@ -55,12 +55,14 @@ export class HeaderComponent {
     return [newFirstName, newLastName];
   }
 
-  openOptionWindow(){
-    this.openWindow = true;
+  openOptionWindow(event: Event){
+    event.stopPropagation();
+    this.toggleService.openWindowHeader = true;
   }
 
-  closeWhiteWindow(){
-    this.openWindow = false;
+  closeWhiteWindow(event: Event){
+    event.stopPropagation();
+    this.toggleService.openWindowHeader = false;
   }
 
   changeRout(component: string){

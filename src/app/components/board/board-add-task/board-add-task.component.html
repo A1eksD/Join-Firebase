@@ -79,7 +79,7 @@
                                 </div>
                                 <div class="userNameAndChackbox">
                                     <label for="{{user.id}}"> {{user.firstName}} {{user.lastName}}</label>
-                                    <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)"/>
+                                    <input type="checkbox" name="cheese" id="{{user.id}}" (click)="addUser(user, $event)" [checked]="isChecked(user)"/>
                                 </div>
                             </div>
                         }

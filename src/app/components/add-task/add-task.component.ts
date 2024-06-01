@@ -141,7 +141,10 @@ export class AddTaskComponent {
     }
   }
   
-
+  isChecked(user: User): boolean {
+    const assignedUsers = this.chackedUser.filter(u => u.uid === user.uid);;
+    return assignedUsers.some((assignedUser: any) => assignedUser.uid === user.uid);
+  }
   
   getContactsFromCurrenUser(){
     const currentUser = localStorage.getItem('currentUser');

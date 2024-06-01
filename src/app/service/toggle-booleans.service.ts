@@ -13,6 +13,7 @@ export class ToggleBooleansService {
   slideInRightWindow:boolean = false;
   openEditCard:boolean = false;
   openWhiteBox:boolean = false;
+  openWindowHeader:boolean = false;
   selectedComponent: string = 'summary';
   headerInputValue: string  = '';
   clickedTask: string = '';

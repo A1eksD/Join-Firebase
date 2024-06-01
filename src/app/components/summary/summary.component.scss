@@ -203,7 +203,7 @@ section{
     }
 
     .taskRow1{
-        @include displayFlex($j: space-evenly);
+        @include displayFlex($j: space-evenly, $g: 32px);
         .blueTask{
             width: 564px;
             height: 160px;

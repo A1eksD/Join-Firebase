@@ -61,5 +61,6 @@ export class ComponentsComponent {
     this.toggleService.openEditDeleteWindow = false;
     this.toggleService.headerInputValue = '';
     this.toggleService.clickedTask = '';
+    this.toggleService.openWindowHeader = false;
   }
 }

@@ -3,6 +3,7 @@ import { User } from '../interface/user';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { Firestore, QuerySnapshot, addDoc, collection, doc, getDocs, query, updateDoc, where } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { distinctUntilChanged, fromEvent, tap } from 'rxjs';
 
 
 @Injectable({
@@ -23,8 +24,46 @@ export class LoginService {
   currentUser: string = '';
   errorMessage: string = '';
   loginBoolean: boolean = false;
+  lastActivityTimestamp: number = 0;
+  autoLogoutTimer: number | null = null;
 
   constructor(private route: Router,) {}
+
+  startAutoLogoutTimer() {
+    const timeout = 20 * 60 * 1000; // 20 minutes in milliseconds
+
+    // Create an observable to track user activity
+    const userActivityObservable = fromEvent(document, 'mousemove')
+      .pipe(
+        distinctUntilChanged(), // Ignore consecutive mousemove events
+        tap(() => {
+          this.lastActivityTimestamp = Date.now(); // Update timestamp on activity
+        })
+      );
+
+    // Subscribe to the observable and update the timer accordingly
+    userActivityObservable.subscribe(() => {
+      if (this.autoLogoutTimer) {
+        clearTimeout(this.autoLogoutTimer); // Clear existing timer
+      }
+
+      this.autoLogoutTimer = setTimeout(() => {
+        this.deleteUserIdInLocalStorage();
+      }, timeout) as unknown as number;
+    });
+  }
+
+
+  // startAutoLogoutTimer() {
+  //   const timeout = 20 * 60 * 1000; // 20 minutes in milliseconds
+  //   setTimeout(() => {
+  //     this.deleteUserIdInLocalStorage();
+  //   }, timeout);
+  // }
+
+  // deleteUserIdInLocalStorage() {
+  //   localStorage.removeItem('currentUser');
+  // }
 
   //--------------- register new user -------------------------------------------------
   register() {
