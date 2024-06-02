@@ -109,7 +109,7 @@ export class CardEditComponent {
   }
 
   checkSubtaskLength(){
-    if (this.taskService.clickedTaskCopy[0].subtasks.length <= 30) {
+    if (this.taskService.clickedTaskCopy[0].subtasks.length <= 50) {
       this.subtaskToLong = true;
       return true;
     } else{

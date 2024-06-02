@@ -163,7 +163,7 @@ export class AddTaskComponent {
   }
 
   checkSubtaskLength(){
-    if (this.subtask.length <= 30) {
+    if (this.subtask.length <= 50) {
       this.subtaskToLong = true;
       return true;
     } else{
