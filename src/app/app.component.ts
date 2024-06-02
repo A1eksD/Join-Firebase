@@ -11,7 +11,7 @@ import { LoginService } from './service/login.service';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'join';
+  title = 'Join';
 
   constructor( private route: Router, private longinService:LoginService){
   }

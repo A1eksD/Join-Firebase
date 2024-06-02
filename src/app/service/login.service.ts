@@ -193,6 +193,7 @@ export class LoginService {
       // this.route.navigate([`/mainPage`]);
       setTimeout(() => {
         this.clearUserData();
+        this.startAutoLogoutTimer();
       }, 1500);
     } else {
       console.error('Kein zugehöriges Benutzerdokument gefunden.');
