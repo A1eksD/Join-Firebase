@@ -4,6 +4,7 @@ section{
     width: auto;
     height: 96px;
     @include displayFlex($j: space-between);
+    z-index: 20;
     .logo{
         margin-left: 24px;
         height: 80px;

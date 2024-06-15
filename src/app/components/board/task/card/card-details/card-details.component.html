@@ -37,16 +37,17 @@
                 } @else {
                     <div class="boxOfSubtasks">
                         @for (item of taskService.clickedTask[0].subtasks; track $index) {
-                            <div class="renderSubtask">
-                                <input type="checkbox" name="cheese" id="{{item}}" 
-                                [checked]="item.subtaskDone" (click)="subtaskDone($index)"/>
+                            <div class="renderSubtask" (click)="subtaskDone($index)">
+                                <input type="checkbox" name="cheese" id="{{$index}}" 
+                                [checked]="item.subtaskDone"/>
+
                                 <label for="{{item}}">{{item.subtask}}</label>
                             </div>
                         }
                     </div>
                 } 
             </div>
-        
+            
             <div class="buttonBox">
                 <span>{{getuserName()}}</span>
                 <div class="buttonBoxposition">

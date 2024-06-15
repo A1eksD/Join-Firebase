@@ -6,6 +6,7 @@ section{
     @include displayFlex($j: flex-start, $a:flex-start);
     flex-direction: column;
     position: relative;
+    cursor: default;
 }
 
 .imgBox{
@@ -124,6 +125,7 @@ section{
     
     .buttonBox{
         width: 100%;
+        cursor: default;
         @include displayFlex($j: space-between); 
         .buttonBoxposition{
             width: 100%;
@@ -146,7 +148,7 @@ section{
     }
 }
 
-
+label{cursor: pointer;}
 
 @media (max-width: 440px) {
 

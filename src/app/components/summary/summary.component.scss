@@ -188,6 +188,7 @@ section{
         position: absolute;
         bottom: 100px;
         @include displayFlex();
+        overflow-y: auto;
     }
 }
 
