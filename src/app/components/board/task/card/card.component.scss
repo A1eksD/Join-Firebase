@@ -8,13 +8,13 @@ section{
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 
 }
 
 .grayBackround{
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     position: absolute;
     cursor: default;
     top: 0;
@@ -26,7 +26,7 @@ section{
 .whiteBox{
     z-index: 21;
     width: 40vw;
-    height: 80vh;
+    height: 80dvh;
     background-color: white;
     border-radius: 15px;
     padding: 16px;

@@ -2,7 +2,7 @@
 
 section{
     width: calc(100vw - 222px);
-    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
     position: absolute;
     bottom: 0;
     right: 0;
@@ -184,7 +184,7 @@ section{
 @media (max-width: 1380px) {
     section{
         width: 100vw;
-        height: calc(100vh - 196px);
+        height: calc(100dvh - 196px);
         position: absolute;
         bottom: 100px;
         @include displayFlex();
@@ -195,7 +195,7 @@ section{
 @media (max-width: 1000px) {
     section{
         width: 100vw;
-        height: calc(100vh - 196px);
+        height: calc(100dvh - 196px);
         @include displayFlex();
         .contantBox{
             width: 912px;

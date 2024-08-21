@@ -2,7 +2,7 @@
 
 section{
     width: calc(100vw - 222px);
-    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
     position: absolute;
     bottom: 0;
     right: 0;
@@ -443,7 +443,7 @@ input{
 @media (max-width: 1380px) {
     section{
         width: 100vw;
-        height: calc(100vh - 196px);
+        height: calc(100dvh - 196px);
         position: absolute;
         bottom: 100px;
         @include displayFlex(); 
@@ -477,7 +477,7 @@ input{
 
 @media (max-width: 1000px) {
     section{
-        height: calc(100vh - 168px);
+        height: calc(100dvh - 168px);
         bottom: 72px;
     }
     .taskBox{

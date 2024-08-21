@@ -150,6 +150,20 @@ section{
 
 label{cursor: pointer;}
 
+@media (max-width: 620px) {
+    .everythingInIt{
+        .assignetTo{
+            .contactBox{
+                .userNameBox{
+                    .userBackground{
+                        font-size: smaller;
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 440px) {
 
     .everythingInIt{

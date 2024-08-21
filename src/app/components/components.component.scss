@@ -2,7 +2,7 @@
 
 section {
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
 
     .positionheader {
         height: 96px;
@@ -13,7 +13,7 @@ section {
     .positionContent {
         display: flex;
         .buttons {
-            height: calc(100vh - 96px);
+            height: calc(100dvh - 96px);
             padding-top: 64px;
             width: 222px;
             @include displayFlex($j: flex-start, $g: 32px);

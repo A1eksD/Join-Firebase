@@ -2,7 +2,7 @@
 
 section{
     width: calc(100vw - 222px);
-    height: calc(100vh - 96px);
+    height: calc(100dvh - 96px);
 }
 
 .allContacsBox{
@@ -131,7 +131,7 @@ section{
     right: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     z-index: 10;
     background-color: rgba(128, 128, 128, 0.2);
     .userRightWindow{
@@ -140,7 +140,7 @@ section{
         right: 0;
         bottom: 0;
         width: 32%;
-        height: 100vh;
+        height: 100dvh;
         z-index: 10;
         animation: slideinRightWindow 0.5s ease-in-out;
         .bleueTop{
@@ -520,7 +520,7 @@ span{
     left: 0;
     bottom: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     background-color: rgba(128, 128, 128, 0.2);
     z-index: 10;
     .userLeftWindow{
@@ -529,7 +529,7 @@ span{
         left: 0;
         bottom: 0;
         width: 36%;
-        height: 100vh;
+        height: 100dvh;
         z-index: 12;
         animation: slideinLeftWindow 0.5s ease-in-out;
         .bleueTopLeft{
@@ -774,7 +774,7 @@ span{
 @media (max-width: 1380px) {
     section{
         width: 100vw;
-        height: calc(100vh - 196px);
+        height: calc(100dvh - 196px);
         @include displayFlex();
         box-shadow: -5px 0 5px -5px rgba(51, 51, 51, 0.2705882353), 5px 0 5px -5px rgba(51, 51, 51, 0.2705882353);
     }
@@ -785,7 +785,7 @@ span{
 
     .positionUserContactBoXX {
         width: 100vw;
-        height: calc(100vh - 196px);
+        height: calc(100dvh - 196px);
         background-color: white;
         left: 0;
         top: 96px;
@@ -848,11 +848,11 @@ span{
 
 @media (max-width: 780px) {
     section{
-        height: calc(100vh - 168px);
+        height: calc(100dvh - 168px);
     }
 
     .positionUserContactBoXX {
-        height: calc(100vh - 168px);
+        height: calc(100dvh - 168px);
         .positionUserContactBox{
             .userContactHeader{
                 @include displayFlex($j: flex-start, $g: 24px); 
