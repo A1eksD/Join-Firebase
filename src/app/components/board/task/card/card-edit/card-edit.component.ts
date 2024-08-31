@@ -34,6 +34,8 @@ export class CardEditComponent {
   subtaskArray: any[] = [];
   chackedUser: any[] = [];
   disabledButton: boolean = false;
+  showUserWindow: null | false | true = null;
+  showCategoryWindow: null | false | true = null;
 
   constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
@@ -44,7 +46,7 @@ export class CardEditComponent {
 
   openAssignedTo(event: Event) {
     event.stopPropagation();
-    this.toggleService.showUserWindow = !this.toggleService.showUserWindow;
+    this.showUserWindow = !this.showUserWindow;
   }
 
   getUserFirstLetter(user: User): string {

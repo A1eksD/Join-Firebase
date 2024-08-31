@@ -60,7 +60,7 @@
                         <span>Select contacts to assign</span>
                         <img src="assets/img/arrow_drop_down.svg" alt="">
                     </div>
-                    <div class="userWindow" [ngClass]="{'slideInUpUser': toggleService.showUserWindow , 'slideOutDownUser': !toggleService.showUserWindow,}">
+                    <div class="userWindow" [ngClass]="{'dNone': showUserWindow === null, 'slideInUpUser': showUserWindow , 'slideOutDownUser': !showUserWindow,}">
                         @if (chackedUser.length > 0) {
                             <div class="checkedUsers">
                                 @for (user of chackedUser; track $index) {
@@ -96,7 +96,7 @@
                             <img src="assets/img/arrow_drop_down.svg" alt="">
                         </div>
                         <div class="taskWindow" #taskWindoW 
-                            [ngClass]="{'slideInUpTask': toggleService.showCategoryWindow , 'slideOutDownTask': !toggleService.showCategoryWindow,}"
+                            [ngClass]="{'dNone': showCategoryWindow === null,'slideInUpTask': showCategoryWindow , 'slideOutDownTask': !showCategoryWindow,}"
                         >
                             <span (click)="changeTask('Technical Task', $event)">Technical Task</span>
                             <span (click)="changeTask('User Story', $event)">User Story</span>

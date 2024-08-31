@@ -26,9 +26,10 @@ export class BoardAddTaskComponent {
   category: string = 'Technical Task';
   subtask: string = '';
   subtaskArray: any[] = [];
-  showCategoryWindow: boolean = false;
   addedUser: boolean = false;
   subtaskToLong: boolean = false;
+  showUserWindow: null | false | true = null;
+  showCategoryWindow: null | false | true = null;
 
   constructor(public toggleService: ToggleBooleansService, private userService: UsersService, public taskService: TasksService){}
 
@@ -56,8 +57,8 @@ export class BoardAddTaskComponent {
 
   openAssignedTo(event: Event) {
     event.stopPropagation();
-    this.toggleService.showUserWindow = !this.toggleService.showUserWindow;
-    this.toggleService.showCategoryWindow = false;
+    this.showUserWindow = !this.showUserWindow;
+    this.showCategoryWindow = false;
   }
 
   getUserFirstLetter(user: User): string {
@@ -102,14 +103,14 @@ export class BoardAddTaskComponent {
   
   openCategory(event: Event) {
     event.stopPropagation();
-    this.toggleService.showCategoryWindow = !this.toggleService.showCategoryWindow;
-    this.toggleService.showUserWindow = false;
+    this.showCategoryWindow = !this.showCategoryWindow;
+    this.showUserWindow = false;
   }
 
   changeTask(task: string, event: Event) {
     event.stopPropagation();
     this.category = task;
-    this.toggleService.showCategoryWindow = false;
+    this.showCategoryWindow = false;
   }
 
   checkSubtaskLength(){

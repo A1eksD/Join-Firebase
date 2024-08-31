@@ -25,9 +25,11 @@ export class AddTaskComponent {
   category: string = 'Technical Task';
   subtask: string = '';
   subtaskArray: any[] = [];
-  showCategoryWindow: boolean = false;
   addedUser: boolean = false;
   subtaskToLong: boolean = false;
+  showUserWindow: null | false | true = null;
+  showCategoryWindow: null | false | true = null;
+
 
   constructor(
     public taskService: TasksService,
@@ -95,19 +97,18 @@ export class AddTaskComponent {
 
   openCategory(event: Event) {
     event.stopPropagation();
-    this.toggleService.showCategoryWindow =
-      !this.toggleService.showCategoryWindow;
+    this.showCategoryWindow = !this.showCategoryWindow;
   }
 
   openAssignedTo(event: Event) {
     event.stopPropagation();
-    this.toggleService.showUserWindow = !this.toggleService.showUserWindow;
+    this.showUserWindow = !this.showUserWindow;
   }
 
   changeTask(task: string, event: Event) {
     event.stopPropagation();
     this.category = task;
-    this.toggleService.showCategoryWindow = false;
+    this.showCategoryWindow = false;
   }
 
   clearValues() {
