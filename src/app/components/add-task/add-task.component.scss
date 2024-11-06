@@ -106,6 +106,34 @@ section{
     }
 }
 
+.checkedUsers{
+    min-height: 72px;
+    width: calc(100% - 16px);
+    overflow-x: scroll;
+    display: flex;
+    margin-left: 8px;
+    margin-right: 8px;
+    .userRing{
+        min-width: 40px;
+        height: 40px;
+        background-color: white;
+        border-radius: 50%;
+        box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
+        @include displayFlex(); 
+        margin: 8px;
+        .userTag{
+            width: 32px;
+            height: 32px;
+            background-color: springgreen;
+            object-fit: cover;
+            border-radius: 50%;
+            @include displayFlex(); 
+            color: white;
+            font-weight: 500;
+        }
+    }
+}
+
 .assignetToBox{
     width: 100%;
     .userWindow{
@@ -115,33 +143,6 @@ section{
         padding-left: 10px;
         margin: 6px;
         overflow-y: scroll;
-        .checkedUsers{
-            min-height: 72px;
-            width: calc(100% - 16px);
-            overflow-x: scroll;
-            display: flex;
-            margin-left: 8px;
-            margin-right: 8px;
-            .userRing{
-                min-width: 40px;
-                height: 40px;
-                background-color: white;
-                border-radius: 50%;
-                box-shadow: rgba(99, 99, 99, 0.4) 0px 2px 8px 0px;
-                @include displayFlex(); 
-                margin: 8px;
-                .userTag{
-                    width: 32px;
-                    height: 32px;
-                    background-color: springgreen;
-                    object-fit: cover;
-                    border-radius: 50%;
-                    @include displayFlex(); 
-                    color: white;
-                    font-weight: 500;
-                }
-            }
-        }
         .loadedUsers{
             width: calc(100% - 16px);
             @include displayFlex($j: flex-start, $g: 12px); 
