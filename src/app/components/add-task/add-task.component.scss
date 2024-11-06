@@ -66,11 +66,11 @@ section{
     .prioBoxBtns{
         margin-top: 12px;
         margin-bottom: 12px;
-        @include displayFlex($j: space-around);
+        @include displayFlex($j: space-evenly);
         button{
             @include displayFlex($g: 12px);
-            width: 136px;
-            height: 51px;
+            width: 180px;
+            height: 54px;
             font-size: 19px;
             font-weight: 400;
             cursor: pointer;
@@ -441,6 +441,17 @@ input{
 }
 
 
+@media (max-width: 1500px) {
+    .prioBox{
+        .prioBoxBtns{
+            button{
+                width: 140px;
+                height: 48px;
+            }
+        }
+    }
+
+}
 @media (max-width: 1380px) {
     section{
         width: 100vw;
