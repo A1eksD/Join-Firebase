@@ -48,7 +48,7 @@ section{
             padding: 12px;
             width: 49%;
             height: 100%;
-            @include displayFlex($j: flex-start, $g: 24px);
+            @include displayFlex($j: flex-start);
             flex-direction: column;
         }
         .mid{
