@@ -9,16 +9,16 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
-    provideFirebaseApp(() =>
-      initializeApp({
-        apiKey: "AIzaSyAVcnywzsv-gAC3d5QTbF9EkCcTVOL-ep4",
-        authDomain: "join-bdb9c.firebaseapp.com",
-        projectId: "join-bdb9c",
-        storageBucket: "join-bdb9c.appspot.com",
-        messagingSenderId: "668904791885",
-        appId: "1:668904791885:web:da2c6f78e7ef4087b4e104"
-      })
-    ),
-    provideFirestore(() => getFirestore()), provideAnimationsAsync(),
+    // provideFirebaseApp(() =>
+    //   initializeApp({
+    //     apiKey: "AIzaSyAVcnywzsv-gAC3d5QTbF9EkCcTVOL-ep4",
+    //     authDomain: "join-bdb9c.firebaseapp.com",
+    //     projectId: "join-bdb9c",
+    //     storageBucket: "join-bdb9c.appspot.com",
+    //     messagingSenderId: "668904791885",
+    //     appId: "1:668904791885:web:da2c6f78e7ef4087b4e104"
+    //   })
+    // ),
+    // provideFirestore(() => getFirestore()), provideAnimationsAsync(),
   ],
 };
