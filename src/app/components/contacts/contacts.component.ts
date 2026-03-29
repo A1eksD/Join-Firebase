@@ -61,9 +61,10 @@ export class ContactsComponent {
         color: this.generateRandomColor(),
         uid: (Math.random() * 341235).toString(),
       };
-      this.userService.addNewContact([user]);
-      this.showUserContacts();
-      this.returnBack();
+      this.userService.addNewContact([user]).subscribe(() => {
+        this.showUserContacts();
+        this.returnBack();
+      });
     }
   }
 
@@ -165,8 +166,9 @@ export class ContactsComponent {
   deleteContact(user: User) {
     const filteredUser = this.getCleanIDFromLogedInUSer();
     const contactIndex = filteredUser[0].savedUsers.filter((u: any) => u.uid === user.uid);
-    this.userService.deleteContact(user, filteredUser);
-    this.returnBack();
+    this.userService.deleteContact(user, filteredUser).subscribe(() => {
+      this.returnBack();
+    });
   }
 
   saveUserEditData(){
@@ -181,9 +183,10 @@ export class ContactsComponent {
       color: this.getUserToEdit.color,
       uid: this.getUserToEdit.uid
     };
-    this.userService.updateEditContact([user]);
-    this.showUserContacts();
-    this.returnBack();
+    this.userService.updateEditContact([user]).subscribe(() => {
+      this.showUserContacts();
+      this.returnBack();
+    });
   }
 
   showUserContacts(){
@@ -288,7 +291,7 @@ export class ContactsComponent {
   addUserToContacts(user: User, event: Event){
     event.stopPropagation();
     const filteredContact = this.searchBarUsersArray.filter(c => c.uid === user.uid);
-    this.userService.updateEditContact(filteredContact);
+    this.userService.updateEditContact(filteredContact).subscribe();
     this.toggleService.headerInputValue = '';
   }
 

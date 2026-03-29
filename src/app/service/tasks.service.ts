@@ -1,87 +1,103 @@
-import { Injectable, inject } from '@angular/core';
-import { Firestore, addDoc, collection, deleteDoc, doc, onSnapshot, updateDoc } from '@angular/fire/firestore';
+import { Injectable } from '@angular/core';
 import { Task } from '../interface/task';
 
+const API = 'http://localhost:4200/api';
+
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TasksService {
-
-  firestore: Firestore = inject(Firestore);
   allTasks: Task[] = [];
   allTasksCopy: Task[] = [];
   clickedTask: any;
   clickedTaskCopy: any;
   subtaskLenghtValue: number = 0;
 
-  unsubTasks;
   constructor() {
-    this.unsubTasks = this.subTaskList();
+    this.loadAllTasks();
   }
 
-  subTaskList() {
-    return onSnapshot(collection(this.firestore, 'tasks'), (list) => {
-      this.allTasks = [];
-      this.allTasksCopy = [];
-      list.forEach((element) => {
-        const userWithId = { id: element.id, ...element.data() } as Task;
-        this.allTasks.push(userWithId);
-        this.allTasksCopy.push(userWithId);
+  // ─── Normale HTTP (fetch + async/await) ──────────────────────────────────────
+
+  async loadAllTasks(): Promise<void> {
+    try {
+      const response = await fetch(`${API}/tasks`);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const tasks: Task[] = await response.json();
+      this.allTasks = tasks;
+      this.allTasksCopy = [...tasks];
+    } catch (error) {
+      console.error('Load tasks failed', error);
+    }
+  }
+
+  async addTask(task: Task[]): Promise<void> {
+    try {
+      const response = await fetch(`${API}/tasks`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task[0]),
       });
-    });
-  }
-
-  async addTask(task: Task[]){
-    const usersCollection = collection(this.firestore, 'tasks');
-    try {
-      await addDoc(usersCollection, task[0]);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      await this.loadAllTasks();
     } catch (error) {
-      console.error('Create task failed');
-      
+      console.error('Create task failed', error);
     }
   }
 
-  async updateTaskCategors(id: string, taskCategory: string){
-    const docRef = doc(this.firestore, `tasks/${id}`);
+  async updateTaskCategors(id: string, taskCategory: string): Promise<void> {
     try {
-      await updateDoc(docRef,  { 
-        category: taskCategory
-       });
+      const response = await fetch(`${API}/tasks/${id}/category`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: taskCategory }),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      await this.loadAllTasks();
     } catch (error) {
-      console.error('Update taskCategory failed');
+      console.error('Update taskCategory failed', error);
     }
   }
 
-  async updateSubtasks(subtasks: any, id: string){
-    const docRef = doc(this.firestore, `tasks/${id}`);
+  async updateSubtasks(subtasks: string[], id: string): Promise<void> {
     try {
-      await updateDoc(docRef,  { 
-        subtasks: subtasks
-       });
+      const response = await fetch(`${API}/tasks/${id}/subtasks`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ subtasks }),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      await this.loadAllTasks();
     } catch (error) {
-      console.error('Update subtask failed');
+      console.error('Update subtask failed', error);
     }
   }
 
-
-  async updateTask(task: Task[]){
-    const docRef = doc(this.firestore, `tasks/${task[0].id}`);
+  async updateTask(task: Task[]): Promise<void> {
     try {
-      await updateDoc(docRef,  { ...task[0] });
+      const response = await fetch(`${API}/tasks/${task[0].id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(task[0]),
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      await this.loadAllTasks();
     } catch (error) {
-      console.error('Update task failed');
+      console.error('Update task failed', error);
     }
   }
 
-  async deleteTask(id :string){
+  async deleteTask(id: string): Promise<void> {
     try {
-      await deleteDoc(doc(this.firestore, `tasks/${id}`));
+      const response = await fetch(`${API}/tasks/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      await this.loadAllTasks();
     } catch (error) {
-      console.error('Delete task failed');
+      console.error('Delete task failed', error);
     }
   }
 
-  ngOnDestroy() {
-    this.subTaskList();
-  }
+  ngOnDestroy() {}
 }
