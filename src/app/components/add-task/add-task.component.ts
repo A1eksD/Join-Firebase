@@ -151,7 +151,7 @@ export class AddTaskComponent {
     const currentUser = localStorage.getItem('currentUser');
     const cleanUserID = currentUser!.replace(/"/g, '');
     const filteredUser = this.userService.allUsers.filter(u => u.id === cleanUserID);
-    const filteredContacts = this.sortFilterUserExistingUserName(filteredUser[0].savedUsers);
+    const filteredContacts = this.sortFilterUserExistingUserName(filteredUser[0].savedUsers ?? []);
     return filteredContacts;
   }
 

@@ -5,7 +5,7 @@ import { TasksService } from '../../../../../service/tasks.service';
 import { UsersService } from '../../../../../service/users.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Task } from 'zone.js/lib/zone-impl';
+import { Task } from '../../../../../interface/task';
 
 @Component({
   selector: 'app-card-edit',
@@ -51,7 +51,7 @@ export class CardEditComponent {
     const currentUser = localStorage.getItem('currentUser');
     const cleanUserID = currentUser!.replace(/"/g, '');
     const filteredUser = this.userService.allUsers.filter(u => u.id === cleanUserID);
-    const filteredContacts = this.sortFilterUserExistingUserName(filteredUser[0].savedUsers);
+    const filteredContacts = this.sortFilterUserExistingUserName(filteredUser[0].savedUsers ?? []);
     return filteredContacts;
   }
 

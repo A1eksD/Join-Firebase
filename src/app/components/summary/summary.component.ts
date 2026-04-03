@@ -3,7 +3,7 @@ import { TasksService } from '../../service/tasks.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
-import { Task } from 'zone.js/lib/zone-impl';
+import { Task } from '../../interface/task';
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 
 @Component({

@@ -165,7 +165,7 @@ export class ContactsComponent {
 
   deleteContact(user: User) {
     const filteredUser = this.getCleanIDFromLogedInUSer();
-    const contactIndex = filteredUser[0].savedUsers.filter((u: any) => u.uid === user.uid);
+    const contactIndex = (filteredUser[0].savedUsers ?? []).filter((u: any) => u.uid === user.uid);
     this.userService.deleteContact(user, filteredUser).subscribe(() => {
       this.returnBack();
     });
@@ -192,7 +192,7 @@ export class ContactsComponent {
   showUserContacts(){
     const currentUser = localStorage.getItem('currentUser');
     const filterUser = this.userService.allUsers.filter(u => u.id === this.userService.getCleanID(currentUser!))
-    this.SortedContacts = this.sortByFirstLetter(filterUser[0].savedUsers);
+    this.SortedContacts = this.sortByFirstLetter(filterUser[0].savedUsers ?? []);
     return this.SortedContacts;
   }
 
@@ -224,7 +224,7 @@ export class ContactsComponent {
       // Filter current user's contacts
       const filteredUser = this.getCleanIDFromLogedInUSer();
       // Filter common users based on search input
-      const filterUserExistingUserName = filteredUser[0].savedUsers.filter((user: any) => (user.firstName.toLowerCase().includes(this.toggleService.headerInputValue.toLowerCase())));
+      const filterUserExistingUserName = (filteredUser[0].savedUsers ?? []).filter((user: any) => (user.firstName.toLowerCase().includes(this.toggleService.headerInputValue.toLowerCase())));
       const sortedFilterUserExistingUserName = this.sortFilterUserExistingUserName(filterUserExistingUserName);
       //------------------- 
       const filterUserToAddName = this.userService.commonUsers.filter((user: any) =>
