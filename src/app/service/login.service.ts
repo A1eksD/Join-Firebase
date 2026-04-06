@@ -63,9 +63,15 @@ export class LoginService {
           email: this.email,
           status: true,
         };
-        this.createUser(userData).subscribe();
-        this.clearUserData();
-        window.location.reload();
+        this.createUser(userData).subscribe({
+          next: () => {
+            this.clearUserData();
+            window.location.reload();
+          },
+          error: (err) => {
+            console.error('Local DB entry failed:', err);
+          }
+        });
       })
       .catch((error: any) =>
         console.error('Registration failed:', error.code, error.message)
@@ -75,7 +81,7 @@ export class LoginService {
   // ─── RxJS / HttpClient – User anlegen ───────────────────────────────────────
 
   createUser(userData: User): Observable<User> {
-    return this.http.post<User>(`${API}/users`, userData).pipe(
+    return this.http.post<User>(`${API}/registerUser`, userData).pipe(
       tap((user) => {
         this.currentUser = user.id!;
         this.saveUserToLocalStorage(user.id!);
