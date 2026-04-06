@@ -20,8 +20,4 @@ export class LoginComponent {
   changeIcon(){
     this.rememberUser = !this.rememberUser;
   }
-
-  googleLogin() {
-    this.loginService.googleLogin();
-  }
 }

@@ -1,19 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { User } from '../interface/user';
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from 'firebase/auth';
 import { Router } from '@angular/router';
 
-const API = 'http://localhost:4200/api';
+const API = 'http://localhost:8080/api';
 
 @Injectable({
   providedIn: 'root',
@@ -31,8 +23,6 @@ export class LoginService {
   currentUser: string = '';
   errorMessage: string = '';
   loginBoolean: boolean = false;
-  lastActivityTimestamp: number = 0;
-  autoLogoutTimer: number | null = null;
 
   constructor(private http: HttpClient, private route: Router) {
     this.startAutoLogoutTimer();
@@ -40,65 +30,115 @@ export class LoginService {
 
   startAutoLogoutTimer() {
     const timeout = 20 * 60 * 1000;
-    setTimeout(() => localStorage.removeItem('currentUser'), timeout);
+    setTimeout(() => this.deleteTokenFromLocalStorage(), timeout);
   }
 
-  // ─── Register (Firebase Auth + lokale API via RxJS) ──────────────────────────
+  // ─── Register ────────────────────────────────────────────────────────────────
 
   register() {
     if (!this.loginBoolean) return;
     this.getFirstAndLastName();
-    const password = this.checkPW();
+    this.checkPW();
     if (!this.samePw) {
       console.error('Passwords do not match');
       return;
     }
-    createUserWithEmailAndPassword(getAuth(), this.email, password)
-      .then((userCredential) => {
-        const userData: User = {
-          uid: userCredential.user.uid,
-          firstName: this.firstName,
-          lastName: this.lastName || '',
-          savedUsers: [],
-          email: this.email,
-          status: true,
-        };
-        this.createUser(userData).subscribe({
-          next: () => {
-            this.clearUserData();
-            window.location.reload();
-          },
-          error: (err) => {
-            console.error('Local DB entry failed:', err);
-          }
-        });
-      })
-      .catch((error: any) =>
-        console.error('Registration failed:', error.code, error.message)
-      );
+    const userData: User = {
+      firstName: this.firstName,
+      lastName: this.lastName || '',
+      savedUsers: [],
+      email: this.email,
+      password: this.password1,
+      status: true,
+    };
+    this.createUser(userData).subscribe({
+      next: () => {
+        this.route.navigateByUrl('/mainPage');
+        setTimeout(() => this.clearUserData(), 1500);
+      },
+      error: (err) => {
+        console.error('Register failed:', err);
+        this.errorMessage = '*Registration failed. Please try again.';
+      }
+    });
   }
 
-  // ─── RxJS / HttpClient – User anlegen ───────────────────────────────────────
+  // ─── Login ───────────────────────────────────────────────────────────────────
 
-  createUser(userData: User): Observable<User> {
-    return this.http.post<User>(`${API}/registerUser`, userData).pipe(
-      tap((user) => {
-        this.currentUser = user.id!;
-        this.saveUserToLocalStorage(user.id!);
-        this.route.navigateByUrl('/mainPage');
+  login() {
+    this.http
+      .post<{ token: string }>(`${API}/login/`, {
+        email: this.email,
+        password: this.passwordLogin,
+      })
+      .pipe(
+        catchError((err) => {
+          this.switchCase(err.status);
+          return of(null);
+        })
+      )
+      .subscribe((res) => {
+        if (res?.token) {
+          this.saveTokenToLocalStorage(res.token);
+          this.route.navigateByUrl('/mainPage');
+          setTimeout(() => {
+            this.clearUserData();
+            this.startAutoLogoutTimer();
+          }, 1500);
+        }
+      });
+  }
+
+  // ─── Guest Login ─────────────────────────────────────────────────────────────
+
+  guestLogin() {
+    this.http
+      .post<{ token: string }>(`${API}/login/`, {
+        email: 'guest@gues.de',
+        password: 'guest@gues.de',
+      })
+      .pipe(
+        catchError((err) => {
+          console.error(err);
+          this.errorMessage = 'Fehler bei der Gastanmeldung. Bitte versuchen Sie es später erneut.';
+          return of(null);
+        })
+      )
+      .subscribe((res) => {
+        if (res?.token) {
+          this.saveTokenToLocalStorage(res.token);
+          this.route.navigateByUrl('/mainPage');
+          setTimeout(() => this.clearUserData(), 1500);
+        }
+      });
+  }
+
+  // ─── Logout ──────────────────────────────────────────────────────────────────
+
+  logout() {
+    this.updateUserOnlineStatus(false).subscribe(() => {
+      this.deleteTokenFromLocalStorage();
+      this.route.navigate(['/login']);
+    });
+  }
+
+  // ─── API Calls ───────────────────────────────────────────────────────────────
+
+  createUser(userData: User): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(`${API}/registerUser/`, userData).pipe(
+      tap((res) => {
+        this.saveTokenToLocalStorage(res.token);
       }),
       catchError((err) => {
         console.error('Create user failed', err);
-        return of({} as User);
+        throw err;
       })
     );
   }
 
-  // ─── RxJS / HttpClient – Online-Status setzen ───────────────────────────────
-
-  updateUserOnlineStatus(userId: string, online: boolean = true): Observable<any> {
+  updateUserOnlineStatus(online: boolean = true): Observable<any> {
     return this.http
-      .patch<any>(`${API}/users/${userId}/status`, { status: online })
+      .patch<any>(`${API}/users/status/`, { status: online })
       .pipe(
         catchError((err) => {
           console.error('Update status failed', err);
@@ -107,118 +147,36 @@ export class LoginService {
       );
   }
 
-  // ─── RxJS / HttpClient – User per UID finden ────────────────────────────────
+  // ─── Token Utilities ─────────────────────────────────────────────────────────
 
-  findUserByUid(uid: string): Observable<string> {
-    return this.http.get<User[]>(`${API}/users?uid=${uid}`).pipe(
-      map((users) => users[0]?.id || ''),
-      catchError((err) => {
-        console.error('Find user by UID failed', err);
-        return of('');
-      })
-    );
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
   }
 
-  // ─── Login (Firebase Auth) ───────────────────────────────────────────────────
-
-  login() {
-    signInWithEmailAndPassword(getAuth(), this.email, this.passwordLogin)
-      .then((userCredential) => {
-        this.findUserByUid(userCredential.user.uid).subscribe((docId) => {
-          if (docId) {
-            this.currentUser = docId;
-            this.saveUserToLocalStorage(docId);
-            this.route.navigateByUrl('/mainPage');
-            setTimeout(() => {
-              this.clearUserData();
-              this.startAutoLogoutTimer();
-            }, 1500);
-          } else {
-            console.error('Kein zugehöriges Benutzerdokument gefunden.');
-          }
-        });
-      })
-      .catch((error) => this.switchCase(error.code));
+  isLoggedIn(): boolean {
+    return !!this.getToken();
   }
 
-  // ─── Guest Login (Firebase Auth) ─────────────────────────────────────────────
-
-  guestLogin() {
-    const userId = '3oUdmL26NdAWAcYgYxQu';
-    signInWithEmailAndPassword(getAuth(), 'guest@gues.de', 'guest@gues.de')
-      .then(() => {
-        this.saveUserToLocalStorage(userId);
-        setTimeout(() => this.clearUserData(), 1500);
-        this.route.navigateByUrl('/mainPage');
-      })
-      .catch((error) => {
-        console.error(error);
-        this.errorMessage =
-          'Fehler bei der Gastanmeldung. Bitte versuchen Sie es später erneut.';
-      });
+  getCurrentUserId(): string | undefined {
+    return this.getToken() ?? undefined;
   }
 
-  // ─── Logout (Firebase Auth + lokale API via RxJS) ────────────────────────────
-
-  logout() {
-    const userId = this.getCurrentUserId();
-    if (!userId) {
-      console.error('Keine UserID gefunden');
-      return;
-    }
-    this.updateUserOnlineStatus(userId, false).subscribe(() => {
-      signOut(getAuth())
-        .then(() => {
-          this.deleteUserIdInLocalStorage();
-          this.route.navigate(['/login']);
-        })
-        .catch((error) => console.error(error));
-    });
+  private saveTokenToLocalStorage(token: string) {
+    localStorage.setItem('authToken', token);
   }
 
-  // ─── Google Login (Firebase Auth + lokale API via RxJS) ──────────────────────
-
-  googleLogin() {
-    signInWithPopup(getAuth(), new GoogleAuthProvider())
-      .then((result) => {
-        const user = result.user;
-        this.findUserByUid(user.uid).subscribe((docId) => {
-          if (!docId) {
-            this.createUser({
-              uid: user.uid,
-              email: user.email || 'leer@gmail.com',
-              firstName: user.displayName ? user.displayName.split(' ')[0] : 'FirstName',
-              lastName: user.displayName
-                ? user.displayName.split(' ').slice(1).join(' ')
-                : 'LastName',
-              status: true,
-              savedUsers: [],
-              color: '',
-            }).subscribe();
-          } else {
-            this.currentUser = docId;
-            this.saveUserToLocalStorage(docId);
-          }
-          window.location.reload();
-        });
-      })
-      .catch((error) => console.error(error));
+  deleteTokenFromLocalStorage() {
+    localStorage.removeItem('authToken');
   }
 
   // ─── Utilities ───────────────────────────────────────────────────────────────
-
-  private saveUserToLocalStorage(userId: string) {
-    if (!localStorage.getItem('currentUser')) {
-      localStorage.setItem('currentUser', JSON.stringify(userId));
-      this.updateUserOnlineStatus(userId, true).subscribe();
-    }
-  }
 
   checkPW() {
     if (this.password1 === this.password2) {
       this.samePw = true;
       return this.password1;
     }
+    this.samePw = false;
     return '';
   }
 
@@ -227,6 +185,7 @@ export class LoginService {
     this.email = '';
     this.password1 = '';
     this.password2 = '';
+    this.passwordLogin = '';
   }
 
   getFirstAndLastName() {
@@ -236,23 +195,13 @@ export class LoginService {
     if (fullname[2]) this.lastName += ' ' + fullname[2];
   }
 
-  getCurrentUserId() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (currentUser !== null) return JSON.parse(currentUser);
-  }
-
-  deleteUserIdInLocalStorage() {
-    localStorage.removeItem('currentUser');
-  }
-
-  switchCase(errorCode: string) {
-    switch (errorCode) {
-      case 'auth/invalid-credential':
+  switchCase(statusCode: number) {
+    switch (statusCode) {
+      case 401:
         this.errorMessage = '*Invalid credentials. Please check your entries.';
         break;
-      case 'auth/too-many-requests':
-        this.errorMessage =
-          '*Access to this account has been temporarily disabled due to numerous failed login attempts.';
+      case 429:
+        this.errorMessage = '*Too many requests. Please try again later.';
         break;
       default:
         this.errorMessage = '*Please check your entries.';
