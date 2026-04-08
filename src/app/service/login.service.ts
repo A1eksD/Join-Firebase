@@ -67,7 +67,7 @@ export class LoginService {
 
   login() {
     this.http
-      .post<{ token: string }>(`${API}/login/`, {
+      .post<{ token: string }>(`${API}/login`, {
         email: this.email,
         password: this.passwordLogin,
       })
@@ -93,9 +93,10 @@ export class LoginService {
 
   guestLogin() {
     this.http
-      .post<{ token: string }>(`${API}/login/`, {
-        email: 'guest@gues.de',
-        password: 'guest@gues.de',
+      .post<{ token: string }>(`${API}/login`, {
+        //dummy acc
+        email: 'alesk@aleks.de',
+        password: '123456',
       })
       .pipe(
         catchError((err) => {
@@ -125,7 +126,7 @@ export class LoginService {
   // ─── API Calls ───────────────────────────────────────────────────────────────
 
   createUser(userData: User): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${API}/registerUser/`, userData).pipe(
+    return this.http.post<{ token: string }>(`${API}/registerUser`, userData).pipe(
       tap((res) => {
         this.saveTokenToLocalStorage(res.token);
       }),
@@ -163,6 +164,7 @@ export class LoginService {
 
   private saveTokenToLocalStorage(token: string) {
     localStorage.setItem('authToken', token);
+    //DOTO: hier auch username speichern und dann später im icon oben rechts anzeigen
   }
 
   deleteTokenFromLocalStorage() {
