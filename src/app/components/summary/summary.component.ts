@@ -36,9 +36,8 @@ export class SummaryComponent {
 
 
   getUserName() {
-    const userID = this.showUserContacts();
-    const getUser = this.userService.allUsers.filter(u => u.id === userID);
-    return `${getUser[0]?.firstName || ''} ${getUser[0]?.lastName || ''}`;
+    const userName: string[] | undefined = localStorage.getItem('currentUser')?.split(" ");
+    return `${userName?.slice(0, 1) || ''} ${userName?.slice(1, 1) || ''}`;
   }
   
 

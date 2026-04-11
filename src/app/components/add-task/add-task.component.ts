@@ -51,7 +51,7 @@ export class AddTaskComponent {
         description: this.description,
         date: this.date,
         priority: this.priority || 'low',
-        assignetTo: this.chackedUser || [],
+        assignedTo: this.chackedUser || [],
         categoryTask: this.category || 'Technical Task',
         subtasks: this.subtaskArray || [],
         publishedTimestamp: unicTimestamp,

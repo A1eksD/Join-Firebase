@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from '../interface/user';
+import { ApiResponseLogin, User } from '../interface/user';
 import { Router } from '@angular/router';
 
 const API = 'http://localhost:8080/api';
@@ -67,7 +67,7 @@ export class LoginService {
 
   login() {
     this.http
-      .post<{ token: string }>(`${API}/login`, {
+      .post<ApiResponseLogin>(`${API}/login`, {
         email: this.email,
         password: this.passwordLogin,
       })
@@ -78,8 +78,8 @@ export class LoginService {
         })
       )
       .subscribe((res) => {
-        if (res?.token) {
-          this.saveTokenToLocalStorage(res.token);
+        if (res?.data?.jwtToken) {
+          this.saveTokenToLocalStorage(res);
           this.route.navigateByUrl('/mainPage');
           setTimeout(() => {
             this.clearUserData();
@@ -93,8 +93,7 @@ export class LoginService {
 
   guestLogin() {
     this.http
-      .post<{ token: string }>(`${API}/login`, {
-        //dummy acc
+      .post<ApiResponseLogin>(`${API}/login`, {
         email: 'alesk@aleks.de',
         password: '123456',
       })
@@ -106,10 +105,13 @@ export class LoginService {
         })
       )
       .subscribe((res) => {
-        if (res?.token) {
-          this.saveTokenToLocalStorage(res.token);
+        if (res?.data?.jwtToken) {
+          this.saveTokenToLocalStorage(res);
           this.route.navigateByUrl('/mainPage');
           setTimeout(() => this.clearUserData(), 1500);
+        } else {
+          //hier theretisch ein touster einbauen, um message dem user anzuzeigen
+          console.error('Guest login failed');
         }
       });
   }
@@ -125,10 +127,10 @@ export class LoginService {
 
   // ─── API Calls ───────────────────────────────────────────────────────────────
 
-  createUser(userData: User): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>(`${API}/registerUser`, userData).pipe(
+  createUser(userData: User): Observable<ApiResponseLogin> {
+    return this.http.post<ApiResponseLogin>(`${API}/registerUser`, userData).pipe(
       tap((res) => {
-        this.saveTokenToLocalStorage(res.token);
+        this.saveTokenToLocalStorage(res);
       }),
       catchError((err) => {
         console.error('Create user failed', err);
@@ -162,9 +164,12 @@ export class LoginService {
     return this.getToken() ?? undefined;
   }
 
-  private saveTokenToLocalStorage(token: string) {
-    localStorage.setItem('authToken', token);
-    //DOTO: hier auch username speichern und dann später im icon oben rechts anzeigen
+  private saveTokenToLocalStorage(res: ApiResponseLogin) {
+    console.log('saveTokenToLocalStorage called, res:', res);
+    console.log('jwtToken:', res.data.jwtToken);
+    localStorage.setItem('authToken', res.data.jwtToken);
+    localStorage.setItem('userName', res.data.userName ?? '');
+    console.log('authToken in storage:', localStorage.getItem('authToken'));
   }
 
   deleteTokenFromLocalStorage() {

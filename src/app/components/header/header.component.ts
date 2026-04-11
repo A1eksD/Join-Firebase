@@ -23,26 +23,14 @@ export class HeaderComponent {
   constructor(public loginService: LoginService, public userService: UsersService, public toggleService: ToggleBooleansService) {
   }
 
-   getUserLetters(){
-    const currentUserFromStorage = localStorage.getItem('currentUser');
-    let cleanUserID = this.getCleanID(currentUserFromStorage!);
-    let user = this.userService.allUsers!.filter(user => user.id === cleanUserID);
-    if (user.length > 0) {
-      this.getUserInitials(user); 
-      return true;
-    }
-    return false;
-  }
+  getUserLetters() {
+    const userName = localStorage.getItem('userName');
+    if (!userName) return false;
 
-  getCleanID(currentUserFromStorage: string){
-    return currentUserFromStorage.replace(/"/g, '');
-  }
-
-  getUserInitials(user: User[]) {
-    if (user.length > 0) {
-        this.firstLetter = user[0].firstName !.charAt(0).toUpperCase();
-        this.secondLetter = user[0].lastName?.charAt(0).toUpperCase();
-    }
+    const parts = userName.trim().split(' ');
+    this.firstLetter = parts[0]?.charAt(0).toUpperCase() ?? '';
+    this.secondLetter = parts[1]?.charAt(0).toUpperCase() ?? '';
+    return true;
   }
 
   splitNameValue(getName:string) {

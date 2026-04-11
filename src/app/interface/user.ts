@@ -10,3 +10,14 @@ export interface User {
   status: boolean;
   color?: string;
 }
+
+export interface LoginData {
+  jwtToken: string;
+  userName: string;
+}
+
+export interface ApiResponseLogin {
+  status: string;
+  data: LoginData;
+  message: string | null;
+}
