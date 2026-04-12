@@ -1,18 +1,18 @@
 <section (click)="openTaskCatd(id)">
-    @if(category === 'Technical Task'){
-        <span class="technicalTask">{{category}}</span>
+    @if(category === 1){
+        <span class="technicalTask">Technical Task</span>
     } @else {
-        <span class="userStory">{{category}}</span>
+        <span class="userStory">User Story</span>
     }
 
     @if (checkScreanWidth()) {
         <img src="assets/img/switchDirectionArrows.svg" alt="" class="mobileDragSwitch" (click)="openWindowToSwitshTask($event)">
         @if (id == toggleService.clickedTask) {
             <div class="smallBox">
-                <span (click)="moveTo($event, 'toDo')">TO DO</span>
-                <span (click)="moveTo($event, 'inProgress')">IN PROGRESS</span>
-                <span (click)="moveTo($event, 'awaitFeedback')">AWAIT FEEDBACK</span>
-                <span (click)="moveTo($event, 'done')">DONE</span>
+                <span (click)="moveTo($event, 1)">TO DO</span>
+                <span (click)="moveTo($event, 2)">IN PROGRESS</span>
+                <span (click)="moveTo($event, 3)">AWAIT FEEDBACK</span>
+                <span (click)="moveTo($event, 4)">DONE</span>
                 <span (click)="closeSmallWindow($event)">CLOSE</span>
             </div>
         }
@@ -36,11 +36,11 @@
                 </div>
             }
         </div>
-        @if(priority === 'low'){
+        @if(priority === 1){
             <img src="assets/img/prio_baja.svg" alt="">
-        } @else if(priority === 'medium'){
+        } @else if(priority === 2){
             <img src="assets/img/prio_media.svg" alt="">
-        } @else if(priority === 'high'){
+        } @else if(priority === 3){
             <img src="assets/img/prio_alta.svg" alt="">
         }
     </div>

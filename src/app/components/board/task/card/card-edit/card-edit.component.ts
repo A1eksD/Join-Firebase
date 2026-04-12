@@ -6,6 +6,7 @@ import { UsersService } from '../../../../../service/users.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Task } from '../../../../../interface/task';
+import { CATEGORY_TASK, PRIORITY } from '../../../../../interface/task-constants';
 
 @Component({
   selector: 'app-card-edit',
@@ -16,8 +17,8 @@ import { Task } from '../../../../../interface/task';
 })
 export class CardEditComponent {
 
-  priority: string = '';
-  category: string = 'Technical Task';
+  priority: number = 0;
+  category: number = CATEGORY_TASK.TECHNICAL_TASK;
   chackedUserArray: any[] = [];
   subtaskToLong: boolean = false;
   subtask: string = '';
@@ -30,7 +31,7 @@ export class CardEditComponent {
   constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
   
-  checkPrio(priority: string) {
+  checkPrio(priority: number) {
     this.priority = priority;
   }
 
@@ -94,7 +95,7 @@ export class CardEditComponent {
       !this.toggleService.showCategoryWindow;
   }
 
-  changeTask(task: string, event: Event) {
+  changeTask(task: number, event: Event) {
     event.stopPropagation();
     this.taskService.clickedTaskCopy[0].categoryTask = task;
     this.toggleService.showCategoryWindow = false;
@@ -195,7 +196,7 @@ export class CardEditComponent {
         title: this.taskService.clickedTaskCopy[0].title,
         description: this.taskService.clickedTaskCopy[0].description,
         date: this.taskService.clickedTaskCopy[0].date,
-        priority: this.taskService.clickedTaskCopy[0].priority || 'low',
+        priority: this.taskService.clickedTaskCopy[0].priority || PRIORITY.LOW,
         assignetTo: this.taskService.clickedTaskCopy[0].assignetTo || [],
         categoryTask: this.taskService.clickedTaskCopy[0].categoryTask,
         subtasks: this.taskService.clickedTaskCopy[0].subtasks || [],

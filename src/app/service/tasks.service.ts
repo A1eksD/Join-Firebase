@@ -45,7 +45,7 @@ export class TasksService {
     }
   }
 
-  async updateTaskCategors(id: string, taskCategory: string): Promise<void> {
+  async updateTaskCategors(id: string, taskCategory: number): Promise<void> {
     try {
       const response = await fetch(`${API}/tasks/${id}/category`, {
         method: 'PATCH',

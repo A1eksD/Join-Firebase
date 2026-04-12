@@ -17,11 +17,12 @@ export class CardComponent {
 
   // @Input() currentTask: any;
   @Input() id: string = '';
-  @Input() category: string = '';
+  @Input() category: number = 0;
+  @Input() categoryTask: number = 0;
   @Input() createtBy: string = '';
-  @Input() date: string = '';
+  @Input() date: number = 0;
   @Input() description: string = '';
-  @Input() priority: string = '';
+  @Input() priority: number = 0;
   @Input() title: string = '';
   @Input() assignetTo: User[] = [];
   @Input() subtasks: any[] = [];

@@ -6,6 +6,7 @@ import { ToggleBooleansService } from '../../service/toggle-booleans.service';
 import { UsersService } from '../../service/users.service';
 import { User } from '../../interface/user';
 import { Router } from '@angular/router';
+import { CATEGORY, CATEGORY_TASK, PRIORITY } from '../../interface/task-constants';
 
 @Component({
   selector: 'app-add-task',
@@ -19,10 +20,11 @@ export class AddTaskComponent {
   title: string = '';
   description: string = '';
   date: number = 0;
-  priority: string = '';
-  assignetTo: any[] = [];
+  priority: number = 0;
+  assignetTo: string[] = [];
   chackedUser: any[] = [];
-  category: string = 'Technical Task';
+  category: number = CATEGORY.TODO;
+  categoryTask: number = CATEGORY_TASK.TECHNICAL_TASK;
   subtask: string = '';
   subtaskArray: any[] = [];
   addedUser: boolean = false;
@@ -38,7 +40,7 @@ export class AddTaskComponent {
     private router: Router
   ) {}
 
-  checkPrio(priority: string) {
+  checkPrio(priority: number) {
     this.priority = priority;
   }
 
@@ -50,13 +52,13 @@ export class AddTaskComponent {
         title: this.title,
         description: this.description,
         date: this.date,
-        priority: this.priority || 'low',
-        assignedTo: this.chackedUser || [],
-        categoryTask: this.category || 'Technical Task',
+        priority: this.priority || PRIORITY.LOW,
+        assignetTo: this.chackedUser || [],
+        categoryTask: this.categoryTask || CATEGORY_TASK.TECHNICAL_TASK,
         subtasks: this.subtaskArray || [],
         publishedTimestamp: unicTimestamp,
         createtBy: this.showUserContacts(),
-        category: 'toDo',
+        category: CATEGORY.TODO,
       };
       this.taskService.addTask([task]);
       this.clearValues(); 
@@ -105,9 +107,9 @@ export class AddTaskComponent {
     this.showUserWindow = !this.showUserWindow;
   }
 
-  changeTask(task: string, event: Event) {
+  changeTask(task: number, event: Event) {
     event.stopPropagation();
-    this.category = task;
+    this.categoryTask = task;
     this.showCategoryWindow = false;
   }
 
@@ -115,10 +117,11 @@ export class AddTaskComponent {
     this.title = '';
     this.description = '';
     this.date = 0;
-    this.priority = '';
+    this.priority = 0;
     this.assignetTo = [];
     this.chackedUser = [];
-    this.category = 'Technical Task';
+    this.category = CATEGORY.TODO;
+    this.categoryTask = CATEGORY_TASK.TECHNICAL_TASK;
     this.subtask = '';
     this.subtaskArray = [];
   }
@@ -163,6 +166,10 @@ export class AddTaskComponent {
     });
   }
 
+  getCategoryTaskLabel(): string {
+    return this.categoryTask === CATEGORY_TASK.USER_STORY ? 'User Story' : 'Technical Task';
+  }
+
   checkSubtaskLength(){
     if (this.subtask.length <= 50) {
       this.subtaskToLong = true;
@@ -181,11 +188,10 @@ export class AddTaskComponent {
     }
   }
 
-  deleteSubtask(task: string){
+  deleteSubtask(task: any){
     const taskMsg = this.subtaskArray.indexOf(task);
     if (taskMsg !== -1) {
       this.subtaskArray.splice(taskMsg, 1);
-      // this.chackedUser.splice(taskMsg, 1); 
     }
   }
 

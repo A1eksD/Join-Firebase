@@ -1,13 +1,14 @@
 export interface Task {
-    id?: string; 
+    id?: string;
     title: string;
     description: string;
     date: number;
-    priority?: string; 
-    assignetTo?: string[];
-    category: string;
-    subtasks?: string[];
+    priority?: number;
+    assignetTo?: any[];
+    category: number;
+    subtasks?: any[];
     publishedTimestamp: number;
     createtBy: string;
+    categoryTask: number;
   }
   

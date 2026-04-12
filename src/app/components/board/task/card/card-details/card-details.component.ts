@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../../../../service/users.service';
 import { ToggleBooleansService } from '../../../../../service/toggle-booleans.service';
 import { TasksService } from '../../../../../service/tasks.service';
+import { PRIORITY } from '../../../../../interface/task-constants';
 
 @Component({
   selector: 'app-card-details',
@@ -28,11 +29,11 @@ export class CardDetailsComponent {
   constructor(private userService: UsersService, public toggleService: ToggleBooleansService, public taskService: TasksService){}
 
   getProiImg(){
-    if(this.taskService.clickedTask[0].priority === 'low'){
+    if(this.taskService.clickedTask[0].priority === PRIORITY.LOW){
       return 'prio_baja.svg';
-    } else if (this.taskService.clickedTask[0].priority === 'medium') {
+    } else if (this.taskService.clickedTask[0].priority === PRIORITY.MEDIUM) {
       return 'prio_media.svg';
-    } else if (this.taskService.clickedTask[0].priority === 'high') {
+    } else if (this.taskService.clickedTask[0].priority === PRIORITY.HIGH) {
       return 'prio_alta.svg';
     }
     return '';

@@ -5,19 +5,19 @@
       <img src="assets/img/vector3.svg" alt="">
       <img src="assets/img/search.svg" alt="" class="searchImg">
     </div>
-    <button (click)="createNewTask('toDo')" >New Task <img src="assets/img/plus.svg" alt=""></button>
+    <button (click)="createNewTask(1)" >New Task <img src="assets/img/plus.svg" alt=""></button>
   </div>
   @if (toggleService.openBoard) {
     <div class="droppBoxes">
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>To do</h1>
-          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('toDo')" class="curserPointer">
+          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask(1)" class="curserPointer">
         </div>
         <div class="dragAreaBox">
           <div
             appOnDragHighlight  id="toDo" #todoArea class="dragArea"
-            (drop)="moveTo('toDo')" (dragleave)="removeHighlight('toDo')" (dragover)="allowDrop($event); highlight('toDo')">
+            (drop)="moveTo(1)" (dragleave)="removeHighlight('toDo')" (dragover)="allowDrop($event); highlight('toDo')">
             @if( !filterExistingTask() ){
               @if(getToDOCategory()){
                 @for (item of toDoCategory; track $index;) {
@@ -55,12 +55,12 @@
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>In progress</h1>
-          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('inProgress')" class="curserPointer">
+          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask(2)" class="curserPointer">
         </div>
         <div class="dragAreaBox">
           <div
             appOnDragHighlight class="dragArea" id="inProgress" #inProgressArea
-            (drop)="moveTo('inProgress')" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
+            (drop)="moveTo(2)" (dragleave)="removeHighlight('inProgress')" (dragover)="allowDrop($event); highlight('inProgress')">
             @if( !filterExistingTask() ){
               @if(getInProgressCategory()){ 
                 @for (item of inProgressCategory; track $index;) {
@@ -98,12 +98,12 @@
       <div class="dragRow">
         <div class="headerOfBar">
           <h1>Await feedback</h1>
-          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask('awaitFeedback')" class="curserPointer">
+          <img src="assets/img/plus_button.svg" alt="" (click)="createNewTask(3)" class="curserPointer">
         </div>
         <div class="dragAreaBox">
           <div
           appOnDragHighlight class="dragArea" id="awaitFeedback" #awaitFeedbackArea
-          (drop)="moveTo('awaitFeedback')" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
+          (drop)="moveTo(3)" (dragleave)="removeHighlight('awaitFeedback')" (dragover)="allowDrop($event); highlight('awaitFeedback')">
           @if( !filterExistingTask() ){
             @if(getAwaitFeedbackCategory()){ 
               @for (item of awaitFeedbackCategory; track $index;) {
@@ -145,7 +145,7 @@
         <div class="dragAreaBox">
           <div
           appOnDragHighlight class="dragArea" id="done" #doneArea
-          (drop)="moveTo('done')" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
+          (drop)="moveTo(4)" (dragleave)="removeHighlight('done')" (dragover)="allowDrop($event); highlight('done')">
           @if( !filterExistingTask() ){
             @if(getDoneategory()){ 
               @for (item of doneCategory; track $index;) {

@@ -6,6 +6,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CardComponent } from './card/card.component';
 import { ToggleBooleansService } from '../../../service/toggle-booleans.service';
 import { TasksService } from '../../../service/tasks.service';
+import { CATEGORY, CATEGORY_TASK } from '../../../interface/task-constants';
 
 @Component({
   selector: 'app-task',
@@ -16,11 +17,11 @@ import { TasksService } from '../../../service/tasks.service';
 })
 export class TaskComponent {
 
-  @Input() category: string = '';
+  @Input() category: number = 0;
   @Input() createtBy: string = '';
-  @Input() date: string = '';
+  @Input() date: number = 0;
   @Input() description: string = '';
-  @Input() priority: string = '';
+  @Input() priority: number = 0;
   @Input() title: string = '';
   @Input() id: string = '';
   @Input() assignetTo: User[] = [];
@@ -57,11 +58,7 @@ export class TaskComponent {
   }
 
   checkCategory(){
-    if (this.category === 'Technical Task') {
-      return true;
-    } else {
-      return false;
-    }
+    return this.category === CATEGORY_TASK.TECHNICAL_TASK;
   }
 
   chackPercentage(): number {
@@ -90,13 +87,13 @@ export class TaskComponent {
     this.toggleService.clickedTask = this.id;
   }
 
-  moveTo(event: Event, category: string) {
+  moveTo(event: Event, category: number) {
     event.stopPropagation();
     const draggedIndex = this.id;
     if (draggedIndex !== null) {
       const getCurrentTask = this.taskService.allTasks.filter((t) => t.id === draggedIndex);
       getCurrentTask[0].category = category;
-      this.taskService.updateTaskCategors( getCurrentTask[0].id! ,category);
+      this.taskService.updateTaskCategors(getCurrentTask[0].id!, category);
     }
     this.toggleService.clickedTask = '';
   }

@@ -10,6 +10,7 @@ import { TasksService } from '../../service/tasks.service';
 import { TaskComponent } from './task/task.component';
 import { FormsModule } from '@angular/forms';
 import { BoardAddTaskComponent } from './board-add-task/board-add-task.component';
+import { CATEGORY } from '../../interface/task-constants';
 
 @Component({
   selector: 'app-board',
@@ -30,7 +31,7 @@ export class BoardComponent {
   doneCategory: any[] = [];
   currentCategory: string = 'open';
   openAddNewTaskWindow: boolean = false;
-  CategorY: string= '';
+  CategorY: number = CATEGORY.TODO;
   filteredTasks: any[] = [];
 
 
@@ -38,7 +39,7 @@ export class BoardComponent {
 
 
   getToDOCategory() {
-    this.toDoCategory = this.taskService.allTasks.filter((t) => t.category === 'toDo');
+    this.toDoCategory = this.taskService.allTasks.filter((t) => t.category === CATEGORY.TODO);
     if (this.toDoCategory.length > 0) {
       return true;
     }
@@ -46,7 +47,7 @@ export class BoardComponent {
   }
 
   getInProgressCategory() {
-    this.inProgressCategory = this.taskService.allTasks.filter((t) => t.category === 'inProgress');
+    this.inProgressCategory = this.taskService.allTasks.filter((t) => t.category === CATEGORY.IN_PROGRESS);
     if (this.inProgressCategory.length > 0) {
       return true;
     }
@@ -54,7 +55,7 @@ export class BoardComponent {
   }
 
   getAwaitFeedbackCategory() {
-    this.awaitFeedbackCategory = this.taskService.allTasks.filter((t) => t.category === 'awaitFeedback');
+    this.awaitFeedbackCategory = this.taskService.allTasks.filter((t) => t.category === CATEGORY.REVIEW);
     if (this.awaitFeedbackCategory.length > 0) {
       return true;
     }
@@ -62,7 +63,7 @@ export class BoardComponent {
   }
 
   getDoneategory() {
-    this.doneCategory = this.taskService.allTasks.filter((t) => t.category === 'done');
+    this.doneCategory = this.taskService.allTasks.filter((t) => t.category === CATEGORY.DONE);
     if (this.doneCategory.length > 0) {
       return true;
     }
@@ -77,12 +78,12 @@ export class BoardComponent {
     event.preventDefault();
   }
 
-  moveTo(category: string) {
+  moveTo(category: number) {
     const draggedIndex = this.currentDraggedElement;
     if (draggedIndex !== null) {
       const getCurrentTask = this.taskService.allTasks.filter((t) => t.id === this.currentDraggedElement);
       getCurrentTask[0].category = category;
-      this.taskService.updateTaskCategors( getCurrentTask[0].id! ,category);
+      this.taskService.updateTaskCategors(getCurrentTask[0].id!, category);
     }
   }
 
@@ -95,7 +96,7 @@ export class BoardComponent {
     this.currentCategory = category;
   }
 
-  createNewTask(taskCategory: string){
+  createNewTask(taskCategory: number){
     this.openAddNewTaskWindow = true;
     this.CategorY = taskCategory;
   }
@@ -118,19 +119,19 @@ export class BoardComponent {
       this.updateCategoryLists(singleTask);
       return true;
     } else {
-      this.toDoCategory = this.taskService.allTasks.filter(t => t.category === 'toDo');
-      this.inProgressCategory = this.taskService.allTasks.filter(t => t.category === 'inProgress');
-      this.awaitFeedbackCategory = this.taskService.allTasks.filter(t => t.category === 'awaitFeedback');
-      this.doneCategory = this.taskService.allTasks.filter(t => t.category === 'done');    
+      this.toDoCategory = this.taskService.allTasks.filter(t => t.category === CATEGORY.TODO);
+      this.inProgressCategory = this.taskService.allTasks.filter(t => t.category === CATEGORY.IN_PROGRESS);
+      this.awaitFeedbackCategory = this.taskService.allTasks.filter(t => t.category === CATEGORY.REVIEW);
+      this.doneCategory = this.taskService.allTasks.filter(t => t.category === CATEGORY.DONE);
       return false;
     }
   }
 
 
   updateCategoryLists(tasks : any) {
-    this.toDoCategory = tasks.filter((task: any) => task.category === 'toDo');
-    this.inProgressCategory = tasks.filter((task: any) => task.category === 'inProgress');
-    this.awaitFeedbackCategory = tasks.filter((task: any) => task.category === 'awaitFeedback');
-    this.doneCategory = tasks.filter((task: any) => task.category === 'done');
+    this.toDoCategory = tasks.filter((task: any) => task.category === CATEGORY.TODO);
+    this.inProgressCategory = tasks.filter((task: any) => task.category === CATEGORY.IN_PROGRESS);
+    this.awaitFeedbackCategory = tasks.filter((task: any) => task.category === CATEGORY.REVIEW);
+    this.doneCategory = tasks.filter((task: any) => task.category === CATEGORY.DONE);
   }
 }

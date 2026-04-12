@@ -5,6 +5,7 @@ import { ToggleBooleansService } from '../../../service/toggle-booleans.service'
 import { User } from '../../../interface/user';
 import { UsersService } from '../../../service/users.service';
 import { TasksService } from '../../../service/tasks.service';
+import { CATEGORY, CATEGORY_TASK, PRIORITY } from '../../../interface/task-constants';
 
 @Component({
   selector: 'app-board-add-task',
@@ -14,16 +15,16 @@ import { TasksService } from '../../../service/tasks.service';
   styleUrl: './board-add-task.component.scss'
 })
 export class BoardAddTaskComponent {
-  @Input() CategorY: string = '';
+  @Input() CategorY: number = CATEGORY.TODO;
   @Input() openAddNewTaskWindow!: boolean;
   @Output() closeBigWindow = new EventEmitter<boolean>();
   title: string = '';
   description: string = '';
   date: number = 0;
-  priority: string = '';
+  priority: number = 0;
   assignetTo: any[] = [];
   chackedUser: any[] = [];
-  category: string = 'Technical Task';
+  categoryTask: number = CATEGORY_TASK.TECHNICAL_TASK;
   subtask: string = '';
   subtaskArray: any[] = [];
   addedUser: boolean = false;
@@ -33,7 +34,7 @@ export class BoardAddTaskComponent {
 
   constructor(public toggleService: ToggleBooleansService, private userService: UsersService, public taskService: TasksService){}
 
-  checkPrio(priority: string) {
+  checkPrio(priority: number) {
     this.priority = priority;
   }
 
@@ -107,10 +108,14 @@ export class BoardAddTaskComponent {
     this.showUserWindow = false;
   }
 
-  changeTask(task: string, event: Event) {
+  changeTask(task: number, event: Event) {
     event.stopPropagation();
-    this.category = task;
+    this.categoryTask = task;
     this.showCategoryWindow = false;
+  }
+
+  getCategoryTaskLabel(): string {
+    return this.categoryTask === CATEGORY_TASK.USER_STORY ? 'User Story' : 'Technical Task';
   }
 
   checkSubtaskLength(){
@@ -161,10 +166,10 @@ export class BoardAddTaskComponent {
     this.title = '';
     this.description = '';
     this.date = 0;
-    this.priority = '';
+    this.priority = 0;
     this.assignetTo = [];
     this.chackedUser = [];
-    this.category = 'Technical Task';
+    this.categoryTask = CATEGORY_TASK.TECHNICAL_TASK;
     this.subtask = '';
     this.subtaskArray = [];
   }
@@ -177,13 +182,13 @@ export class BoardAddTaskComponent {
         title: this.title,
         description: this.description,
         date: this.date,
-        priority: this.priority || 'low',
+        priority: this.priority || PRIORITY.LOW,
         assignetTo: this.chackedUser || [],
-        categoryTask: this.category || 'Technical Task',
+        categoryTask: this.categoryTask || CATEGORY_TASK.TECHNICAL_TASK,
         subtasks: this.subtaskArray || [],
         publishedTimestamp: unicTimestamp,
         createtBy: this.showUserContacts(),
-        category: 'toDo',
+        category: CATEGORY.TODO,
       };
       this.taskService.addTask([task]);
       this.clearValues(); 

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
 import { Task } from '../../interface/task';
 import { ToggleBooleansService } from '../../service/toggle-booleans.service';
+import { CATEGORY, PRIORITY } from '../../interface/task-constants';
 
 @Component({
   selector: 'app-summary',
@@ -54,13 +55,13 @@ export class SummaryComponent {
     let valueDone = 0;
 
     tasks.forEach(task => {
-        if (task.category === "toDo") {
+        if (task.category === CATEGORY.TODO) {
             valueToDo++;
-        } else if (task.category === "inProgress") {
+        } else if (task.category === CATEGORY.IN_PROGRESS) {
             valueProgress++;
-        } else if (task.category === "awaitFeedback") {
+        } else if (task.category === CATEGORY.REVIEW) {
             valueFeedBack++;
-        } else if (task.category === "done") {
+        } else if (task.category === CATEGORY.DONE) {
             valueDone++;
         }});
 
@@ -74,7 +75,7 @@ export class SummaryComponent {
 
 
   getUrbanTasksNumber(){
-    const tasks = this.taskService.allTasks.filter((task) => task.priority === 'high');
+    const tasks = this.taskService.allTasks.filter((task) => task.priority === PRIORITY.HIGH);
     return tasks.length;
   }
 
@@ -84,7 +85,7 @@ export class SummaryComponent {
   
     // Filter tasks with high priority and a valid date
     const tasksWithHighPrioAndDate = tasks.filter(
-      (task) => task.priority === 'high' && task.date !== undefined && task.date !== null
+      (task) => task.priority === PRIORITY.HIGH && task.date !== undefined && task.date !== null
     );
   
     // Handle the case where no tasks with high priority and date exist

@@ -28,19 +28,19 @@
                     <h2>Priority</h2><span>(optional)</span>
                 </div>
                 <div class="prioBoxBtns">
-                    <button class="greenBtn" (click)="checkPrio('low')"
-                        [ngClass]="{'btn-active': priority == 'low'}" 
-                        [ngStyle]="{'background-color': priority == 'low' ? 'rgb(154, 233, 93)' : 'white'}"
+                    <button class="greenBtn" (click)="checkPrio(1)"
+                        [ngClass]="{'btn-active': priority == 1}"
+                        [ngStyle]="{'background-color': priority == 1 ? 'rgb(154, 233, 93)' : 'white'}"
                     >Low<img src="assets/img/prio_baja.svg" alt=""></button>
-    
-                    <button class="orangeBtn" (click)="checkPrio('medium')"
-                        [ngClass]="{'btn-active': priority == 'medium'}" 
-                        [ngStyle]="{'background-color': priority == 'medium' ? 'rgb(255, 168, 0)' : 'white'}"
+
+                    <button class="orangeBtn" (click)="checkPrio(2)"
+                        [ngClass]="{'btn-active': priority == 2}"
+                        [ngStyle]="{'background-color': priority == 2 ? 'rgb(255, 168, 0)' : 'white'}"
                     >Medium<img src="assets/img/prio_media.svg" alt=""></button>
-                    
-                    <button class="redBtn" (click)="checkPrio('high')" 
-                        [ngClass]="{'btn-active': priority == 'high'}" 
-                        [ngStyle]="{'background-color': priority == 'high' ? 'rgb(255, 66, 6)' : 'white'}"
+
+                    <button class="redBtn" (click)="checkPrio(3)"
+                        [ngClass]="{'btn-active': priority == 3}"
+                        [ngStyle]="{'background-color': priority == 3 ? 'rgb(255, 66, 6)' : 'white'}"
                     >High<img src="assets/img/prio_alta.svg" alt=""></button>
                 </div>
             </div>
@@ -87,14 +87,14 @@
                 </div>
                 <div class="taskBoxSection">
                     <div class="assignedSelect" (click)="openCategory($event)">
-                        <span>{{ taskService.clickedTaskCopy[0].categoryTask }}</span>
+                        <span>{{ taskService.clickedTaskCopy[0].categoryTask === 1 ? 'Technical Task' : 'User Story' }}</span>
                         <img src="assets/img/arrow_drop_down.svg" alt="">
                     </div>
                     <div class="taskWindow" #taskWindoW 
                         [ngClass]="{'dNone': showCategoryWindow === null, 'slideInUpTask': showCategoryWindow , 'slideOutDownTask': !showCategoryWindow,}"
                     >
-                        <span (click)="changeTask('Technical Task', $event)">Technical Task</span>
-                        <span (click)="changeTask('User Story', $event)">User Story</span>
+                        <span (click)="changeTask(1, $event)">Technical Task</span>
+                        <span (click)="changeTask(2, $event)">User Story</span>
                     </div>
                 </div>
             </div>
